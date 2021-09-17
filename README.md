@@ -234,7 +234,7 @@ df = df.drop(['John', 'Nate'])
 # df에 다시 넣지 않고 바로 저장
 df.drop(['John', 'Nate'], inplace=True)
 
-
+*
 friends = [{'name': 'John', 'age': 15, 'job': 'student'},
           {'name': 'Ben', 'age': 25, 'job': 'developer'},
           {'name': 'Jenny', 'age': 30, 'job': 'teacher'}]
@@ -588,7 +588,9 @@ comparison = pd.DataFrame({'label': label, 'prediction': prediction})
 
 ## 명세
 
-### Req. 1-1. 데이터 전처리(parse.py)
+### Req. 1. 데이터 전처리(parse.py)
+
+#### Req. 1-1. 데이터 로딩 및 Pandas DataFrame 변환
 
 ```python
 store_columns = (
@@ -691,4 +693,143 @@ def import_data(data_path=DATA_FILE):
         "menus": menu_frame
         }
 ```
+
+
+
+### Req. 2. 데이터 통계 값 구하기 (analyze.py)
+
+#### Req. 2-1~2-2. 음식점 평점 순 출력, 최소 리뷰 개수 필터링
+
+```python
+def sort_stores_by_score(dataframes, n=20, min_reviews=30):
+    """
+    Req. 1-2-1 각 음식점의 평균 평점을 계산하여 높은 평점의 음식점 순으로 `n`개의 음식점을 정렬하여 리턴합니다
+    Req. 1-2-2 리뷰 개수가 `min_reviews` 미만인 음식점은 제외합니다.
+    """
+    stores_reviews = pd.merge(
+        dataframes["stores"], dataframes["reviews"], left_on="id", right_on="store"
+    )
+    scores_group = stores_reviews.groupby(["store", "store_name"])
+    scores = scores_group.mean()
+    scores = scores.sort_values(by='score', ascending=False) # 평점 순 정렬
+
+    return scores.head(n=n).reset_index()
+```
+
+
+
+박찬규 CTO
+
+
+
+
+
+## CF와 CBF
+
+### CF(Collaborative Filtering), 협업 필터링
+
+* 행렬 분해
+
+정보 검색(information retrieval[17])에서 많이 사용하는 순위 결합(rank aggregation[18]) 알고리듬을 주로 사용하는데, 대표적인 알고리듬으로는 상호랭킹결합(reciprocal rank fusion[19]), comb mnz[20] 등의 알고리듬들이 있다. 좋은 추천을 하려면 앙상블만으로는 충분하지 않다. 대부분의 앙상블 방법론들은 사용자 반응을 고려하지 않으므로 모델에 사용자 반응이 반영되기 전까지 사용자 반응에 둔감하기 때문이다. 그렇기 때문에 사용자들에게 추천 결과가 정적으로 느껴질 수 있고, 반응률이 좋은 콘텐츠를 추천 결과에 더 자주 노출하거나 반응이 나쁜 콘텐츠는 추천 결과에서 빼버리는 등의 메커니즘을 적용하기 어렵다. 사용자 반응을 알고 있을 때 전체 추천 결과의 반응률을 가장 최대화하는 방법은 반응률이 높은 순서대로 추천 결과를 정렬하는 것이다. 그러나 콘텐츠를 실제로 노출하기 전에는 콘텐츠들의 반응률을 알 수 없다는 문제가 있다. 
+
+### CBF(Contents Based Filtering), 콘텐츠 기반 필터링
+
+
+
+### TF-IDF(코사인 유사도) - 자연언어 처리
+
+https://blog.naver.com/myincizor/221823805086
+
+코사인 유사도는 **데이터 크기의 차이에 관계없이 유사도를 비교할 수 있기 때문에**, 저희가 실습 때 사용할 영화 줄거리들의 유사도를 구하는 데 효과적으로 활용 할 수 있을 것입니다.
+
+
+
+데이터셋의 줄거리가 짧은데 괜찮을까? => 가중치
+
+
+
+1. 핵심어의 가중치 뽑기
+2. 
+
+
+
+## 명세2
+
+### Req. 1. 데이터 DB 마이그레이션
+
+#### Req. 1-1 DB 모델 설계
+
+의문점
+
+1. id값은 자동 생성될텐데 샘플 코드에선 왜 id를 직접 잡아줬을까?
+
+   -> Foreign Key가 잘 연결될까?
+
+2. CharField의 `null=True` 중 필요 없는 곳 지워주기
+3. 리뷰를 수정한다면 수정 시간을 따로 auto_now로 만들어줘야 할 것 같다.
+
+```python
+from django.utils import timezone
+from django.db import models
+
+
+class Store(models.Model):
+    id = models.IntegerField(primary_key=True)
+    store_name = models.CharField(max_length=50)
+    branch = models.CharField(max_length=20, null=True)
+    area = models.CharField(max_length=50, null=True)
+    tel = models.CharField(max_length=20, null=True)
+    address = models.CharField(max_length=200, null=True)
+    latitude = models.FloatField(max_length=10, null=True)
+    longitude = models.FloatField(max_length=10, null=True)
+    category = models.CharField(max_length=200, null=True)
+
+    @property
+    def category_list(self):
+        return self.category.split("|") if self.category else []
+
+class Menu(models.Model):
+    id = models.IntegerField(primary_key=True)
+    store = models.ForeignKey(Store, on_delete=models.CASCADE)
+    menu_name = models.CharField(max_length=20, null=True)
+    price = models.IntegerField()
+
+    @property
+    def category_list(self):
+        return self.category.split("|") if self.category else []
+
+class User(models.Model):
+    id = models.IntegerField(primary_key=True)
+    gender = models.CharField(max_length=10, null=True)
+    age = models.IntegerField()
+
+    @property
+    def category_list(self):
+        return self.category.split("|") if self.category else []
+
+class Review(models.Model):
+    id = models.IntegerField(primary_key=True)
+    store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name="stores")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    score = models.IntegerField()
+    content = models.CharField(max_length=100, null=True)
+    reg_time = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def category_list(self):
+        return self.category.split("|") if self.category else []
+```
+
+
+
+* bash
+
+```bash
+$ python manage.py makemigrations
+$ python manage.py migrate
+```
+
+
+
+#### Req. 1-2 Pandas DataFrame DB 마이그레이션
 
