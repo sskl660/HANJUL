@@ -6,4 +6,5 @@ MAINTAINER Taehyun Kim <sskl600@naver.com>
 WORKDIR /app
 ADD . .
 RUN yarn install
+COPY . .
 RUN yarn build
