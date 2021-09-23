@@ -49,4 +49,24 @@
   font-size: 20px;
   color:#857D70;
   font-weight: 400;
+  margin: 15px 0 5% 0;
 }
+
+/* 글씨 타이핑 느낌 */
+.hanjul-title {
+  display: none;
+}
+
+.hanjul-title-typing {
+  display: inline-block; 
+  animation-name: cursor; 
+  animation-duration: 0.6s; 
+  animation-iteration-count: infinite;
+  font-size: 30px;
+  margin: 0 0 15px 0;
+  }
+  @keyframes cursor{ 
+    0%{border-right: 1px solid rgb(117, 109, 109)} 
+    50%{border-right: 1px solid #000} 
+    100%{border-right: 1px solid rgb(235, 235, 235)} 
+  }
