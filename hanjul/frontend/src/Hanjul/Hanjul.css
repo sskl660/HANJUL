@@ -18,7 +18,7 @@
 .hanjul-input {
   color: #3B2828;
   border-radius: 5px;
-  box-shadow: -3px -3px 5px 1px white inset, 1px 1px 4px 3px rgba(133, 125, 112, 0.5) inset;
+  box-shadow: -3px -3px 5px 1px rgb(255, 255, 255) inset, 1px 1px 4px 3px rgba(133, 125, 112, 0.5) inset;
   width: 70%;
   height: 40px;
   padding: 0 0 0 10px;
@@ -32,7 +32,6 @@
   border-radius: 5px;
   padding: 0 10px 0 5px;
   width: 100%;
-  
 }
 
 .hanjul-input > input:focus {
@@ -42,7 +41,8 @@
 
 .hanjul-input > .fa-search {
   cursor: pointer;
-  margin: 0 10px;
+  margin: auto 0;
+  padding: 10px 3%;
 }
 
 .hanjul-description {
