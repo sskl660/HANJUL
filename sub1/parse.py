@@ -85,11 +85,11 @@ def import_data(data_path=DATA_FILE):
                 [r["id"], d["id"], u["id"], r["score"], r["content"], r["reg_time"]]
             )
             users.append(
-                [u["id"], u["gender"], u["age"]]
+                [u["id"], u["gender"], u["born_year"]]
             )
 
         menu_id = 0
-        for menu in d["menu_list"]:
+        for menu in d["menu_list"]: 
             menus.append(
                 [menu_id, d["id"], menu["menu"], menu["price"]]
             )
