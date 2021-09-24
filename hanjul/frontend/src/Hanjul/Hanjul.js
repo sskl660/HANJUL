@@ -30,11 +30,12 @@ function Hanjul() {
     <div className="hanjul">
       <p className="hanjul-title">ㅎㅏㄴㅈㅜㄹ</p>
       <div className="hanjul-input">
-        <input type="text" placeholder="한 줄을 입력해주세요" autoFocus/>
+        <input type="text" placeholder="당신의 한 줄" autoFocus/>
         <i className="fas fa-search"></i>
       </div>
-        <h2 className="hanjul-description">당신의 인생을 한 줄로 표현한다면?"</h2>
-        <h2 className="hanjul-description-typing">"</h2>
+      <h2 className="hanjul-description">당신의 인생을 한 줄로 표현한다면?"</h2>
+      <h2 className="hanjul-description-typing">"</h2>
+      <img src="image/hanjul.png" alt="image_for_css" class="hanjul-flower" />
     </div>
   )
 }

@@ -19,7 +19,6 @@ class Navbar extends Component {
           <button className="nav-button"></button>
         </div>
         <div>
-          sdf
         </div>
         
       </div>
