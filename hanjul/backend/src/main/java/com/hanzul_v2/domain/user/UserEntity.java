@@ -2,6 +2,7 @@ package com.hanzul_v2.domain.user;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiParam;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ public class UserEntity {
 
     @Id//PK각 될 속성값 주석
     @ApiModelProperty(value="아이디")
+    @ApiParam(value = "사용자 이름", required = false, example = "홍길동")
     private String userId;
     @Column(name="user_name")//선언적 컬럼 매핑
     @NonNull
