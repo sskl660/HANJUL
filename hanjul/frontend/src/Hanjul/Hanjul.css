@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Gugi&family=Nanum+Brush+Script&display=swap');
+
 .hanjul {
   display: flex;
   flex-direction: column;
@@ -7,20 +9,20 @@
   min-height: 100vh;
 }
 
-/* 반응형으로 크기를 조절해줘야 함 */
 .hanjul-title {
-  margin: 0 0 15px 0;
-  font-size: 30px;
+  margin: 0 0 25px 0;
+  font-size: 50px;
   font-weight: 500;
-  letter-spacing: 10px;
+  letter-spacing: 15px;
+  font-family: 'Gugi';
 }
 
 .hanjul-input {
   color: #3B2828;
-  border-radius: 5px;
-  box-shadow: -3px -3px 5px 1px white inset, 1px 1px 4px 3px rgba(133, 125, 112, 0.5) inset;
-  width: 70%;
-  height: 40px;
+  border-radius: 10px;
+  box-shadow: -4px -4px 11px 6px rgba(255, 255, 255, 0.7) inset, 4px 4px 11px 5px rgba(133, 125, 112, 0.5) inset;
+  width: 60%;
+  height: 80px;
   padding: 0 0 0 10px;
   display: flex;
   justify-content: space-between;
@@ -29,10 +31,10 @@
 .hanjul-input > input {
   border: none;
   background-color: transparent;
-  border-radius: 5px;
-  padding: 0 10px 0 5px;
+  border-radius: 10px;
+  padding: 0 10px 0 20px;
   width: 100%;
-  
+  font-size: 25px;
 }
 
 .hanjul-input > input:focus {
@@ -42,11 +44,94 @@
 
 .hanjul-input > .fa-search {
   cursor: pointer;
-  margin: 0 10px;
+  margin: auto 0;
+  padding: 10px 3%;
+  font-size: 35px;
+}
+
+.hanjul-description,
+.hanjul-description-typing {
+  font-size: 33px;
+  margin: 40px 0 5% 0;
+  font-weight: 400;
+  color:#857D70;
 }
 
 .hanjul-description {
-  font-size: 20px;
-  color:#857D70;
-  font-weight: 400;
+  display: none;
+}
+
+.hanjul-description-typing {
+  display: inline-block; 
+  animation-name: cursor; 
+  animation-duration: 0.6s;
+  animation-iteration-count: infinite;
+  }
+  @keyframes cursor{ 
+    0%{border-right: 1px solid rgb(117, 109, 109)} 
+    50%{border-right: 1px solid #000} 
+    100%{border-right: 1px solid rgb(235, 235, 235)} 
+  }
+
+.hanjul-flower {
+  position: absolute;
+  right: 7%;
+  top: 38%;
+  width: 14vw;
+  height: 30vh;
+}
+
+@media (max-width:880px) and (min-width: 601px) {
+  .hanjul-title {
+    font-size: 33px;
+  }
+
+  .hanjul-input {
+    width: 70%;
+    height: 63px;
+  }
+
+  .hanjul-input > input {
+    font-size: 20px;
+  }
+
+  .hanjul-description,
+  .hanjul-description-typing {
+    font-size: 25px;
+  }
+
+  .hanjul-flower {
+    right: 2%;
+    top: 41%;
+  }
+}
+
+@media(max-width:600px) {
+  .hanjul-title {
+    font-size: 26px;
+  }
+
+  .hanjul-input {
+    width: 83%;
+    height: 50px;
+  }
+
+  .hanjul-input > input {
+    font-size: 14px;
+  }
+
+  .hanjul-description,
+  .hanjul-description-typing {
+    font-size: 18px;
+  }
+
+  .hanjul-input > .fa-search {
+    cursor: pointer;
+    margin: auto 0;
+    padding: 10px 5%;
+    font-size: 20px;
+  }
+  .hanjul-flower {
+    display: none;
+  }
 }
