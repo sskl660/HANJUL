@@ -5,13 +5,13 @@ function Hanjul() {
   useEffect(() => {
     let typingBool = false;
     let typingIdx = 0;
-    const typing = document.querySelector(".hanjul-title");
+    const typing = document.querySelector(".hanjul-description");
     let typingTxt = typing.innerHTML;
     typingTxt = typingTxt.split("");
 
     var typingFunc = () => {
       if(typingIdx < typingTxt.length) {
-        const titleTyping = document.querySelector(".hanjul-title-typing");
+        const titleTyping = document.querySelector(".hanjul-description-typing");
         titleTyping.append(typingTxt[typingIdx]);
         typingIdx++;
       } else {
@@ -28,13 +28,13 @@ function Hanjul() {
 
   return (
     <div className="hanjul">
-      <p className="hanjul-title">ㅏ ㄴ ㅈ ㅜ ㄹ</p>
-      <p className="hanjul-title-typing">ㅎ</p>
+      <p className="hanjul-title">ㅎㅏㄴㅈㅜㄹ</p>
       <div className="hanjul-input">
         <input type="text" placeholder="한 줄을 입력해주세요" autoFocus/>
         <i className="fas fa-search"></i>
       </div>
-        <h2 className="hanjul-description">"당신의 인생을 한 줄로 표현한다면?"</h2>
+        <h2 className="hanjul-description">당신의 인생을 한 줄로 표현한다면?"</h2>
+        <h2 className="hanjul-description-typing">"</h2>
     </div>
   )
 }

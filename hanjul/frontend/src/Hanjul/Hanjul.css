@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Gugi&family=Nanum+Brush+Script&display=swap');
+
+
 .hanjul {
   display: flex;
   flex-direction: column;
@@ -9,18 +12,19 @@
 
 /* 반응형으로 크기를 조절해줘야 함 */
 .hanjul-title {
-  margin: 0 0 15px 0;
-  font-size: 30px;
+  margin: 0 0 25px 0;
+  font-size: 50px;
   font-weight: 500;
-  letter-spacing: 10px;
+  letter-spacing: 15px;
+  font-family: 'Gugi';
 }
 
 .hanjul-input {
   color: #3B2828;
-  border-radius: 5px;
-  box-shadow: -3px -3px 5px 1px rgb(255, 255, 255) inset, 1px 1px 4px 3px rgba(133, 125, 112, 0.5) inset;
-  width: 70%;
-  height: 40px;
+  border-radius: 10px;
+  box-shadow: -4px -4px 11px 6px rgba(255, 255, 255, 0.7) inset, 4px 4px 11px 5px rgba(133, 125, 112, 0.5) inset;
+  width: 60%;
+  height: 80px;
   padding: 0 0 0 10px;
   display: flex;
   justify-content: space-between;
@@ -29,9 +33,10 @@
 .hanjul-input > input {
   border: none;
   background-color: transparent;
-  border-radius: 5px;
-  padding: 0 10px 0 5px;
+  border-radius: 10px;
+  padding: 0 10px 0 20px;
   width: 100%;
+  font-size: 25px;
 }
 
 .hanjul-input > input:focus {
@@ -43,27 +48,26 @@
   cursor: pointer;
   margin: auto 0;
   padding: 10px 3%;
+  font-size: 35px;
 }
 
 .hanjul-description {
-  font-size: 20px;
+  font-size: 33px;
   color:#857D70;
   font-weight: 400;
-  margin: 15px 0 5% 0;
-}
-
-/* 글씨 타이핑 느낌 */
-.hanjul-title {
+  margin: 40px 0 5% 0;
   display: none;
+  font-family: 'Gugi';
 }
 
-.hanjul-title-typing {
+.hanjul-description-typing {
   display: inline-block; 
   animation-name: cursor; 
   animation-duration: 0.6s; 
   animation-iteration-count: infinite;
-  font-size: 30px;
-  margin: 0 0 15px 0;
+  font-size: 33px;
+  margin: 40px 0 5% 0;
+  font-family: 'Gugi';
   }
   @keyframes cursor{ 
     0%{border-right: 1px solid rgb(117, 109, 109)} 

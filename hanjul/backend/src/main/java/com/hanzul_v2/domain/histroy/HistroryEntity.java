@@ -13,11 +13,11 @@ public class HistroryEntity {
 
     @Id
     private long historyId;
-    @ManyToOne
-    private String userUserId;
-    private String oneLine;
-    private String historyBooks;
-    private LocalDateTime historyDate;
+//    @ManyToOne
+//    private String userUserId;
+//    private String oneLine;
+//    private String historyBooks;
+//    private LocalDateTime historyDate;
 
 
 }
