@@ -1,7 +1,7 @@
 from parse import load_dataframes
 import pandas as pd
+import numpy as np
 import shutil
-
 
 def sort_stores_by_score(dataframes, n=20, min_reviews=30):
     """
@@ -12,10 +12,19 @@ def sort_stores_by_score(dataframes, n=20, min_reviews=30):
         dataframes["stores"], dataframes["reviews"], left_on="id", right_on="store"
     )
     scores_group = stores_reviews.groupby(["store", "store_name"])
+    # print(scores_group.filter(lambda x : len(x) > 100))
+    scores_group_cnt = pd.DataFrame( {'count' : scores_group.size()} )
+    print(scores_group_cnt)
+    # print(scores_group.count())
+    # print(scores_group['score'].where(scores_group.count() > 30))
+    # print(scores_group.where(scores_group.count() > 10))
+    # print(np.where(scores_group.count() > min_reviews))
+    # scores_group = scores_group.filter(lambda x: len(x) > min_reviews)
+    # scores_group = pd.DataFrame(scores_group)
     scores = scores_group.mean()
     print(scores)
+    scores = scores.sort_values(by="score", ascending=False) # 평점 순 정렬
     return scores.head(n=n).reset_index()
-
 
 def get_most_reviewed_stores(dataframes, n=20):
     """

@@ -1,0 +1,72 @@
+.hanjul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+
+/* 반응형으로 크기를 조절해줘야 함 */
+.hanjul-title {
+  margin: 0 0 15px 0;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: 10px;
+}
+
+.hanjul-input {
+  color: #3B2828;
+  border-radius: 5px;
+  box-shadow: -3px -3px 5px 1px rgb(255, 255, 255) inset, 1px 1px 4px 3px rgba(133, 125, 112, 0.5) inset;
+  width: 70%;
+  height: 40px;
+  padding: 0 0 0 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.hanjul-input > input {
+  border: none;
+  background-color: transparent;
+  border-radius: 5px;
+  padding: 0 10px 0 5px;
+  width: 100%;
+}
+
+.hanjul-input > input:focus {
+  outline: none;
+  caret-color: #3B2828;
+}
+
+.hanjul-input > .fa-search {
+  cursor: pointer;
+  margin: auto 0;
+  padding: 10px 3%;
+}
+
+.hanjul-description {
+  font-size: 20px;
+  color:#857D70;
+  font-weight: 400;
+  margin: 15px 0 5% 0;
+}
+
+/* 글씨 타이핑 느낌 */
+.hanjul-title {
+  display: none;
+}
+
+.hanjul-title-typing {
+  display: inline-block; 
+  animation-name: cursor; 
+  animation-duration: 0.6s; 
+  animation-iteration-count: infinite;
+  font-size: 30px;
+  margin: 0 0 15px 0;
+  }
+  @keyframes cursor{ 
+    0%{border-right: 1px solid rgb(117, 109, 109)} 
+    50%{border-right: 1px solid #000} 
+    100%{border-right: 1px solid rgb(235, 235, 235)} 
+  }

@@ -1,49 +1,11 @@
-import pandas as pd
-import numpy as np
+from parse_book import load_dataframes
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
 import time
 import random
 
-# 데이터 읽어오기
-data = pd.read_csv('book_202106.csv', low_memory=False)
-
-book_columns = (
-    "isbn13",
-    "title",
-    "author",
-    "publisher",
-    "pub_date",
-    "img_url",
-    'description',
-    'is_coll_aladin',
-    'is_coll_naver',
-    'isbn_origin'
-)
-
-books = []
-print(data)
-for d in data:
-    books.append(
-        [
-            d["isbn13"],
-            d["title"],
-            d["author"],
-            d["publisher"],
-            d["pub_date"],
-            d["img_url"],
-            d['description'],
-            d['is_coll_aladin'],
-            d['is_coll_naver'],
-            d['isbn_origin']
-        ]
-    )
-    print(books)
-
-# 전처리
-# description과 img_url이 없는 항목은 모두 제거
-data = data[data['description'].notnull()].reset_index(drop=True)
-data = data[data['img_url'].notnull()].reset_index(drop=True)
+data = load_dataframes()
 
 sentence = input()
 start = time.time()
@@ -77,7 +39,7 @@ sim_scores = [(i, c) for i, c in enumerate(cosine_matrix[0]) if i != 0]
 sim_scores = sorted(sim_scores, key = lambda x: x[1], reverse=True)
 # idx 기준으로 TF-IDF를 정렬한 결과(상위 10개)
 
-sim_scores = [(book2id[i], score) for i, score in sim_scores[0:5] if score > 0.1]
+sim_scores = [(book2id[i], score) for i, score in sim_scores[0:5]]
 while len(sim_scores) < 5:
     sim_scores.append((book2id[random.randint(1, len(sim_scores))], 0))
 

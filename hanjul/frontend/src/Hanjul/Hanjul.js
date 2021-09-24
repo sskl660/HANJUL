@@ -1,0 +1,42 @@
+import { useEffect } from 'react'
+import './Hanjul.css'
+
+function Hanjul() {
+  useEffect(() => {
+    let typingBool = false;
+    let typingIdx = 0;
+    const typing = document.querySelector(".hanjul-title");
+    let typingTxt = typing.innerHTML;
+    typingTxt = typingTxt.split("");
+
+    var typingFunc = () => {
+      if(typingIdx < typingTxt.length) {
+        const titleTyping = document.querySelector(".hanjul-title-typing");
+        titleTyping.append(typingTxt[typingIdx]);
+        typingIdx++;
+      } else {
+        clearInterval(tyInt)
+      }
+    }
+
+    if(typingBool === false) {
+      typingBool = true;
+      var tyInt = setInterval(typingFunc, 150);
+    }
+  })
+
+
+  return (
+    <div className="hanjul">
+      <p className="hanjul-title">ㅏ ㄴ ㅈ ㅜ ㄹ</p>
+      <p className="hanjul-title-typing">ㅎ</p>
+      <div className="hanjul-input">
+        <input type="text" placeholder="한 줄을 입력해주세요" autoFocus/>
+        <i className="fas fa-search"></i>
+      </div>
+        <h2 className="hanjul-description">"당신의 인생을 한 줄로 표현한다면?"</h2>
+    </div>
+  )
+}
+
+export default Hanjul
