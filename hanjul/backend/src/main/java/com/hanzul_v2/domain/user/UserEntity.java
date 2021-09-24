@@ -26,8 +26,8 @@ public class UserEntity {
     //변수명을 카멜로해도 언더바 형식과 자동 매핑해준다
     private String userPw;
 
-    @OneToMany(mappedBy = "HistoryEntity")
-    List<HistroryEntity> userUserId =new ArrayList<>();
+//    @OneToMany(mappedBy = "HistoryEntity")
+//    List<HistroryEntity> userUserId =new ArrayList<>();
 
 
 
