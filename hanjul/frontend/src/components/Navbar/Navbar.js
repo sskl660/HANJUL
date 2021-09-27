@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Link } from 'react-router-dom';
 import './Navbar.css'
 
 class Navbar extends Component {
@@ -30,7 +31,28 @@ class Navbar extends Component {
     return (
       <div className="side">
         <div className="side-bar" onClick={!this.state.open ? sideClick:''}>
-          <button className="nav-button"></button>
+          <div>
+            <Link to="/" exact>
+              <button>ㅎㅏㄴㅈㅜㄹ</button>
+            </Link>
+          </div>
+          <div>
+            <Link to="/mylibrary">
+              <button>나의 서재</button>
+            </Link>
+          </div>
+          <div>
+            <Link to="/traces">
+              <button>발자취</button>
+            </Link>
+          </div>
+          <div>
+            <Link to="/user">
+              <button>login</button>
+            </Link>
+          </div>
+         
+          <button className="nav-button" onclick={sideClick}></button>
         </div>
         <div className="side-back" onClick={sideClose}>
         </div>

@@ -12,6 +12,11 @@ function Hanjul() {
     const typingFunc = () => {
       if(typingIdx < typingTxt.length) {
         const titleTyping = document.querySelector(".hanjul-description-typing");
+        if(titleTyping === null) {
+          return () => {
+            clearInterval(tyInt)
+          }
+        }
         titleTyping.append(typingTxt[typingIdx]);
         typingIdx++;
       } else {
