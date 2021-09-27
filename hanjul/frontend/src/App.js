@@ -2,7 +2,7 @@ import { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Hanjul from './Hanjul/Hanjul';
-import Recommend from './Recommend';
+import Recommend from './Recommend/Recommend';
 import Traces from './Traces';
 import User from './User';
 import BookDetail from './BookDetail';

@@ -31,28 +31,34 @@ class Navbar extends Component {
     return (
       <div className="side">
         <div className="side-bar" onClick={!this.state.open ? sideClick:''}>
-          <div>
-            <Link to="/" exact>
-              <button>ㅎㅏㄴㅈㅜㄹ</button>
-            </Link>
+          
+          <div className="side-bar-list">
+            <div>
+              <Link to="/" exact>
+                <button className="up-hanjul-button">ㅎㅏㄴㅈㅜㄹ</button>
+              </Link>
+            </div>
+            <div>
+              <Link to="/mylibrary">
+                <button className="up-mylibrary-button">나의 서재</button>
+              </Link>
+            </div>
+            <div>
+              <Link to="/traces">
+                <button className="up-traces-button">발자취</button>
+              </Link>
+            </div>
+            <div>
+              <Link to="/user">
+                <button className="up-user-button">들어가기</button>
+              </Link>
+            </div>
           </div>
-          <div>
-            <Link to="/mylibrary">
-              <button>나의 서재</button>
-            </Link>
-          </div>
-          <div>
-            <Link to="/traces">
-              <button>발자취</button>
-            </Link>
-          </div>
-          <div>
-            <Link to="/user">
-              <button>login</button>
-            </Link>
-          </div>
+
          
-          <button className="nav-button" onclick={sideClick}></button>
+         
+          <button className="nav-button"></button>
+          
         </div>
         <div className="side-back" onClick={sideClose}>
         </div>

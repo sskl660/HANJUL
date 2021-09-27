@@ -9,9 +9,14 @@ function Hanjul() {
     let typingTxt = typing.innerHTML;
     typingTxt = typingTxt.split("");
 
-    var typingFunc = () => {
+    const typingFunc = () => {
       if(typingIdx < typingTxt.length) {
         const titleTyping = document.querySelector(".hanjul-description-typing");
+        if(titleTyping === null) {
+          return () => {
+            clearInterval(tyInt)
+          }
+        }
         titleTyping.append(typingTxt[typingIdx]);
         typingIdx++;
       } else {
@@ -35,7 +40,7 @@ function Hanjul() {
       </div>
       <h2 className="hanjul-description">당신의 인생을 한 줄로 표현한다면?"</h2>
       <h2 className="hanjul-description-typing">"</h2>
-      <img src="image/hanjul.png" alt="image_for_css" class="hanjul-flower" />
+      <img src="image/hanjul.png" alt="image_for_css" className="hanjul-flower" />
     </div>
   )
 }
