@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -36,6 +37,17 @@ public class UserService {
             userDtoList.add(userDto);
         }
         return userDtoList;
+    }
+
+    @Transactional//spring의 선언적 트렌젝션 방법, 정상여부에 따른 commit과 rollback처리
+    public boolean checkId(String userId) {
+        Optional<UserEntity> userEntity= userRepository.findById(userId);
+        return userEntity.isEmpty()? true:false;
+    }
+
+    @Transactional
+    public void deleteUser(String userId) {
+        userRepository.deleteById(userId);
     }
 
 //    public List<UserDto> getUserAll
