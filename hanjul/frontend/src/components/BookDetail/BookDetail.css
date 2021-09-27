@@ -87,7 +87,7 @@
   border-radius: 10px;
   box-shadow: -4px -4px 11px 6px rgba(255, 255, 255, 0.7) inset,
     4px 4px 11px 5px rgba(133, 125, 112, 0.5) inset;
-  height: 525px;
+  height: 535px;
   /* display: flex; */
   justify-content: space-between;
   margin-bottom: 5%;
@@ -156,11 +156,63 @@
   border-radius: 10px;
   height: 210px;
   justify-content: space-between;
-  margin-top: 2%;
-  margin-bottom: 5%;
+  margin-top: 1%;
+  margin-bottom: 20px;
   margin-left: 7%;
 }
 
 h3 {
   margin-left: 15px;
+}
+
+.bookmarkIcon {
+  position: absolute;
+  right: 7%;
+  top: 10%;
+  width: 14vw;
+}
+
+.bookmark-img {
+  cursor: pointer;
+  color: #ce9680;
+}
+
+.bookD-pagination {
+  margin-left: 25%;
+  width: 50%;
+  background: #f2efe5;
+  padding: 1px;
+  border-radius: 3px;
+  box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, 0.288);
+}
+
+.bookD-pagination .pagination {
+  display: flex;
+  list-style: none;
+  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.bookD-pagination .pagination li {
+  flex: 1;
+  margin: 0 5px;
+  background: #f2efe5;
+  border-radius: 3px;
+  box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, 0.288);
+}
+
+.pagination li a {
+  font-size: 18px;
+  text-decoration: none;
+  color: #3b2828;
+  display: block;
+  line-height: 40px;
+}
+.pagination li:first-child {
+  margin: 0 15px 0 0;
+}
+
+.pagination li:last-child {
+  margin: 0 0 0 15px;
 }
