@@ -2,6 +2,7 @@ package com.hanzul_v2.domain.user;
 
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiParam;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import lombok.Setter;
 @ApiModel("UserDto")
 @NoArgsConstructor
 public class UserDto {
+    @ApiParam(value = "사용자 이름", required = false, example = "홍길")
     private String userId;
     private String userName;
     private String userPw;
