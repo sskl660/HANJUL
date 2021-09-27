@@ -1,0 +1,166 @@
+@import url("https://fonts.googleapis.com/css2?family=Gugi&family=Nanum+Brush+Script&display=swap");
+
+.bookDetail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* min-height: 110vh; */
+  margin-top: 5%;
+}
+
+.bookD-info {
+  width: 50%;
+}
+
+.bookD-infoL {
+  float: left;
+  width: 38%;
+}
+
+.bookD-infoR {
+  float: right;
+  width: 55%;
+}
+
+.bookD-bookImg {
+  border-radius: 10px;
+  box-shadow: -4px -4px 11px 6px rgba(255, 255, 255, 0.7) inset,
+    4px 4px 11px 5px rgba(133, 125, 112, 0.5) inset;
+  width: 100%;
+  height: 448px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bookD-bookInfo {
+  background-color: #e6d3c7;
+  border-radius: 10px;
+  box-shadow: -4px -4px 11px 6px rgba(255, 255, 255, 0.7) inset,
+    4px 4px 11px 5px rgba(133, 125, 112, 0.5) inset;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4%;
+}
+
+.bookD-bookIntro {
+  background-color: #e6d3c7;
+  border-radius: 10px;
+  box-shadow: -4px -4px 11px 6px rgba(255, 255, 255, 0.7) inset,
+    4px 4px 11px 5px rgba(133, 125, 112, 0.5) inset;
+  width: 100%;
+  height: 280px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4%;
+}
+
+.bookD-bookGrade {
+  background-color: #857d70;
+  border-radius: 33px;
+  width: 90%;
+  height: 54px;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+.bookD-recommend {
+  width: 68%;
+  background-color: #e6d3c7;
+  border-radius: 10px;
+  box-shadow: -4px -4px 11px 6px rgba(255, 255, 255, 0.7) inset,
+    4px 4px 11px 5px rgba(133, 125, 112, 0.5) inset;
+  height: 817px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2%;
+  margin-bottom: 3%;
+}
+
+.bookD-review {
+  width: 68%;
+  background-color: #e6d3c7;
+  border-radius: 10px;
+  box-shadow: -4px -4px 11px 6px rgba(255, 255, 255, 0.7) inset,
+    4px 4px 11px 5px rgba(133, 125, 112, 0.5) inset;
+  height: 525px;
+  /* display: flex; */
+  justify-content: space-between;
+  margin-bottom: 5%;
+}
+
+.bookD-reviewTitle {
+  margin-top: 2.5%;
+  font-size: 48px;
+  font-weight: 500;
+  letter-spacing: 15px;
+  font-family: "Gugi";
+  text-align: center;
+  margin-bottom: 2%;
+}
+
+.bookD-reviewInput {
+  background-color: #e6e2d6;
+  border-radius: 10px;
+  box-shadow: -4px -4px 11px 6px rgba(255, 255, 255, 0.7) inset,
+    4px 4px 11px 5px rgba(133, 125, 112, 0.5) inset;
+  width: 82%;
+  height: 60px;
+  margin-bottom: 1%;
+  float: left;
+}
+
+.bookD-reviewInput > input {
+  border: none;
+  background-color: transparent;
+  border-radius: 10px;
+  padding-left: 15px;
+  padding-top: 20px;
+  width: 100%;
+  font-size: 20px;
+}
+
+.bookD-reviewInput > input:focus {
+  outline: none;
+  /* caret-color: #3b2828; */
+}
+
+.bookD-btn {
+  background-color: #857d70;
+  box-shadow: 4px 4px 4px 0px rgba(133, 125, 112, 0.5);
+  border-radius: 33px;
+  width: 15%;
+  justify-content: space-between;
+  margin-bottom: 1%;
+  float: right;
+  color: white;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.bookD-reviewBox {
+  width: 86%;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 7%;
+}
+
+.bookD-reviewShow {
+  background-color: #f7f2ee;
+  width: 86%;
+  border-radius: 10px;
+  height: 210px;
+  justify-content: space-between;
+  margin-top: 2%;
+  margin-bottom: 5%;
+  margin-left: 7%;
+}
+
+h3 {
+  margin-left: 15px;
+}
