@@ -38,21 +38,25 @@ class Navbar extends Component {
                 <button className="up-hanjul-button">ㅎㅏㄴㅈㅜㄹ</button>
               </Link>
             </div>
+            <img className="nav-hanjul-img" src="../../image/nav-flower-left.png" alt="" />
             <div>
               <Link to="/mylibrary">
                 <button className="up-mylibrary-button">나의 서재</button>
               </Link>
             </div>
+            <img className="nav-mylibrary-img" src="../../image/nav-flower-right.png" alt="" />
             <div>
               <Link to="/traces">
                 <button className="up-traces-button">발자취</button>
               </Link>
             </div>
+            <img className="nav-traces-img" src="../../image/nav-flower-left.png" alt="" />
             <div>
               <Link to="/user">
                 <button className="up-user-button">들어가기</button>
               </Link>
             </div>
+            <img className="nav-user-img" src="../../image/nav-flower-right.png" alt="" />
           </div>
 
          
