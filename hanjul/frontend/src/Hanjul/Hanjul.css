@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Gugi&family=Nanum+Brush+Script&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Gugi&family=Nanum+Brush+Script&display=swap");
 
 .hanjul {
   display: flex;
@@ -14,13 +14,14 @@
   font-size: 50px;
   font-weight: 500;
   letter-spacing: 15px;
-  font-family: 'Gugi';
+  font-family: "Gugi";
 }
 
 .hanjul-input {
-  color: #3B2828;
+  color: #3b2828;
   border-radius: 10px;
-  box-shadow: -4px -4px 11px 6px rgba(255, 255, 255, 0.7) inset, 4px 4px 11px 5px rgba(133, 125, 112, 0.5) inset;
+  box-shadow: -4px -4px 11px 6px rgba(255, 255, 255, 0.7) inset,
+    4px 4px 11px 5px rgba(133, 125, 112, 0.5) inset;
   width: 60%;
   height: 80px;
   padding: 0 0 0 10px;
@@ -39,7 +40,7 @@
 
 .hanjul-input > input:focus {
   outline: none;
-  caret-color: #3B2828;
+  caret-color: #3b2828;
 }
 
 .hanjul-input > .fa-search {
@@ -54,7 +55,7 @@
   font-size: 33px;
   margin: 40px 0 5% 0;
   font-weight: 400;
-  color:#857D70;
+  color: #857d70;
 }
 
 .hanjul-description {
@@ -62,16 +63,22 @@
 }
 
 .hanjul-description-typing {
-  display: inline-block; 
-  animation-name: cursor; 
+  display: inline-block;
+  animation-name: cursor;
   animation-duration: 0.6s;
   animation-iteration-count: infinite;
+}
+@keyframes cursor {
+  0% {
+    border-right: 1px solid rgb(117, 109, 109);
   }
-  @keyframes cursor{ 
-    0%{border-right: 1px solid rgb(117, 109, 109)} 
-    50%{border-right: 1px solid #000} 
-    100%{border-right: 1px solid rgb(235, 235, 235)} 
+  50% {
+    border-right: 1px solid #000;
   }
+  100% {
+    border-right: 1px solid rgb(235, 235, 235);
+  }
+}
 
 .hanjul-flower {
   position: absolute;
@@ -81,7 +88,7 @@
   height: 30vh;
 }
 
-@media (max-width:880px) and (min-width: 601px) {
+@media (max-width: 880px) and (min-width: 601px) {
   .hanjul-title {
     font-size: 33px;
   }
@@ -106,7 +113,7 @@
   }
 }
 
-@media(max-width:600px) {
+@media (max-width: 600px) {
   .hanjul-title {
     font-size: 26px;
   }
