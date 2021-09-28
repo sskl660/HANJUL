@@ -72,14 +72,15 @@ books.forEach((book, index) => {
 
 
 let histories = [
-  '나는 곱창에 소주를 먹고 싶다',
+  '파이썬 공부를 하고 싶다',
   '퇴실체크!',
-  '리액트 공부 파이팅',
-  '우리 존재 화이팅',
-  '빵상',
-  '안녕하세요?',
+  '리액트 공부 화이팅',
+  '취업하고싶다',
+  '자기계발서를 읽어보고 싶어요',
   '이거 어떻게 쓰는건가요?',
-  '여기까지 나올까?'
+  '인문학 책을 읽고 싶은데 뭘 읽을지 모르겠어요',
+  '알고리즘 공부!',
+  '컴퓨터 지식 공부'
 ]
 
 let historyList = [];
@@ -184,7 +185,7 @@ function Recommend() {
     <div className="recommend-page">
       <p className="recommend-title">
         <span>"</span>
-        <span>나는 책이 싫다!!</span>
+        <span>나는 책이 좋다!</span>
         <span>"</span>
       </p>
       <div class="carousel">
