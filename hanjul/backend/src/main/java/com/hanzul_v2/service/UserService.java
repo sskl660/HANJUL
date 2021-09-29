@@ -25,11 +25,27 @@ public class UserService {
         userRepository.save(request.toEntity());
     }
 
+    @Transactional//spring의 선언적 트렌젝션 방법, 정상여부에 따른 commit과 rollback처리
+    public boolean checkId(String userId) {
+        Optional<UserEntity> userEntity= userRepository.findById(userId);
+        return userEntity.isEmpty()? true:false;
+    }
+
     @Transactional
-    public List<UserDto> showUser(){
-        List<UserEntity> userEntityList=userRepository.findAll();
-        List<UserDto> userDtoList=new ArrayList<>();
-        for(UserEntity userEntity: userEntityList){
+    public UserDto loginUser(UserDto.ReqLoginDto IdPw) {
+        //nullpointException을 처리하기위한 옵셔널
+        Optional<UserEntity> loginedUser=userRepository.findByUserIdAndUserPw(IdPw.getUserId(), IdPw.getUserPw());
+        UserDto userDto = new UserDto(loginedUser.orElse(null).getUserId(),
+                loginedUser.orElse(null).getUserName(),
+                loginedUser.orElse(null).getUserPw());
+        return userDto;
+    }
+
+    @Transactional
+    public List<UserDto> showUser() {
+        List<UserEntity> userEntityList = userRepository.findAll();
+        List<UserDto> userDtoList = new ArrayList<>();
+        for (UserEntity userEntity : userEntityList) {
             UserDto userDto = new UserDto();
             userDto.setUserId(userEntity.getUserId());
             userDto.setUserName(userEntity.getUserName());
@@ -39,16 +55,13 @@ public class UserService {
         return userDtoList;
     }
 
-    @Transactional//spring의 선언적 트렌젝션 방법, 정상여부에 따른 commit과 rollback처리
-    public boolean checkId(String userId) {
-        Optional<UserEntity> userEntity= userRepository.findById(userId);
-        return userEntity.isEmpty()? true:false;
-    }
-
     @Transactional
     public void deleteUser(String userId) {
         userRepository.deleteById(userId);
     }
+
+
+
 
 //    public List<UserDto> getUserAll
 }

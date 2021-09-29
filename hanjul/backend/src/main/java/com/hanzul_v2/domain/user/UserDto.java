@@ -3,9 +3,7 @@ package com.hanzul_v2.domain.user;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
@@ -28,5 +26,13 @@ public class UserDto {
         this.userId = userId;
         this.userName = userName;
         this.userPw = userPw;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @Builder
+    public static class ReqLoginDto{
+        private String userId;
+        private String userPw;
     }
 }
