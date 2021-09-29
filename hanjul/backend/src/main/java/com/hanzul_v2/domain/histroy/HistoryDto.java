@@ -26,7 +26,7 @@ public class HistoryDto {
     @Builder
     public static class RequestSetHistory{
         private String historyOneline;
-        private List<Integer> historyBooksIsbns;
+        private List<String> historyBooksIsbns;
         private String userName;
         private List<String> historyBooksImgurl;
     }
@@ -38,7 +38,7 @@ public class HistoryDto {
         private long historyId;
         private LocalDateTime historyDate;
         private String historyOneline;
-        private List<Integer> histroyBooksIsbns;
+        private List<String> histroyBooksIsbns;
         private List<String> historyBooksImgurl;
         private String userName;
     }
@@ -47,7 +47,7 @@ public class HistoryDto {
     private long historyId;
     private String historyOneline;
     private LocalDateTime historyDate;
-    private List<Integer> historyBooksIsbns=new ArrayList<>();
+    private List<String> historyBooksIsbns=new ArrayList<>();
     private List<String> historyBooksImgurl=new ArrayList<>();
     private String userName;
 

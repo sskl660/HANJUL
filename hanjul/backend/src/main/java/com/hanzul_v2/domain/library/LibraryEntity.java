@@ -18,7 +18,7 @@ public class LibraryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long libraryId;
-    private int mybookIsbn;
+    private String mybookIsbn;
     @CreatedDate
     private LocalDateTime mybookDate;
     private String mybookImgurl;
@@ -33,7 +33,7 @@ public class LibraryEntity {
     private UserEntity libraryFkUserId;
 
     @Builder
-    public LibraryEntity(long libraryId, int mybookIsbn, LocalDateTime mybookDate, String mybookImgurl, String mybookTitle, String mybookAuthor, String mybookDesc, String mybookPublisher, String mybookPublished, UserEntity libraryFkUserId) {
+    public LibraryEntity(long libraryId, String mybookIsbn, LocalDateTime mybookDate, String mybookImgurl, String mybookTitle, String mybookAuthor, String mybookDesc, String mybookPublisher, String mybookPublished, UserEntity libraryFkUserId) {
         this.libraryId = libraryId;
         this.mybookIsbn = mybookIsbn;
         this.mybookDate = mybookDate;

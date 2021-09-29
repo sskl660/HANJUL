@@ -26,21 +26,28 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-//    @ApiOperation(value = "책 상세 정보 요청")
-//    @GetMapping(value = "detail/{book_isbn}")
-//    public ResponseEntity<BookDto> getBookDetail(
-//            @ApiParam(value = "book isbn")
-//            @PathVariable(name = "book_isbn") int bookIsbn
-//    )throws Exception{
-//        BookDto respBookDto=new BookDto();
-//        return ResponseEntity.ok().body(respBookDto);
-//    }
+    @ApiOperation(value = "덤프 책 요청 20개")
+    @GetMapping(value = "admin/dump")
+    public ResponseEntity<List<BookDto>> reqDump()throws Exception{
+        List<BookDto> respBookDto=bookService.giveDump();
+        return ResponseEntity.ok().body(respBookDto);
+    }
+
+    @ApiOperation(value = "책 상세 정보 요청")
+    @GetMapping(value = "detail/{book_isbn}")
+    public ResponseEntity<BookDto> getBookDetail(
+            @ApiParam(value = "book isbn")
+            @PathVariable(name = "book_isbn") String bookIsbn
+    )throws Exception{
+        BookDto respBookDto=bookService.getBookDetail(bookIsbn);
+        return ResponseEntity.ok().body(respBookDto);
+    }
 
     @ApiOperation(value = "책 리뷰 정보 요청")
     @GetMapping(value = "detail/reivew/{book_isbn}")
     public ResponseEntity<List<ReviewDto.RespBookReviewDto>> getBookReview(
             @ApiParam(value = "book isbn")
-            @PathVariable(name = "book_isbn") int bookIsbn
+            @PathVariable(name = "book_isbn") String bookIsbn
     )throws Exception{
         List<ReviewDto.RespBookReviewDto> respBookReviewDtoList=bookService.getBookReviews(bookIsbn);
         return ResponseEntity.ok().body(respBookReviewDtoList);
@@ -60,7 +67,7 @@ public class BookController {
     @GetMapping(value = "detail/scrap/{book_isbn}/{user_id}")
     public ResponseEntity<Boolean> isScraped(
 //            @ApiParam(value = "book_i)
-            @PathVariable(name = "book_isbn") int isbn,
+            @PathVariable(name = "book_isbn") String isbn,
             @PathVariable(name = "user_id") String userId
     )throws Exception{
         Boolean aBoolean = bookService.isScraped(isbn,userId);
@@ -71,7 +78,7 @@ public class BookController {
     @DeleteMapping(value = "detail/scrap/{book_isbn}/{user_id}")
     public ResponseEntity cancelScrap(
             @ApiParam(value = "book isbn")
-            @PathVariable(name = "book_isbn") int isbn,
+            @PathVariable(name = "book_isbn") String isbn,
             @ApiParam(value = "user id")
             @PathVariable(name = "user_id") String userId
     )throws Exception{
