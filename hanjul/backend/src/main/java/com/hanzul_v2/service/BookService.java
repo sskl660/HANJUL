@@ -1,12 +1,15 @@
 package com.hanzul_v2.service;
 
+import com.hanzul_v2.domain.book.BookDto;
 import com.hanzul_v2.domain.book.ReviewDto;
 import com.hanzul_v2.domain.book.ReviewEntity;
+import com.hanzul_v2.domain.book.TmpbooksEntity;
 import com.hanzul_v2.domain.library.LibraryDto;
 import com.hanzul_v2.domain.library.LibraryEntity;
 import com.hanzul_v2.domain.user.UserEntity;
 import com.hanzul_v2.repository.LibraryRepository;
 import com.hanzul_v2.repository.ReviewRepository;
+import com.hanzul_v2.repository.TmpbooksRepository;
 import com.hanzul_v2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,8 +27,46 @@ public class BookService {
     private UserRepository userRepository;
     @Autowired
     private LibraryRepository libraryRepository;
+    @Autowired
+    private TmpbooksRepository tmpbooksRepository;
 
-    public List<ReviewDto.RespBookReviewDto> getBookReviews(int bookIsbn){
+
+
+    public List<BookDto> giveDump(){
+        List<TmpbooksEntity> tmpbooksEntityList =tmpbooksRepository.findTop100ByOrderByImgUrl();
+        List<BookDto> bookDtoList =new ArrayList<>();
+        for(int i=0;i<20;i++){
+            int idx= (int)(Math.random()*20);
+            BookDto bookDto= BookDto.builder()
+                    .isbn(tmpbooksEntityList.get(idx).getIsbn())
+                    .imgUrl(tmpbooksEntityList.get(idx).getImgUrl())
+                    .author(tmpbooksEntityList.get(idx).getAuthor())
+                    .description(tmpbooksEntityList.get(idx).getDescription())
+                    .avgStar(tmpbooksEntityList.get(idx).getAvgStar())
+                    .build();
+            bookDtoList.add(bookDto);
+        }
+        return bookDtoList;
+    }
+
+    public BookDto getBookDetail(String bookIsbn){
+        //조회
+        TmpbooksEntity tmpbooksEntity = tmpbooksRepository.findById(bookIsbn).orElse(null);
+        //빌드
+        BookDto resBookDto=BookDto.builder()
+                .isbn(tmpbooksEntity.getIsbn())
+                .imgUrl(tmpbooksEntity.getImgUrl())
+                .title(tmpbooksEntity.getTitle())
+                .author(tmpbooksEntity.getAuthor())
+                .description(tmpbooksEntity.getDescription())
+                .publisher(tmpbooksEntity.getPublisher())
+                .avgStar(tmpbooksEntity.getAvgStar())
+                .build();
+        return resBookDto;
+
+    }
+
+    public List<ReviewDto.RespBookReviewDto> getBookReviews(String bookIsbn){
         //응답
         List<ReviewDto.RespBookReviewDto> respBookReviewDtoList=new ArrayList<>();
         //조회
@@ -43,19 +84,25 @@ public class BookService {
     }
 
     public void setScrap(LibraryDto.ReqLibrary reqLibrary){
-        //DAO 전송을 위해 엔티티화 시키는 중
+        //유저정보
+        Optional<UserEntity> optionalUserEntity = userRepository.findById(reqLibrary.getUserId());
+        UserEntity userEntity = optionalUserEntity.orElse(null);
+        //책정보
+        TmpbooksEntity tmpbooksEntity = tmpbooksRepository.findById(reqLibrary.getMybookIsbn()).orElse(null);
+        //엔티티화
         LibraryEntity libraryEntity = LibraryEntity.builder()
-                .mybookIsbn(reqLibrary.getMybookIsbn())
+                .mybookIsbn(tmpbooksEntity.getIsbn())
                 .mybookDate(LocalDateTime.now())
-                .mybookImgurl(reqLibrary.getMybookImgurl())
-                .mybookTitle(reqLibrary.getMybookTitle())
-                .mybookAuthor(reqLibrary.getMybookAuthor())
-                .mybookDesc(reqLibrary.getMybookDesc())
+                .mybookImgurl(tmpbooksEntity.getImgUrl())
+                .mybookTitle(tmpbooksEntity.getTitle())
+                .mybookAuthor(tmpbooksEntity.getAuthor())
+                .mybookDesc(tmpbooksEntity.getDescription())
+                .libraryFkUserId(userEntity)
                 .build();
         libraryRepository.save(libraryEntity);
     }
 
-    public Boolean isScraped(int isbn, String userId){
+    public Boolean isScraped(String isbn, String userId){
         //조회
         Optional<UserEntity> optionalUserEntity = userRepository.findById(userId);
         UserEntity userEntity = optionalUserEntity.orElse(null);
@@ -65,7 +112,7 @@ public class BookService {
         else return true;
     }
 
-    public void cancelScraped(int isbn, String userId){
+    public void cancelScraped(String isbn, String userId){
         //조회
         Optional<UserEntity> optionalUserEntity = userRepository.findById(userId);
         UserEntity userEntity = optionalUserEntity.orElse(null);
@@ -75,8 +122,9 @@ public class BookService {
 
     public Boolean setReview(ReviewDto.ReqBookDto reqBookDto){
         //조회
-        Optional<UserEntity> optionalUserEntity = userRepository.findById(reqBookDto.getUserName());
+        Optional<UserEntity> optionalUserEntity = userRepository.findById(reqBookDto.getUserId());
         UserEntity userEntity = optionalUserEntity.orElse(null);
+        System.out.println(userEntity.toString());
         //변환
         ReviewEntity reviewEntity = ReviewEntity.builder()
                 .reviewStar(reqBookDto.getReviewStar())
@@ -85,7 +133,21 @@ public class BookService {
                 .reviewDate(LocalDateTime.now())
                 .reviewFkUserId(userEntity)
                 .build();
-        if(reviewRepository.save(reviewEntity)!=null) return true;
+        if(reviewRepository.save(reviewEntity)!=null){
+            //별점 평균내기
+            List<ReviewEntity> reviewEntityList = reviewRepository.findByReviewIsbnOrderByReviewDate(reqBookDto.getReviewIsbn());
+            double avg=0;
+            for(ReviewEntity review : reviewEntityList ){
+                avg+=review.getReviewStar();
+            }
+            avg=Math.round(avg/10)*10;
+            System.out.println(avg);
+            Optional<TmpbooksEntity> tmpbooksEntity = tmpbooksRepository.findById(reqBookDto.getReviewIsbn());
+            TmpbooksEntity updatedTmpbooksEntity = tmpbooksEntity.orElse(null);
+            updatedTmpbooksEntity.setAvgStar((int)avg);
+            tmpbooksRepository.save(updatedTmpbooksEntity);
+            return true;
+        }
         else  return false;
     }
 }
