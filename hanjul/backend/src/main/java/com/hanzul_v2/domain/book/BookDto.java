@@ -14,11 +14,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class BookDto {
-    private int bookIsbn;
-    private String bookImgurl;
-    private String bookTitle;
-    private String bookAuthor;
-    private String bookDesc;
-    private String bookPublisher;
-    private LocalDateTime bookPublished;
+    private String isbn;
+    private String imgUrl;
+    private String title;
+    private String author;
+    private String description;
+    private String publisher;
+    private LocalDateTime published;
+    private int avgStar;
 }

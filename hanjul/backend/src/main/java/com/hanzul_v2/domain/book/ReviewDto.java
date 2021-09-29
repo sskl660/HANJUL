@@ -16,7 +16,7 @@ public class ReviewDto {
     private long reviewId;
     private int reviewStar;
     private String reviewComment;
-    private int reviewIsbn;
+    private String reviewIsbn;
     private LocalDateTime reviewDate;
     private String userName;
 
@@ -26,9 +26,9 @@ public class ReviewDto {
     public static class ReqBookDto{
         private int reviewStar;
         private String reviewComment;
-        private int reviewIsbn;
+        private String reviewIsbn;
         private LocalDateTime reviewDate;
-        private String userName;
+        private String userId;
 
     }
 

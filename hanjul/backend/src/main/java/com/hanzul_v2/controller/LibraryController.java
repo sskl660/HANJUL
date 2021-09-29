@@ -31,8 +31,8 @@ class LibraryController {
             @ApiParam(value = "사용자 아이디")
             @PathVariable(name = "user_id") String userId
     )throws Exception{
+        System.out.println("서재요청 들어옴 "+userId);
         List<LibraryDto.RespLibrary> library = libraryService.getMybooks(userId);
         return ResponseEntity.ok().body(library);
     }
-
 }

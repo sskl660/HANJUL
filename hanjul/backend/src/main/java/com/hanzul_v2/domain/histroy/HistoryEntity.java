@@ -30,7 +30,7 @@ public class HistoryEntity {
     @ElementCollection
     @CollectionTable(name = "history_books_isbn", joinColumns = @JoinColumn(
             name = "history_books_id"))
-    private List<Integer> historyBooksIsbns=new ArrayList<>();
+    private List<String> historyBooksIsbns=new ArrayList<>();
 
     @ElementCollection
     @CollectionTable(name = "history_books_imgurl", joinColumns = @JoinColumn(
@@ -53,7 +53,7 @@ public class HistoryEntity {
     private UserEntity historyFkUserId;
 
     @Builder
-    public HistoryEntity(long historyId, String historyOneline, LocalDateTime historyDate, List<Integer> historyBooksIsbns, List<String> historyBooksImgurl, UserEntity historyFkUserId) {
+    public HistoryEntity(long historyId, String historyOneline, LocalDateTime historyDate, List<String> historyBooksIsbns, List<String> historyBooksImgurl, UserEntity historyFkUserId) {
         this.historyId = historyId;
         this.historyOneline = historyOneline;
         this.historyDate = historyDate;

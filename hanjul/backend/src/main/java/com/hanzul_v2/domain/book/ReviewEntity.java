@@ -1,6 +1,7 @@
 package com.hanzul_v2.domain.book;
 
 import com.hanzul_v2.domain.user.UserEntity;
+import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,7 +11,7 @@ import org.springframework.data.annotation.CreatedDate;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity(name = "Book")
+@Entity(name = "review")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -20,9 +21,10 @@ public class ReviewEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long reviewId;
+    @ApiParam(example = "0")
     private int reviewStar;
     private String reviewComment;
-    private int reviewIsbn;
+    private String reviewIsbn;
     @CreatedDate
     private LocalDateTime reviewDate;
 

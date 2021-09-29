@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class LibraryDto {
     private long libraryId;
-    private int mybookIsbn;
+    private String mybookIsbn;
     private LocalDateTime mybookDate;
     private String mybookImgurl;
     private String mybookTitle;
@@ -29,20 +29,15 @@ public class LibraryDto {
     @AllArgsConstructor
     @Builder
     public static class ReqLibrary{
-        private int mybookIsbn;
+        private String mybookIsbn;
         private String userId;
-        private String mybookTitle;
-        private String mybookAuthor;
-        private String mybookDesc;
-        private String mybookImgurl;
-
     }
 
     @Data
     @AllArgsConstructor
     @Builder
     public static class RespLibrary{
-        private int mybookIsbn;
+        private String mybookIsbn;
         private String mybookImgurl;
         private String mybookTitle;
         private String mybookAuthor;
