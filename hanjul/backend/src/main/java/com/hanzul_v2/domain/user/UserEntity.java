@@ -1,5 +1,8 @@
 package com.hanzul_v2.domain.user;
 
+import com.hanzul_v2.domain.book.ReviewEntity;
+import com.hanzul_v2.domain.histroy.HistoryEntity;
+import com.hanzul_v2.domain.library.LibraryEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
@@ -11,6 +14,9 @@ import lombok.NonNull;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data //getter setter 생성을 위해 롬복 어노테이션 data를 달아준다. (지양하란 얘기도 있는 부분!)
 @Entity(name="user")//db 테이블 엔티티로 매핑된다.
@@ -33,8 +39,15 @@ public class UserEntity {
     @ApiModelProperty(required = true, value="비밀번호")
     private String userPw;
 
-//    @OneToMany(mappedBy = "HistoryEntity")
-//    List<HistroryEntity> userUserId =new ArrayList<>();
+    //한명의 유저는 여러 히스토리에서 fk된다
+    @OneToMany(mappedBy = "historyFkUserId")//history 의 fk 필드명과 일치
+    List<HistoryEntity> historyEntityList =new ArrayList<>();
+
+    @OneToMany(mappedBy = "libraryFkUserId")
+    List<LibraryEntity> libraryEntityList =new ArrayList<>();
+
+    @OneToMany(mappedBy = "reviewFkUserId")
+    List<ReviewEntity> reviewFkUserId =new ArrayList<>();
 
 
     @Builder

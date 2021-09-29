@@ -30,12 +30,14 @@ public class UserController {
 //        return ResponseEntity<>()
 //    }
 
+
     /*회원가입*/
     @ApiOperation(value = "회원 가입 요청", notes = "회원 가입을 요청한다")
     @PostMapping(value = "signup")
     public void createUser( @ApiParam(name = "user_info",value = "사용자 정보", example = "ssafy 김싸피 1234")
                                 @RequestBody UserDto request) throws Exception {
-        userService.createUser(request);
+        if(userService.checkId(request.getUserId()))
+                userService.createUser(request);
     }
 
     /*아이디 중복체크*/
@@ -52,6 +54,17 @@ public class UserController {
         return ResponseEntity.ok().body(idUsable);
     }
 
+    /*로그인*/
+    @ApiOperation(value = "로그인 요청")
+    @PostMapping(value = "login")
+    public ResponseEntity<UserDto> loginUser( @ApiParam(name = "user_info",value = "사용자 정보")
+                            @RequestBody UserDto.ReqLoginDto IdPw) throws Exception {
+        UserDto userDto = userService.loginUser(IdPw);
+        System.out.println(userDto.getUserName());
+//        if(userDto.getUserName()!=null) return ResponseEntity.ok().body(userDto);
+        return ResponseEntity.ok().body(userDto);
+    }
+
     //////////////////ADMIN WORKING///////////////////////
     /*회원리스트 요청*/
     @ApiOperation(value = "회원 목록 요청")
@@ -64,7 +77,8 @@ public class UserController {
     /*회원삭제 요청*/
     @ApiOperation(value = "회원 삭제 요청")
     @DeleteMapping(value = "admin/delete/{user_id}")
-    public ResponseEntity deleteUser(@PathVariable(name = "user_id", value = "삭제 할 아이디") String userId) throws Exception {
+    public ResponseEntity deleteUser(@ApiParam(value = "사용자 아이디")
+                                     @PathVariable(name = "user_id") String userId) throws Exception {
         userService.deleteUser(userId);
         System.out.println(userId+"삭제 완료");
         return new ResponseEntity<>(userId+"삭제완료",HttpStatus.OK);
