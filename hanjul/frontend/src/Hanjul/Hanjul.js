@@ -5,17 +5,15 @@ function Hanjul() {
   useEffect(() => {
     let typingBool = false;
     let typingIdx = 0;
-    const typing = document.querySelector(".hanjul-description");
+    let typing = document.querySelector(".hanjul-description");
     let typingTxt = typing.innerHTML;
     typingTxt = typingTxt.split("");
 
     const typingFunc = () => {
       if(typingIdx < typingTxt.length) {
-        const titleTyping = document.querySelector(".hanjul-description-typing");
+        let titleTyping = document.querySelector(".hanjul-description-typing");
         if(titleTyping === null) {
-          return () => {
-            clearInterval(tyInt)
-          }
+          return
         }
         titleTyping.append(typingTxt[typingIdx]);
         typingIdx++;
@@ -28,7 +26,10 @@ function Hanjul() {
       typingBool = true;
       var tyInt = setInterval(typingFunc, 150);
     }
-  })
+    return () => {
+        clearInterval(tyInt)
+    }
+  }, [])
 
 
   return (
