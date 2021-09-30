@@ -5,7 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 // import { createStore } from "redux";
 // import { createStore, applyMiddleware, compose } from "redux";
-import { Provider } from "react-redux";
 // import logger from "redux-logger";
 // import { composeWithDevTools } from "redux-devtools-extension";
 // import rootReducer from "./reducers";
@@ -14,11 +13,9 @@ import { BrowserRouter } from 'react-router-dom';
 ReactDOM.render(
   <React.StrictMode>
     {/* 만든 store를 앱 상위에 넣어줍니다. */}
-    <Provider store={store}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
