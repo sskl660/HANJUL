@@ -23,7 +23,7 @@ class User extends Component {
       const signupUserId = document.querySelector(".signupUserId")
       const signupPassword = document.querySelector(".signupPassword")
       const signupPasswordRev = document.querySelector(".signupPasswordRev")
- 
+
       move.classList.add("moving");
       move.classList.remove("start");
       form.classList.add("movingForm");

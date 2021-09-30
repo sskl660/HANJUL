@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b6a932f-d074-4f10-b4c1-50445c318a8b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sub1/analyze.py" beforeDir="false" afterPath="$PROJECT_DIR$/sub1/analyze.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sub1/parse.py" beforeDir="false" afterPath="$PROJECT_DIR$/sub1/parse.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hanjul/frontend/src/BookDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/hanjul/frontend/src/BookDetail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hanjul/frontend/src/Recommend/Recommend copy.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hanjul/frontend/src/Recommend/Recommend.js" beforeDir="false" afterPath="$PROJECT_DIR$/hanjul/frontend/src/Recommend/Recommend.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hanjul/frontend/src/components/Navbar/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/hanjul/frontend/src/components/Navbar/Navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hanjul/frontend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/hanjul/frontend/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +26,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="1b6a932f-d074-4f10-b4c1-50445c318a8b" name="Default Changelist" comment="" />

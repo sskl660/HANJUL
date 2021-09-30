@@ -88,16 +88,15 @@ histories.forEach((history, index) => {
   historyList.push(<li key={index}>{history}</li>)
 })
 
-
+let h1= 0,
+h2 = 1,
+h3 = 2,
+h4 = 3,
+h5 = 4
 
 
 function Recommend() {
   const [showHistories, setShowHistories] = useState([]);
-  let h1= 0,
-    h2 = 1,
-    h3 = 2,
-    h4 = 3,
-    h5 = 4
 
   useEffect(() => {
     var carousel = document.getElementsByClassName('carousel')[0],
@@ -161,15 +160,15 @@ function Recommend() {
         next()
         prev()
     }
-  
+    
     init();
     
     const setSentences = () => {
-      h1 < historyList.length - 1 ? h1 ++ : h1 = 0;
-      h2 < historyList.length - 1 ? h2 ++ : h2 = 0;
-      h3 < historyList.length - 1 ? h3 ++ : h3 = 0;
-      h4 < historyList.length - 1 ? h4 ++ : h4 = 0;
-      h5 < historyList.length - 1 ? h5 ++ : h5 = 0;
+      h1 < historyList.length - 1 ? h1++ : h1 = 0;
+      h2 < historyList.length - 1 ? h2++ : h2 = 0;
+      h3 < historyList.length - 1 ? h3++ : h3 = 0;
+      h4 < historyList.length - 1 ? h4++ : h4 = 0;
+      h5 < historyList.length - 1 ? h5++ : h5 = 0;
       setShowHistories([historyList[h1], historyList[h2], historyList[h3], historyList[h4], historyList[h5]])
     }
 
