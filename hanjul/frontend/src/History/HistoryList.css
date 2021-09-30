@@ -3,7 +3,7 @@
   padding: 15px 20px;
   box-shadow: -2px -2px 15px 8px rgba(255, 255, 255, 0.89) inset,
   10px 10px 15px 2px #857d70 inset;
-  height: 35%;
+  height: 50%;
   border-radius: 20px;
 }
 
@@ -17,8 +17,9 @@
 
 .history-sentence {
   font-size: 37px;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid #8d6666;
   padding: 0 0 8px 0;
+  color: #411212;
 }
 
 .history-book-list {
@@ -39,21 +40,23 @@
   color: #7A7A7A;
   left: 90%;
   bottom: -2%;
+  display: inline-flex;
 }
 
 .sect01 {
   position: relative;
+  display: inline-flex;
   width: 40px; /* X 사이즈 */
   height: 40px; /* X 세로 중앙 */
   left: 94%;
   top: 7%;
   border-radius: 5px;
-  background: #CE9680;
+  background: #ce9680b7;
   box-shadow: 1px 1px 5px .5px grey;
   cursor: pointer;
 }
 
-.sect01:hover {
+.sect01:active {
   background: #a57866;
   box-shadow: -1px -1px 5px .5px grey inset;
 }

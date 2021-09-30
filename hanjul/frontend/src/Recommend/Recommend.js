@@ -1,6 +1,9 @@
 import './Recommend.css'
 import { useEffect, useState } from 'react';
 import RecommendedBook from './RecommendedBook';
+import { connect } from 'react-redux';
+// import { getUser } from '../redux/index.js'
+import { login, logout, getUser } from '../redux'
 
 let books = [
   {
@@ -94,10 +97,25 @@ h3 = 2,
 h4 = 3,
 h5 = 4
 
+const mapStateToProps = ({users}) => {
+  return {
+    user: users.user
+  }
+}
 
-function Recommend() {
+// const mapDispatchToProps = ({ users }) => {
+//   return {
+//     user: users.user
+//   }
+// }
+
+const mapDispatchToProps = {
+  login, logout, getUser
+}
+
+
+function Recommend(props) {
   const [showHistories, setShowHistories] = useState([]);
-
   useEffect(() => {
     var carousel = document.getElementsByClassName('carousel')[0],
         slider = carousel.getElementsByClassName('carousel__slider')[0],
@@ -113,9 +131,9 @@ function Recommend() {
     }
     
     function resize() {
-        width = Math.max(window.innerWidth * .25, 275)
+        width = Math.max(window.innerWidth * .23, 275)
         // height = window.innerHeight * .5
-        height = window.innerHeight * .35
+        height = window.innerHeight * .33
         totalWidth = width * items.length;
       
         // slider.style.width = totalWidth + "px";
@@ -164,7 +182,7 @@ function Recommend() {
     init();
     
     const setSentences = () => {
-      h1 < historyList.length - 1 ? h1++ : h1 = 0;
+      h1 < historyList.length - 1 ? h1++ : h1 = 0; 
       h2 < historyList.length - 1 ? h2++ : h2 = 0;
       h3 < historyList.length - 1 ? h3++ : h3 = 0;
       h4 < historyList.length - 1 ? h4++ : h4 = 0;
@@ -182,11 +200,19 @@ function Recommend() {
   }, [])
   return (
     <div className="recommend-page">
+      <div>
+        <div>{props.user.name}</div>
+        <div>{props.user.id}</div>
+        <button onClick={() => props.login()}>로그인</button>
+        <button onClick={() => props.logout()}>로그아웃</button>
+        <button onClick={() => props.getUser()}>유저 찾기(다른 페이지에서 작동해보기)</button>
+      </div>
       <p className="recommend-title">
         <span>"</span>
         <span>나는 책이 좋다!</span>
         <span>"</span>
       </p>
+
       <div class="carousel">
         <div class="carousel__body">
           <div class="carousel__slider">
@@ -201,4 +227,4 @@ function Recommend() {
   )
 }
 
-export default Recommend
+export default connect(mapStateToProps, mapDispatchToProps)(Recommend)
