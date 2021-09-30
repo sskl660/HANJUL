@@ -2,8 +2,19 @@ import { useState, useEffect } from "react";
 import './components/BookDetail/BookDetail.css';
 import { FaStar } from 'react-icons/fa'; // react icon에 있는 별 이미지 사용
 import BookSlider from './components/BookDetail/BookSlider';
+import Review from './components/BookReview/Review';
+import axios from 'axios';
+import Posts from './components/BookReview/Post'
+import Pagination from './components/BookReview/Pagination'
 
 const ARRAY = [0, 1, 2, 3, 4];
+
+const comments = [
+  { name: '김싸피', content: '이 책을 추천합니다' },
+  {name: '김싸피', content: '이 책을 추천합니다'},
+  {name: '김싸피', content: '이 책을 추천합니다'},
+  {name: '김싸피', content: '이 책을 추천합니다'},
+]
 
 function BookDetail() {
   // 북마크 클릭
@@ -30,8 +41,60 @@ function BookDetail() {
 
   const sendReview = () => {
     let score = clicked.filter(Boolean).length;
+    // fetch('http://52.78.63.175:8000/movie', {
+    //   method: 'POST',
+    //   Headers: {
+    //     Authroization: 'e7f59ef4b4900fe5aa839fcbe7c5ceb7',
+    //   },
+    //   body: JSON.stringify({
+    //     movie_id:1
+    //     star: score,
+    //   }),
+    // });
+    // let score = clicked.filter(Boolean).length;
     
   };
+
+  // 한줄평 pagination
+  const [posts, setPosts] = useState([]);
+  // const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(4);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      // setLoading(true);
+      const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
+      setPosts(res.data);
+      // setLoading(false);
+    }
+      
+    fetchPosts();
+  }, []);
+
+  console.log(posts);
+  // 현재 페이지 가져오기
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  // 페이지 바꾸기
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
+  const slides = [
+    { image: 'http://image.aladin.co.kr/product/461/58/cover/s812532176_1.jpg' },
+    { image: 'image/javabook.png'},
+    { image: 'http://image.aladin.co.kr/product/461/58/cover/s812532176_1.jpg' },
+    { image: 'image/javabook.png' },
+    { image: 'http://image.aladin.co.kr/product/461/58/cover/s812532176_1.jpg' },
+    { image: 'image/javabook.png' },
+    { image: 'http://image.aladin.co.kr/product/461/58/cover/s812532176_1.jpg' },
+    { image: 'image/javabook.png' },
+    { image: 'http://image.aladin.co.kr/product/461/58/cover/s812532176_1.jpg' },
+    { image: 'image/javabook.png' },
+    { image: 'http://image.aladin.co.kr/product/461/58/cover/s812532176_1.jpg' },
+    { image: 'image/javabook.png' },
+  ];
 
   return (
     <div className="bookDetail">
@@ -78,19 +141,8 @@ function BookDetail() {
         </div>
       </div>
       <div className="bookD-recommend">
-        {/* <div className="booD-slider">
-        <BookSlider />
-        </div> */}
-        <div className="bookD-books">
-          <img src="image/javabook.png" className="bookD-book" alt="" />
-          <img src="image/javabook.png" className="bookD-book" alt="" />
-          <img src="image/javabook.png" className="bookD-book" alt="" />
-          <img src="image/javabook.png" className="bookD-book" alt="" />
-          <img src="image/javabook.png" className="bookD-book" alt="" />
-          <img src="image/javabook.png" className="bookD-book" alt="" />
-          <img src="image/javabook.png" className="bookD-book" alt="" />
-          <img src="image/javabook.png" className="bookD-book" alt="" />
-          {/* <img src="image/javabook.png" className="bookD-book" alt="" /> */}
+        <div className="booD-slider">
+          <BookSlider slides={slides}/>
         </div>
       </div>
       <div className="bookD-review">
@@ -117,10 +169,16 @@ function BookDetail() {
           <button className="bookD-btn">입력</button>
         </div>
         <div className="bookD-reviewShow">
-          
+          <Posts posts={currentPosts} />
+          {/* {comments.map((comment, index) => {
+            return (
+              <Review name={comment.name} content={comment.content} />
+            )
+          })} */}
         </div>
         <div className="bookD-pagination">
-          <ul className="pagination">
+          <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
+          {/* <ul className="pagination">
             <li><a href="">이전</a></li>
             <li><a href="">1</a></li>
             <li><a href="">2</a></li>
@@ -131,7 +189,7 @@ function BookDetail() {
             <li><a href="">7</a></li>
             <li><a href="">8</a></li>
             <li><a href="">다음</a></li>
-          </ul>
+          </ul> */}
         </div>
       </div>
     </div>

@@ -9,7 +9,6 @@ data = load_dataframes()
 
 sentence = input()
 start = time.time()
-
 data.loc[0, 'description'] = sentence
 data.loc[0, 'title'] = sentence
 # 불용어 : 유의미하지 않은 단어 토큰을 제거
@@ -17,7 +16,7 @@ tfidf = TfidfVectorizer(stop_words='english')
 
 # description에 대해서 TF-IDF 수행
 tfidf_matrix = tfidf.fit_transform(data['description'])
-title_tfidf_matrix = tfidf.fit_transform(data['title'])
+# title_tfidf_matrix = tfidf.fit_transform(data['title'])
 
 # 코사인 매트릭스, 0번과 전체의 비교
 cosine_matrix = cosine_similarity(tfidf_matrix[0], tfidf_matrix)

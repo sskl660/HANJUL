@@ -1,0 +1,87 @@
+.history-box {
+  margin: 5%;
+  padding: 15px 20px;
+  box-shadow: -2px -2px 15px 8px rgba(255, 255, 255, 0.89) inset,
+  10px 10px 15px 2px #857d70 inset;
+  height: 50%;
+  border-radius: 20px;
+}
+
+.history-sentence-box {
+  text-align: center;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  margin: 0 0 2% 0;
+}
+
+.history-sentence {
+  font-size: 37px;
+  border-bottom: 2px solid #8d6666;
+  padding: 0 0 8px 0;
+  color: #411212;
+}
+
+.history-book-list {
+  display: flex;
+  justify-content: center;
+  height: 57%;
+}
+
+.history-book-image {
+  width: 11%;
+  margin: 10px 2.6%;
+  box-shadow: 5px 5px 8px 5px rgb(167, 167, 167);
+}
+
+.history-date {
+  position: relative;
+  font-size: 24px;
+  color: #7A7A7A;
+  left: 90%;
+  bottom: -2%;
+  display: inline-flex;
+}
+
+.sect01 {
+  position: relative;
+  display: inline-flex;
+  width: 40px; /* X 사이즈 */
+  height: 40px; /* X 세로 중앙 */
+  left: 94%;
+  top: 7%;
+  border-radius: 5px;
+  background: #ce9680b7;
+  box-shadow: 1px 1px 5px .5px grey;
+  cursor: pointer;
+}
+
+.sect01:active {
+  background: #a57866;
+  box-shadow: -1px -1px 5px .5px grey inset;
+}
+
+.sect01 .line-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 100%;
+}
+
+.sect01 .line-box > span {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 2px;
+  background-color: #000;
+}
+
+.sect01 .line-01 {
+  transform: rotate(135deg) translateX(0%);
+}
+
+.sect01 .line-02 {
+  transform: rotate(45deg) translateX(0%);
+}
