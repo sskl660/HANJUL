@@ -41,6 +41,7 @@ public class LibraryService {
                     .mybookAuthor(libraryEntity.getMybookAuthor())
                     .mybookIsbn(libraryEntity.getMybookIsbn())
                     .mybookImgurl(libraryEntity.getMybookImgurl())
+                    .mybookDesc(libraryEntity.getMybookDesc())
                     .build();
             respLibraryList.add(respLibrary);
         }
