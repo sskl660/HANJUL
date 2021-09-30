@@ -35,7 +35,7 @@ public class HistoryController {
         return ResponseEntity.ok().body(getHistories);
     }
 
-    @ApiOperation(value = "전 유저 추천기록(발자취) 중 최신 목록 요청")
+    @ApiOperation(value = "전 유저 추천기록(발자취) 중 최신 10개 목록 요청")
     @GetMapping(value = "history")
     public ResponseEntity<List<String>> requestHistories() {
         List<HistoryDto.ResponseGetHistories> getHistories = historyService.getHistories();
