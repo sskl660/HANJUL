@@ -1,0 +1,21 @@
+.reviewStar {
+  float: left;
+  width: 20%;
+  padding: 10px;
+}
+
+.nameText {
+  float: left;
+  width: 10%;
+  padding: 10px;
+  border-bottom: 2px solid #857d70;
+  font-size: large;
+}
+
+.contentText {
+  float: left;
+  width: 60%;
+  padding: 10px;
+  border-bottom: 2px solid #857d70;
+  font-size: large;
+}
