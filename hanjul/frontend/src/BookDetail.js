@@ -51,6 +51,8 @@ function BookDetail() {
     //     star: score,
     //   }),
     // });
+    // let score = clicked.filter(Boolean).length;
+    
   };
 
   // 한줄평 pagination

@@ -23,7 +23,7 @@ class User extends Component {
       const signupUserId = document.querySelector(".signupUserId")
       const signupPassword = document.querySelector(".signupPassword")
       const signupPasswordRev = document.querySelector(".signupPasswordRev")
- 
+
       move.classList.add("moving");
       move.classList.remove("start");
       form.classList.add("movingForm");
@@ -135,36 +135,36 @@ class User extends Component {
 
   render () {
     return (
-      <div class="user-container">
+      <div className="user-container">
         {/* sign in button */}
-        <div class="move">
-          <div class="p-button user-normal signin animated pulse" onClick={this.signIn}>회원가입</div>
+        <div className="move">
+          <div className="p-button user-normal signin animated pulse" onClick={this.signIn}>회원가입</div>
         </div>
         {/* sign in 상단 내용 */}
-        <div class="user-welcome">
-          <h4 class="bold user-welcome-text">ㅎㅏㄴㅈㅜㄹ</h4>
-          <p class="normal user-text">한 줄에 오신 여러분 환영합니다.</p>
-          <p class="normal user-text">당신의 한 줄을 입력하여 맞춤 책을 만나보세요.</p>
-          <p class="normal user-text-two">아직 아이디가 없으신가요?</p>
+        <div className="user-welcome">
+          <h4 className="bold user-welcome-text">ㅎㅏㄴㅈㅜㄹ</h4>
+          <p className="normal user-text">한 줄에 오신 여러분 환영합니다.</p>
+          <p className="normal user-text">당신의 한 줄을 입력하여 맞춤 책을 만나보세요.</p>
+          <p className="normal user-text-two">아직 아이디가 없으신가요?</p>
         </div>
         {/* sign in 움직이고 난후 우측 상단 내용 */}
-        <div class="hello">
-          <h4 class="bold user-welcome-text-move">ㅎㅏㄴㅈㅜㄹ</h4>
-          <p class="normal user-text-move">한 줄에 오신 여러분 환영합니다.</p>
-          <p class="normal user-text-move">당신의 한 줄을 입력하여 맞춤 책을 만나보세요.</p>
-          <p class="normal user-text-two-move">이미 회원이신가요?</p>       
+        <div className="hello">
+          <h4 className="bold user-welcome-text-move">ㅎㅏㄴㅈㅜㄹ</h4>
+          <p className="normal user-text-move">한 줄에 오신 여러분 환영합니다.</p>
+          <p className="normal user-text-move">당신의 한 줄을 입력하여 맞춤 책을 만나보세요.</p>
+          <p className="normal user-text-two-move">이미 회원이신가요?</p>       
         </div>
 
         {/* sign up form */}
-        <div class="user-form">
+        <div className="user-form">
           {/* sign up 상단 내용 */}
-          <div class="user-bold title">들어가기</div>
-          {/* <div class="user-icons">
-            <div class="user-icon"><i class="fab fa-facebook-f"></i></div>
-            <div class="user-icon"><i class="fab fa-github"></i></div>
-            <div class="user-icon"><i class="fab fa-twitter"></i></div>
+          <div className="user-bold title">들어가기</div>
+          {/* <div className="user-icons">
+            <div className="user-icon"><i className="fab fa-facebook-f"></i></div>
+            <div className="user-icon"><i className="fab fa-github"></i></div>
+            <div className="user-icon"><i className="fab fa-twitter"></i></div>
           </div> */}
-          {/* <p class="normal light">Or use your email for registration</p> */}
+          {/* <p className="normal light">Or use your email for registration</p> */}
           <input type="text" placeholder="아이디" className="normal login loginUserId"/>
           <br/>
           <input type="password" placeholder="비밀번호" className="normal login loginPassword"/>
@@ -181,8 +181,8 @@ class User extends Component {
           <br/>
 
           {/* sign up 움직여서 좌측이동한 후 */}
-          {/* <p class="normal forgot">Forgot your password?</p> */}
-          <button class="b-button normal">로그인</button>
+          {/* <p className="normal forgot">Forgot your password?</p> */}
+          <button className="b-button normal">로그인</button>
         </div>
       </div>
     )

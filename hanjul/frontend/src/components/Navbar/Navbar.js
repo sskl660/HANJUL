@@ -2,8 +2,9 @@ import { Component } from "react";
 import { Link } from 'react-router-dom';
 import './Navbar.css'
 
-class Navbar extends Component {
 
+
+class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -46,7 +47,7 @@ class Navbar extends Component {
             </div>
             <img className="nav-mylibrary-img" src="../../image/nav-flower-right.png" alt="" />
             <div>
-              <Link to="/traces">
+              <Link to="/history">
                 <button className="up-traces-button">발자취</button>
               </Link>
             </div>
@@ -59,8 +60,6 @@ class Navbar extends Component {
             <img className="nav-user-img" src="../../image/nav-flower-right.png" alt="" />
           </div>
 
-         
-         
           <button className="nav-button"></button>
           
         </div>
