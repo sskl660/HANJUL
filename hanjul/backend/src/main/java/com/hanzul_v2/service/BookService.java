@@ -36,13 +36,15 @@ public class BookService {
         List<TmpbooksEntity> tmpbooksEntityList =tmpbooksRepository.findTop100ByOrderByImgUrl();
         List<BookDto> bookDtoList =new ArrayList<>();
         for(int i=0;i<20;i++){
-            int idx= (int)(Math.random()*20);
+//            int idx= (int)(Math.random()*20);
+            int idx=i;
             BookDto bookDto= BookDto.builder()
                     .isbn(tmpbooksEntityList.get(idx).getIsbn())
                     .imgUrl(tmpbooksEntityList.get(idx).getImgUrl())
                     .author(tmpbooksEntityList.get(idx).getAuthor())
                     .description(tmpbooksEntityList.get(idx).getDescription())
                     .avgStar(tmpbooksEntityList.get(idx).getAvgStar())
+                    .publisher(tmpbooksEntityList.get(i).getPublisher())
                     .build();
             bookDtoList.add(bookDto);
         }
