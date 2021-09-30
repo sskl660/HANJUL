@@ -19,9 +19,12 @@ data = load_dataframes()
 """원하는 문장 입력"""
 sentence = input()
 start = time.time()
+<<<<<<< HEAD
 
 """초기 데이터 가공"""
 # 첫번째 행을 지우고 해당 데이터를 데이터에 포함 시켜서 tfidf 분석 알고리즘 적용.
+=======
+>>>>>>> f84c0dbbda7b00c9f344b145b69496703e51603a
 data.loc[0, 'description'] = sentence
 data.loc[0, 'title'] = sentence
 # 불용어 : 유의미하지 않은 단어 토큰을 제거
@@ -31,7 +34,10 @@ print(data.shape)
 
 """description에 대해서 TF-IDF 수행"""
 tfidf_matrix = tfidf.fit_transform(data['description'])
+<<<<<<< HEAD
 # print(tfidf_matrix)
+=======
+>>>>>>> f84c0dbbda7b00c9f344b145b69496703e51603a
 # title_tfidf_matrix = tfidf.fit_transform(data['title'])
 
 """유사도 측정"""

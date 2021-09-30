@@ -1,0 +1,293 @@
+@import url("https://fonts.googleapis.com/css2?family=Gugi&family=Nanum+Brush+Script&display=swap");
+
+.bookDetail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* min-height: 110vh; */
+  margin-top: 5%;
+}
+
+.bookD-info {
+  width: 50%;
+}
+
+.bookD-infoL {
+  float: left;
+  width: 38%;
+}
+
+.bookD-infoR {
+  float: right;
+  width: 55%;
+}
+
+.bookD-bookImg {
+  border-radius: 10px;
+  box-shadow: -4px -4px 11px 6px rgba(255, 255, 255, 0.7) inset,
+    4px 4px 11px 5px rgba(133, 125, 112, 0.5) inset;
+  width: 100%;
+  height: 448px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bookD-bookInfo {
+  background-color: #e6d3c7;
+  border-radius: 10px;
+  box-shadow: -4px -4px 11px 6px rgba(255, 255, 255, 0.7) inset,
+    4px 4px 11px 5px rgba(133, 125, 112, 0.5) inset;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4%;
+}
+
+.bookD-bookIntro {
+  background-color: #e6d3c7;
+  border-radius: 10px;
+  box-shadow: -4px -4px 11px 6px rgba(255, 255, 255, 0.7) inset,
+    4px 4px 11px 5px rgba(133, 125, 112, 0.5) inset;
+  width: 100%;
+  height: 280px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4%;
+}
+
+.bookD-bookGrade {
+  background-color: #857d70;
+  border-radius: 33px;
+  width: 90%;
+  height: 54px;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+.bookD-recommend {
+  width: 68%;
+  background-color: #e6d3c7;
+  border-radius: 10px;
+  box-shadow: -4px -4px 11px 6px rgba(255, 255, 255, 0.7) inset,
+    4px 4px 11px 5px rgba(133, 125, 112, 0.5) inset;
+  height: 760px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2%;
+  margin-bottom: 3%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.bookD-books {
+  width: 100%;
+  margin: 0.5rem;
+  text-align: center;
+}
+
+.bookD-detailImg {
+  width: 76%;
+  height: 86%;
+  margin-left: 12%;
+  margin-top: 10%;
+  box-shadow: 5px 5px 20px 5px #857d70;
+}
+
+.bookD-book {
+  width: 220px;
+  margin: 2rem;
+  box-shadow: 5px 5px 20px 2px #857d70;
+}
+
+.bookD-review {
+  width: 68%;
+  background-color: #e6d3c7;
+  border-radius: 10px;
+  box-shadow: -4px -4px 11px 6px rgba(255, 255, 255, 0.7) inset,
+    4px 4px 11px 5px rgba(133, 125, 112, 0.5) inset;
+  height: 535px;
+  /* display: flex; */
+  justify-content: space-between;
+  margin-bottom: 4%;
+}
+
+.bookD-reviewTitle {
+  margin-top: 2.5%;
+  font-size: 48px;
+  font-weight: 500;
+  letter-spacing: 15px;
+  font-family: "Gugi";
+  text-align: center;
+  margin-bottom: 2%;
+}
+
+.bookD-reviewInput {
+  background-color: #e6e2d6;
+  border-radius: 10px;
+  box-shadow: -4px -4px 11px 6px rgba(255, 255, 255, 0.7) inset,
+    4px 4px 11px 5px rgba(133, 125, 112, 0.5) inset;
+  width: 100%;
+  height: 60px;
+  float: left;
+  margin: 0 1% 1% 1%;
+}
+
+.bookD-reviewInput > input {
+  border: none;
+  background-color: transparent;
+  border-radius: 10px;
+  padding-left: 15px;
+  padding-top: 20px;
+  width: 96%;
+  font-size: 20px;
+}
+
+.bookD-reviewInput > input:focus {
+  outline: none;
+  /* caret-color: #3b2828; */
+}
+
+.bookD-btn {
+  background-color: #857d70;
+  box-shadow: 4px 4px 4px 0px rgba(133, 125, 112, 0.5);
+  border-radius: 33px;
+  width: 15%;
+  justify-content: space-between;
+  margin-bottom: 1%;
+  float: right;
+  color: white;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.bookD-btn:active {
+  box-shadow: -2px -2px 10px 5px rgba(180, 165, 142, 0.5) inset,
+    2px 2px 10px 5px rgba(44, 42, 38, 0.5) inset;
+}
+
+.bookD-reviewBox {
+  width: 86%;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 7%;
+}
+
+.bookD-reviewShow {
+  background-color: #f7f2ee;
+  width: 86%;
+  border-radius: 10px;
+  height: 210px;
+  justify-content: space-between;
+  margin-top: 1%;
+  margin-bottom: 20px;
+  margin-left: 7%;
+  padding-top: 10px;
+}
+
+h3 {
+  margin-left: 15px;
+}
+
+.bookmarkIcon {
+  position: absolute;
+  right: 18%;
+  top: 10%;
+}
+
+.bookmark-img {
+  cursor: pointer;
+  color: #ce9680;
+}
+
+.bookD-pagination {
+  margin-left: 25%;
+  width: 50%;
+  background: #f2efe5;
+  padding: 1px;
+  border-radius: 3px;
+  box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, 0.288);
+}
+
+.bookD-pagination .pagination {
+  display: flex;
+  list-style: none;
+  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.bookD-pagination .pagination li {
+  cursor: pointer;
+  flex: 1;
+  margin: 0 5px;
+  background: #f2efe5;
+  border-radius: 3px;
+  box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, 0.288);
+}
+
+.pagination li a {
+  font-size: 18px;
+  text-decoration: none;
+  color: #3b2828;
+  display: block;
+  line-height: 40px;
+}
+
+.pagination li:active {
+  box-shadow: inset -3px -3px 7px #ffffff73, inset 3px 3px 5px rgba(94, 104, 121, 0.288);
+}
+
+.pagination li a:active {
+  font-size: 15px;
+  color: #ce9680;
+}
+
+.pagination li:first-child {
+  margin: 0 15px 0 0;
+}
+
+.pagination li:last-child {
+  margin: 0 0 0 15px;
+}
+
+.bookD-stars {
+  display: flex;
+  flex-direction: column;
+  padding-top: 8px;
+}
+
+.bookD-star {
+  display: flex;
+}
+
+.bookD-totalStars {
+  display: flex;
+  flex-direction: column;
+  padding-top: 8px;
+  margin-left: 37px;
+}
+
+.bookD-totalStar {
+  display: flex;
+}
+
+svg {
+  color: #bcb8aa;
+  cursor: pointer;
+}
+
+.yellowStar {
+  color: #fcc419;
+}
+
+.totalScore {
+  font-size: 2rem;
+  padding-top: 3px;
+  margin-right: 37px;
+  color: #f2efe5;
+}

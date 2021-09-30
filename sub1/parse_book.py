@@ -3,7 +3,7 @@ import os
 import re
 
 # DATA_FILE = os.path.join("book_202106.csv")
-DATA_FILE = pd.read_csv("book_202012-1.csv", low_memory=False) # 경로
+DATA_FILE = pd.read_csv("book_202106.csv", low_memory=False) # 경로
 DUMP_FILE = os.path.join("dump.pkl")
 
 book_columns = [
@@ -50,7 +50,11 @@ def load_dataframes():
 
 def main():
     data = import_data()
+<<<<<<< HEAD
     pd.DataFrame(data).to_csv('output1.csv', index=False, header=False, sep='`', mode='w', encoding='utf-8-sig')
+=======
+    pd.DataFrame(data).to_csv('output.csv', index=False, header=False, mode='w', encoding='utf-8-sig')
+>>>>>>> f84c0dbbda7b00c9f344b145b69496703e51603a
     dump_dataframes(data)
     data = load_dataframes()
     print(data)
