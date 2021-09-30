@@ -8,7 +8,7 @@ input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
   -webkit-transition: background-color 9999s ease-out;
   /* -webkit-box-shadow: 0 0 0px 1000px white inset !important; */
-  -webkit-text-fill-color: #fff !important;
+  /* -webkit-text-fill-color: rgba(105, 51, 51, 0) !important; */
 }
 
 .user-bold{
@@ -17,9 +17,7 @@ input:-webkit-autofill:active {
   font-size:40px;
   color: #694747;
   margin-top: 9%;
-
 }
-
 
 .user-welcome-text{
   font-size: 40px;
@@ -34,6 +32,13 @@ input:-webkit-autofill:active {
   width:400px;
   z-index:30;
   display: block;
+  animation-name: moveText;
+  animation-duration: 1s;
+}
+
+@keyframes moveText {
+  0% {transform: translateX(80px);}
+  100% {transform: translateX(0px);}
 }
 
 .hello{
@@ -45,10 +50,18 @@ input:-webkit-autofill:active {
   /* width:400px; */
   z-index:30;
   display: none;
+  animation-name: moveText2;
+  animation-duration: 1s;
+}
+
+@keyframes moveText2 {
+0% {transform: translateX(-80px);}
+100% {transform: translateX(0px);}
 }
 
 .user-welcome-text{
   margin-top:100px;
+
 }
 
 /* 시작 좌 */
@@ -69,25 +82,25 @@ input:-webkit-autofill:active {
 @keyframes moving{
   0%{width:400px;transform:translate(0px);}
   50%{width:550px;transform:translate(200px);}
-  100%{width:35%;transform:translate(150%);}
+  100%{width:400px;transform:translate(150%);}
 }
 
 @keyframes start{
   0%{width:400px;transform:translate(500px);}
   50%{width:550px;transform:translate(200px);}
-  100%{width:35%;transform:translate(0px);}
+  100%{width:400px;transform:translate(0px);}
 }
 
 @keyframes startForm{
   0%{width:500px;transform:translate(0px);}
   50%{width:650px;transform:translate(200px);}
-  100%{width:58%;transform:translate(400px);}
+  100%{width:650px;transform:translate(400px);}
 }
 
 @keyframes movingForm{
   0%{width:500px;transform:translate(400px);}
   50%{width:650px;transform:translate(200px);}
-  100%{width:58%;transform:translate(0px);}
+  100%{width:650px;transform:translate(0px);}
 }
 
 .moving{
@@ -133,14 +146,14 @@ input:-webkit-autofill:active {
 
 .p-button:hover{
   transition:all .4s ease;
-  background-color:rgba(0,0,0,.7);
+  background-color:rgb(143,119,115);
 }
 
 
 
 .user-container{
   height: 60%;
-  width: 60%;
+  width: 1200px;
   position:absolute;
   top:50%;
   left:53%;
@@ -152,7 +165,6 @@ input:-webkit-autofill:active {
   width:100%;
   line-height:20px;
   margin:0 auto;
-  
 }
 
 .user-text-two{
@@ -166,18 +178,18 @@ input:-webkit-autofill:active {
   line-height:20px;
   font-size: 40px;
   color:#fff;
-  margin:40% -60%;
+  margin:40% -80%;
 }
 
 .user-text-move{
   width:150%;
   line-height:20px;
-  margin: 0 -85%;
+  margin: 0 -105%;
   
 }
 .user-text-two-move{
   width:60%;
-  margin:15% -42% 5%;
+  margin:15% -60% 5%;
 }
 
 /* .user-icon{
@@ -214,7 +226,7 @@ input:-webkit-autofill:active {
   position:absolute;
   height:100%;
   transform:translate(60%);
-  width: 58%;
+  width: 650px;
   background-color:#F2EFE5;
   border-radius:0px 50px 50px 0px;
 }
@@ -227,6 +239,11 @@ input:-webkit-autofill:active {
   padding: 8px 5px;
   width:60%;
   height: 5%;
+  background: transparent;
+  outline:none;
+  font-size: 25px;
+  font-family: 'ChosunSm';
+  color: #694747;
 
   /* background-color: rgb(10, 6, 1) !important; */
 }
@@ -238,19 +255,29 @@ input:-webkit-autofill:active {
   padding:15px 80px;
   font-size:30px;
   border-radius:25px;
-  margin-top: 0%;
+  margin-top: 1.5%;
   border:none;
   box-shadow: 7px 7px 7px #ccc8b9;
+  cursor: pointer;
+}
+.b-button:hover{
+  transition:all .4s ease;
+  background-color:rgb(143,119,115);
 }
 
 .signup {
   display: none;
   border:0px;
   border-bottom:1px solid #694747;
-  margin: 1% auto 0%;
+  margin: -1% auto 1%;
   padding: 8px 5px;
   width:60%;
   height: 5%;
+  font-size: 20px;
+  font-family: 'ChosunSm';
+  color: #694747;
+  background: transparent;
+  outline: none;
   /* border:0px;
   border-bottom:1px solid lightgray;
   margin-bottom:15px;
