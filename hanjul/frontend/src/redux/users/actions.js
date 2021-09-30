@@ -1,8 +1,10 @@
 import { LOGIN, LOGOUT, GET_USER } from "./types"
 
-export const login = () => {
+export const login = (user) => {
+  console.log('확인'+ user)
   return {
-    type: LOGIN
+    type: LOGIN,
+    user: user,
   }
 }
 

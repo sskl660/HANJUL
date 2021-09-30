@@ -2,20 +2,20 @@ import { LOGIN, LOGOUT, GET_USER } from "./types"
 
 const userState = {
   user: {
-    name: '',
-    id: '',
+    userId: '1',
+    userName: '1',
+    userPw: '1'
   }
 }
 
 const userReducer = (state=userState, action) => {
   switch(action.type){
     case LOGIN:
+      console.log("액션!!!"+action.user)
+      state.user = action.user
       return {
         ...state,
-        user: {
-          name: '기훈',
-          id: 'kihoon'
-        }
+        user: state.user
       }
     case LOGOUT:
       return {
@@ -26,6 +26,7 @@ const userReducer = (state=userState, action) => {
         }
       }
     case GET_USER:
+      console.log("새로고침"+action.user)
       return {
         ...state,
         user: state.user

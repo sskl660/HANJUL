@@ -99,7 +99,7 @@ h5 = 4
 
 const mapStateToProps = ({users}) => {
   return {
-    user: users.user
+    user: users
   }
 }
 
@@ -201,8 +201,8 @@ function Recommend(props) {
   return (
     <div className="recommend-page">
       <div>
-        <div>{props.user.name}</div>
-        <div>{props.user.id}</div>
+        <div>{props.user.userName}</div>
+        <div>{props.user.userId}</div>
         <button onClick={() => props.login()}>로그인</button>
         <button onClick={() => props.logout()}>로그아웃</button>
         <button onClick={() => props.getUser()}>유저 찾기(다른 페이지에서 작동해보기)</button>
