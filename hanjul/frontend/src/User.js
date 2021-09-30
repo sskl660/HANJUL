@@ -1,5 +1,6 @@
 import { Component } from "react";
 import './components/User/User.css';
+import Modal from './components/Common/Modal';
 
 
 class User extends Component {
@@ -8,6 +9,13 @@ class User extends Component {
     this.state = {
       flag: 0,
     }
+  }
+
+  login = () =>{
+    const modal = document.querySelector('.modal');
+    
+    modal.style.display = "block";
+    // modal.classList.add("fade")
   }
   
   signIn = () => {
@@ -92,7 +100,8 @@ class User extends Component {
     // const light = document.querySelector(".light");
     // const login = document.querySelector(".login");
     const pButton = document.querySelector(".p-button");
-    const bButton = document.querySelector(".b-button");
+    const lButton = document.querySelector(".lbutton");
+    const sButton = document.querySelector(".sbutton");
     // const forgot = document.querySelector(".forgot");
     const form = document.querySelector(".user-form");
     const move = document.querySelector(".move");
@@ -101,8 +110,10 @@ class User extends Component {
     title.innerText="가입하기";
     // light.innerText="Or use your email account";
     // login.style.display="none";
+    lButton.style.display = "none"
+    sButton.style.display = "block"
     pButton.innerText="로그인"
-    bButton.innerText="회원가입"
+    // bButton.innerText="회원가입"
     // signup.style.display = "block"
     // forgot.style.display="block";
     // 아래는 다시 확인...
@@ -115,7 +126,8 @@ class User extends Component {
   // const light = document.querySelector(".light");
   // const name = document.querySelector(".name");
   const pButton = document.querySelector(".p-button");
-  const bButton = document.querySelector(".b-button");
+  const lButton = document.querySelector(".lbutton");
+  const sButton = document.querySelector(".sbutton");
   // const forgot = document.querySelector(".forgot");
   const form = document.querySelector(".user-form");
   const move = document.querySelector(".move");
@@ -123,8 +135,11 @@ class User extends Component {
   title.innerText="들어가기";
   // light.innerText="Or use your email for registration";
   // name.style.display="block";
+  lButton.style.display = "block"
+  sButton.style.display = "none"
+
   pButton.innerText="회원가입";
-  bButton.innerText="로그인";
+  // bButton.innerText="로그인";
   // forgot.style.display="none";
   // 아래는 다시 확인...
   form.setAttribute("style","border-radius : 0px 50px 50px 0px");
@@ -135,55 +150,62 @@ class User extends Component {
 
   render () {
     return (
-      <div className="user-container">
-        {/* sign in button */}
-        <div className="move">
-          <div className="p-button user-normal signin animated pulse" onClick={this.signIn}>회원가입</div>
+      <div>
+        <div className="user-container">
+          {/* sign in button */}
+          <div className="move">
+            <div className="p-button user-normal signin animated pulse" onClick={this.signIn}>회원가입</div>
+          </div>
+          {/* sign in 상단 내용 */}
+          <div className="user-welcome">
+            <h4 className="bold user-welcome-text">ㅎㅏㄴㅈㅜㄹ</h4>
+            <p className="normal user-text">한 줄에 오신 여러분 환영합니다.</p>
+            <p className="normal user-text">당신의 한 줄을 입력하여 맞춤 책을 만나보세요.</p>
+            <p className="normal user-text-two">아직 아이디가 없으신가요?</p>
+            <p>{this.props.userId}</p>
+          </div>
+          {/* sign in 움직이고 난후 우측 상단 내용 */}
+          <div className="hello">
+            <h4 className="bold user-welcome-text-move">ㅎㅏㄴㅈㅜㄹ</h4>
+            <p className="normal user-text-move">한 줄에 오신 여러분 환영합니다.</p>
+            <p className="normal user-text-move">당신의 한 줄을 입력하여 맞춤 책을 만나보세요.</p>
+            <p className="normal user-text-two-move">이미 회원이신가요?</p>       
+          </div>
+  
+          {/* sign up form */}
+          <div className="user-form">
+            {/* sign up 상단 내용 */}
+            <div className="user-bold title">들어가기</div>
+            {/* <div className="user-icons">
+              <div className="user-icon"><i className="fab fa-facebook-f"></i></div>
+              <div className="user-icon"><i className="fab fa-github"></i></div>
+              <div className="user-icon"><i className="fab fa-twitter"></i></div>
+            </div> */}
+            {/* <p className="normal light">Or use your email for registration</p> */}
+            <input type="text" placeholder="아이디" className="normal login loginUserId"/>
+            <br/>
+            <input type="password" placeholder="비밀번호" className="normal login loginPassword"/>
+            <br/>
+  
+            {/* 가입하기 */}
+            <input type="text" placeholder="이름" className="normal signup name"/>
+            <br/>
+            <input type="password" placeholder="아이디" className="normal signup signupUserId"/>
+            <br/>
+            <input type="text" placeholder="비밀번호" className="normal signup signupPassword"/>
+            <br/>
+            <input type="password" placeholder="비밀번호 확인" className="normal signup signupPasswordRev"/>
+            <br/>
+  
+            {/* sign up 움직여서 좌측이동한 후 */}
+            {/* <p className="normal forgot">Forgot your password?</p> */}
+            <button className="lbutton normal" onClick={this.login}>로그인</button>
+            <button className="sbutton normal">회원가입</button>
+          </div>
+  
+          
         </div>
-        {/* sign in 상단 내용 */}
-        <div className="user-welcome">
-          <h4 className="bold user-welcome-text">ㅎㅏㄴㅈㅜㄹ</h4>
-          <p className="normal user-text">한 줄에 오신 여러분 환영합니다.</p>
-          <p className="normal user-text">당신의 한 줄을 입력하여 맞춤 책을 만나보세요.</p>
-          <p className="normal user-text-two">아직 아이디가 없으신가요?</p>
-        </div>
-        {/* sign in 움직이고 난후 우측 상단 내용 */}
-        <div className="hello">
-          <h4 className="bold user-welcome-text-move">ㅎㅏㄴㅈㅜㄹ</h4>
-          <p className="normal user-text-move">한 줄에 오신 여러분 환영합니다.</p>
-          <p className="normal user-text-move">당신의 한 줄을 입력하여 맞춤 책을 만나보세요.</p>
-          <p className="normal user-text-two-move">이미 회원이신가요?</p>       
-        </div>
-
-        {/* sign up form */}
-        <div className="user-form">
-          {/* sign up 상단 내용 */}
-          <div className="user-bold title">들어가기</div>
-          {/* <div className="user-icons">
-            <div className="user-icon"><i className="fab fa-facebook-f"></i></div>
-            <div className="user-icon"><i className="fab fa-github"></i></div>
-            <div className="user-icon"><i className="fab fa-twitter"></i></div>
-          </div> */}
-          {/* <p className="normal light">Or use your email for registration</p> */}
-          <input type="text" placeholder="아이디" className="normal login loginUserId"/>
-          <br/>
-          <input type="password" placeholder="비밀번호" className="normal login loginPassword"/>
-          <br/>
-
-          {/* 가입하기 */}
-          <input type="text" placeholder="이름" className="normal signup name"/>
-          <br/>
-          <input type="password" placeholder="아이디" className="normal signup signupUserId"/>
-          <br/>
-          <input type="text" placeholder="비밀번호" className="normal signup signupPassword"/>
-          <br/>
-          <input type="password" placeholder="비밀번호 확인" className="normal signup signupPasswordRev"/>
-          <br/>
-
-          {/* sign up 움직여서 좌측이동한 후 */}
-          {/* <p className="normal forgot">Forgot your password?</p> */}
-          <button className="b-button normal">로그인</button>
-        </div>
+        <Modal msg={"로그인에 성공하셨습니다!"}/>
       </div>
     )
   }

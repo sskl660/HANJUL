@@ -248,7 +248,30 @@ input:-webkit-autofill:active {
   /* background-color: rgb(10, 6, 1) !important; */
 }
 
-.b-button{
+.lbutton{
+  font-family: 'ChosunSm';
+  background-color:#A4B07E;
+  color:white;
+  position: absolute;
+  /* align-content: center; */
+  /* right:10%; */
+  bottom:70px;
+  right : 180px;
+  padding:15px 80px;
+  font-size:30px;
+  border-radius:25px;
+  margin-top: 1.5%;
+  border:none;
+  box-shadow: 7px 7px 7px #ccc8b9;
+  cursor: pointer;
+}
+.lbutton:hover{
+  transition:all .4s ease;
+  background-color:rgb(143,119,115);
+}
+
+.sbutton{
+  display: none;
   font-family: 'ChosunSm';
   background-color:#A4B07E;
   color:white;
@@ -259,8 +282,11 @@ input:-webkit-autofill:active {
   border:none;
   box-shadow: 7px 7px 7px #ccc8b9;
   cursor: pointer;
+  position: relative;
+  left:180px;
+  top:15px;
 }
-.b-button:hover{
+.sbutton:hover{
   transition:all .4s ease;
   background-color:rgb(143,119,115);
 }
