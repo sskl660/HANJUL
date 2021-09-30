@@ -1,25 +1,80 @@
-import { Component } from "react";
+import { useState } from "react";
+import {useDispatch} from 'react-redux'
 import './components/User/User.css';
 import Modal from './components/Common/Modal';
+import { connect } from 'react-redux';
+import { login, logout, getUser } from './redux'
+import axios from "axios";
+import store from "./redux/store";
+// import {useDispatch, useSelector} from 'react-redux';
 
+const mapDispatchToProps = {
+  login, logout, getUser
+};
 
-class User extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      flag: 0,
-    }
+const mapStateToProps = ({users}) => {
+  return {
+    user: users
+  }
+}
+
+function User (props) {
+  const[flag, setFlag] = useState(0)
+  const[Id, setId] = useState("")
+  const[Pw, setPw] = useState("")
+  const dispatch = useDispatch()
+
+  const onId = (e) => {
+    setId(e.target.value)
+    
   }
 
-  login = () =>{
-    const modal = document.querySelector('.modal');
+  const onPw = (e) => {
+    setPw(e.target.value)
     
-    modal.style.display = "block";
-    // modal.classList.add("fade")
+  }
+
+  // const dologin = () => {
+  //   dispatch(login())
+  // }
+
+  const onlogin = (e) =>{
+    const data = {
+      userId : Id,
+      userPw : Pw
+    }
+    
+
+    axios({
+      url: 'http://3.34.123.84:8080/login', 
+      method: 'POST',
+      data: data,
+      headers:{
+        'Content-Type': 'application/json',
+        // 'Accept': 'application/json; charset=utf-8',
+      }
+    }).then(res => {
+        // res.data
+        console.log(res)
+        const modal = document.querySelector('.modal');
+        modal.style.display = "block";
+        store.dispatch(props.login(res.data))
+
+      })
+    
+
+    // dispatch(login(d))
+    //   .then(res => {
+    //     console.log(res)
+    //     const modal = document.querySelector('.modal');
+    //     modal.style.display = "block";
+    //     // modal.classList.add("fade")
+    //   })
   }
   
-  signIn = () => {
-    if(this.state.flag === 0) {
+  const signIn = () => {
+    console.log(flag)
+    if(flag === 0) {
       const move = document.querySelector(".move");
       const form = document.querySelector(".user-form");
       const hello = document.querySelector(".hello");
@@ -50,11 +105,10 @@ class User extends Component {
       signupPassword.style.display="block"
       signupPasswordRev.style.display="block"
 
-      this.setWords();
-      this.setState({
-        flag: 1
-      })
+      setWords();
+      setFlag(1)
     } else {
+      // console.log(flag)
       const move = document.querySelector(".move");
       const form = document.querySelector(".user-form");
       const hello = document.querySelector(".hello");
@@ -87,15 +141,13 @@ class User extends Component {
       signupPassword.style.display="none"
       signupPasswordRev.style.display="none"
 
-      this.setWordsRev();
-      this.setState({
-        flag: 0
-      })
+      setWordsRev();
+      setFlag(0)
 
     }
   }
 
-  setWords () {
+  const setWords = () => {
     const title = document.querySelector(".title");
     // const light = document.querySelector(".light");
     // const login = document.querySelector(".login");
@@ -121,94 +173,104 @@ class User extends Component {
     move.setAttribute("style","border-radius : 0px 50px 50px 0px");
   }
 
-  setWordsRev () {
-  const title = document.querySelector(".title");
-  // const light = document.querySelector(".light");
-  // const name = document.querySelector(".name");
-  const pButton = document.querySelector(".p-button");
-  const lButton = document.querySelector(".lbutton");
-  const sButton = document.querySelector(".sbutton");
-  // const forgot = document.querySelector(".forgot");
-  const form = document.querySelector(".user-form");
-  const move = document.querySelector(".move");
+  const setWordsRev = () =>  {
+    const title = document.querySelector(".title");
+    // const light = document.querySelector(".light");
+    // const name = document.querySelector(".name");
+    const pButton = document.querySelector(".p-button");
+    const lButton = document.querySelector(".lbutton");
+    const sButton = document.querySelector(".sbutton");
+    // const forgot = document.querySelector(".forgot");
+    const form = document.querySelector(".user-form");
+    const move = document.querySelector(".move");
 
-  title.innerText="들어가기";
-  // light.innerText="Or use your email for registration";
-  // name.style.display="block";
-  lButton.style.display = "block"
-  sButton.style.display = "none"
+    title.innerText="들어가기";
+    // light.innerText="Or use your email for registration";
+    // name.style.display="block";
+    lButton.style.display = "block"
+    sButton.style.display = "none"
 
-  pButton.innerText="회원가입";
-  // bButton.innerText="로그인";
-  // forgot.style.display="none";
-  // 아래는 다시 확인...
-  form.setAttribute("style","border-radius : 0px 50px 50px 0px");
-  move.setAttribute("style","border-radius : 50px 0px 0px 50px");
+    pButton.innerText="회원가입";
+    // bButton.innerText="로그인";
+    // forgot.style.display="none";
+    // 아래는 다시 확인...
+    form.setAttribute("style","border-radius : 0px 50px 50px 0px");
+    move.setAttribute("style","border-radius : 50px 0px 0px 50px");
   }
 
+  
 
 
-  render () {
-    return (
-      <div>
-        <div className="user-container">
-          {/* sign in button */}
-          <div className="move">
-            <div className="p-button user-normal signin animated pulse" onClick={this.signIn}>회원가입</div>
-          </div>
-          {/* sign in 상단 내용 */}
-          <div className="user-welcome">
-            <h4 className="bold user-welcome-text">ㅎㅏㄴㅈㅜㄹ</h4>
-            <p className="normal user-text">한 줄에 오신 여러분 환영합니다.</p>
-            <p className="normal user-text">당신의 한 줄을 입력하여 맞춤 책을 만나보세요.</p>
-            <p className="normal user-text-two">아직 아이디가 없으신가요?</p>
-            <p>{this.props.userId}</p>
-          </div>
-          {/* sign in 움직이고 난후 우측 상단 내용 */}
-          <div className="hello">
-            <h4 className="bold user-welcome-text-move">ㅎㅏㄴㅈㅜㄹ</h4>
-            <p className="normal user-text-move">한 줄에 오신 여러분 환영합니다.</p>
-            <p className="normal user-text-move">당신의 한 줄을 입력하여 맞춤 책을 만나보세요.</p>
-            <p className="normal user-text-two-move">이미 회원이신가요?</p>       
-          </div>
+
+ 
+    // const test = useSelector( (state) => state);
+    // console.log(this.props)
+    
+
+    
   
-          {/* sign up form */}
-          <div className="user-form">
-            {/* sign up 상단 내용 */}
-            <div className="user-bold title">들어가기</div>
-            {/* <div className="user-icons">
-              <div className="user-icon"><i className="fab fa-facebook-f"></i></div>
-              <div className="user-icon"><i className="fab fa-github"></i></div>
-              <div className="user-icon"><i className="fab fa-twitter"></i></div>
-            </div> */}
-            {/* <p className="normal light">Or use your email for registration</p> */}
-            <input type="text" placeholder="아이디" className="normal login loginUserId"/>
-            <br/>
-            <input type="password" placeholder="비밀번호" className="normal login loginPassword"/>
-            <br/>
-  
-            {/* 가입하기 */}
-            <input type="text" placeholder="이름" className="normal signup name"/>
-            <br/>
-            <input type="password" placeholder="아이디" className="normal signup signupUserId"/>
-            <br/>
-            <input type="text" placeholder="비밀번호" className="normal signup signupPassword"/>
-            <br/>
-            <input type="password" placeholder="비밀번호 확인" className="normal signup signupPasswordRev"/>
-            <br/>
-  
-            {/* sign up 움직여서 좌측이동한 후 */}
-            {/* <p className="normal forgot">Forgot your password?</p> */}
-            <button className="lbutton normal" onClick={this.login}>로그인</button>
-            <button className="sbutton normal">회원가입</button>
-          </div>
-  
-          
+  return (
+    <div>
+      <div>{props.user.userName}</div>
+      <div>{props.user.userId}</div>
+      <div className="user-container">
+        {/* sign in button */}
+        <div className="move">
+          <div className="p-button user-normal signin animated pulse" onClick={signIn}>회원가입</div>
         </div>
-        <Modal msg={"로그인에 성공하셨습니다!"}/>
+        {/* sign in 상단 내용 */}
+        <div className="user-welcome">
+          <h4 className="bold user-welcome-text">ㅎㅏㄴㅈㅜㄹ</h4>
+          <p className="normal user-text">한 줄에 오신 여러분 환영합니다.</p>
+          <p className="normal user-text">당신의 한 줄을 입력하여 맞춤 책을 만나보세요.</p>
+          <p className="normal user-text-two">아직 아이디가 없으신가요?</p>
+        </div>
+        {/* sign in 움직이고 난후 우측 상단 내용 */}
+        <div className="hello">
+          <h4 className="bold user-welcome-text-move">ㅎㅏㄴㅈㅜㄹ</h4>
+          <p className="normal user-text-move">한 줄에 오신 여러분 환영합니다.</p>
+          <p className="normal user-text-move">당신의 한 줄을 입력하여 맞춤 책을 만나보세요.</p>
+          <p className="normal user-text-two-move">이미 회원이신가요?</p>       
+        </div>
+
+        {/* sign up form */}
+        <div className="user-form">
+          {/* sign up 상단 내용 */}
+          <div className="user-bold title">들어가기</div>
+          {/* <div className="user-icons">
+            <div className="user-icon"><i className="fab fa-facebook-f"></i></div>
+            <div className="user-icon"><i className="fab fa-github"></i></div>
+            <div className="user-icon"><i className="fab fa-twitter"></i></div>
+          </div> */}
+          {/* <p className="normal light">Or use your email for registration</p> */}
+          <input type="text" placeholder="아이디" className="normal login loginUserId" value={Id} onChange={onId}/>
+          <br/>
+          <input type="password" placeholder="비밀번호" className="normal login loginPassword" value={Pw} onChange={onPw}/>
+          <br/>
+
+          {/* 가입하기 */}
+          <input type="text" placeholder="이름" className="normal signup name"/>
+          <br/>
+          <input type="password" placeholder="아이디" className="normal signup signupUserId"/>
+          <br/>
+          <input type="text" placeholder="비밀번호" className="normal signup signupPassword"/>
+          <br/>
+          <input type="password" placeholder="비밀번호 확인" className="normal signup signupPasswordRev"/>
+          <br/>
+
+          {/* sign up 움직여서 좌측이동한 후 */}
+          {/* <p className="normal forgot">Forgot your password?</p> */}
+          <button className="lbutton normal" onClick={onlogin}>로그인</button>
+          {/* <button className="lbutton normal" onClick={() => this.props.login()}>로그인</button> */}
+          <button className="sbutton normal">회원가입</button>
+        </div>
+
+        
       </div>
-    )
-  }
+      <Modal msg={"로그인에 성공하셨습니다!"}/>
+    </div>
+  )
+  
 }
 
-export default User
+export default connect(mapStateToProps, mapDispatchToProps)(User)
