@@ -2,8 +2,9 @@ import { LOGIN, LOGOUT, GET_USER } from "./types"
 
 const userState = {
   user: {
-    name: '',
-    id: '',
+    userId: '1',
+    userName: '1',
+    userPw: '1'
   }
 }
 
@@ -12,10 +13,7 @@ const userReducer = (state=userState, action) => {
     case LOGIN:
       return {
         ...state,
-        user: {
-          name: '기훈',
-          id: 'kihoon'
-        }
+        user: action.user
       }
     case LOGOUT:
       return {

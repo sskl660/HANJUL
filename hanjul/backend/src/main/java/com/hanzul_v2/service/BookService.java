@@ -14,6 +14,7 @@ import com.hanzul_v2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,7 @@ public class BookService {
                     .isbn(tmpbooksEntityList.get(idx).getIsbn())
                     .imgUrl(tmpbooksEntityList.get(idx).getImgUrl())
                     .author(tmpbooksEntityList.get(idx).getAuthor())
+                    .title(tmpbooksEntityList.get(idx).getTitle())
                     .description(tmpbooksEntityList.get(idx).getDescription())
                     .avgStar(tmpbooksEntityList.get(idx).getAvgStar())
                     .publisher(tmpbooksEntityList.get(i).getPublisher())
@@ -138,18 +140,35 @@ public class BookService {
         if(reviewRepository.save(reviewEntity)!=null){
             //별점 평균내기
             List<ReviewEntity> reviewEntityList = reviewRepository.findByReviewIsbnOrderByReviewDate(reqBookDto.getReviewIsbn());
-            double avg=0;
+            double  avg=0;//반올림을 위해선 더블
             for(ReviewEntity review : reviewEntityList ){
                 avg+=review.getReviewStar();
+                System.out.println(avg);
             }
-            avg=Math.round(avg/10)*10;
+            avg=Math.round(avg/reviewEntityList.size());
             System.out.println(avg);
             Optional<TmpbooksEntity> tmpbooksEntity = tmpbooksRepository.findById(reqBookDto.getReviewIsbn());
             TmpbooksEntity updatedTmpbooksEntity = tmpbooksEntity.orElse(null);
             updatedTmpbooksEntity.setAvgStar((int)avg);
+            System.out.println(updatedTmpbooksEntity.getAvgStar());
             tmpbooksRepository.save(updatedTmpbooksEntity);
             return true;
         }
         else  return false;
     }
+
+    @Transactional
+    public Integer removeReview(String isbn, String userId) {
+        Optional<UserEntity> userEntity = userRepository.findById(userId);
+        return reviewRepository.deleteByReviewIsbnAndReviewFkUserId(isbn, userEntity.orElse(null));
+    }
+
+    @Transactional
+    public Integer removeAllReview(String isbn) {
+//        Optional<UserEntity> userEntity = userRepository.findById(isbn);
+//        Boolean aBoolean = reviewRepository.deleteByReviewIsbnAndReviewFkUserId(isbn, userEntity.orElse(null));
+        return reviewRepository.deleteAllByReviewIsbn(isbn);
+
+    }
+
 }

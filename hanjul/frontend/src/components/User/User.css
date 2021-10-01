@@ -310,3 +310,11 @@ input:-webkit-autofill:active {
   padding: 8px 5px;
   width:60%; */
 }
+
+.passwordError {
+  color: #f06255;
+  position:relative;
+  bottom:20px;
+  left:-120px;
+  display: none;
+}

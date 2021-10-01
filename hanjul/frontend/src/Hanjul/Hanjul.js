@@ -1,5 +1,17 @@
 import { useEffect } from 'react'
 import './Hanjul.css'
+import { login, logout, getUser } from '../redux'
+import { connect } from 'react-redux';
+
+const mapDispatchToProps = {
+  login, logout, getUser
+}
+
+const mapStateToProps = ({users}) => {
+  return {
+    user: users
+  }
+}
 
 function Hanjul() {
   useEffect(() => {
@@ -46,4 +58,4 @@ function Hanjul() {
   )
 }
 
-export default Hanjul
+export default connect(mapStateToProps, mapDispatchToProps)(Hanjul)
