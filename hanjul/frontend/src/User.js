@@ -130,7 +130,7 @@ function User (props) {
         // const modal = document.querySelector('.modal'); 
         
         // modal.style.display = "block";      
-        // store.dispatch(props.login(res.data))
+        store.dispatch(props.login(res.data))
         history.push('/')
       })
     
