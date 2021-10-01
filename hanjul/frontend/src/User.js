@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { login, logout, getUser } from './redux'
 import axios from "axios";
 import configStore from "./redux/store";
+import { useHistory } from 'react-router-dom';
 
 const { store } = configStore();
 // import {useDispatch, useSelector} from 'react-redux';
@@ -19,6 +20,7 @@ const mapStateToProps = ({users}) => {
   }
 }
 
+
 function User (props) {
   const[flag, setFlag] = useState(0)
   const[Id, setId] = useState("")
@@ -26,6 +28,8 @@ function User (props) {
   const[Sname, setSname] = useState("")
   const[Sid, setSid] = useState("")
   const[Spw, setSpw] = useState("")
+  const[Spwrev, setSpwrev] = useState("")
+  const history = useHistory()
   // const dispatch = useDispatch()
 
   const sName = (e) => {
@@ -40,6 +44,17 @@ function User (props) {
     setSpw(e.target.value)
   }
 
+  const sPwRev = (e) => {
+    const sPwInput = document.querySelector(".passwordError")
+    if (e.target.value != Spw) {
+      sPwInput.style.display="inline-block"
+      sPwInput.innerText = "비밀번호가 틀립니다."
+    } else {
+      sPwInput.innerText = "비밀번호와 일치합니다."
+      setSpwrev(e.target.value)
+    }
+  }
+
   const onSignup = () => {
     const data = {
       userId: Sid,
@@ -47,19 +62,38 @@ function User (props) {
       userPw: Spw
     }
     console.log(data)
-    axios({
-      url: 'http://3.34.123.84:8080/signup',
-      method: 'POST',
-      data: data,
-      headers:{
-        'Content-Type': 'application/json',
-        // 'Accept': 'application/json; charset=utf-8',
-      }
-    }).then(res => {
-      console.log("회원가입"+res.data)
-    }).catch(
-      
-    )
+
+    if (data.userId != "" && data.userName != "" && data.userPw != "" && data.userPw === Spwrev) {
+      axios({
+        url: 'http://3.34.123.84:8080/signup',
+        method: 'POST',
+        data: data,
+        headers:{
+          'Content-Type': 'application/json',
+          // 'Accept': 'application/json; charset=utf-8',
+        }
+      }).then(res => {
+        console.log("회원가입"+res.data)
+        const modal = document.querySelector('.modal');
+        const content = document.querySelector('.modal_content');
+        modal.style.display = "block";
+        content.innerText = "회원가입에 성공하셨습니다."
+        window.location.replace("/user")
+      }).catch(()=>{
+        const modal = document.querySelector('.modal');
+        const content = document.querySelector('.modal_content');
+        modal.style.display = "block";
+        content.innerText = "회원가입에 실패했습니다."
+        // window.location.replace("/user")
+      })
+    } else {
+      const modal = document.querySelector('.modal');
+      const content = document.querySelector('.modal_content');
+      modal.style.display = "block";
+      content.innerText = "입력정보를 확인해주세요."
+      // window.location.replace("/user")
+    }
+    
   }
 
 
@@ -93,9 +127,11 @@ function User (props) {
     }).then(res => {
         // res.data
         console.log(res.data)
-        const modal = document.querySelector('.modal');
-        modal.style.display = "block";
-        store.dispatch(props.login(res.data))
+        // const modal = document.querySelector('.modal'); 
+        
+        // modal.style.display = "block";      
+        // store.dispatch(props.login(res.data))
+        history.push('/')
       })
     
 
@@ -291,8 +327,9 @@ function User (props) {
           <br/>
           <input type="text" placeholder="비밀번호" className="normal signup signupPassword"onChange={sPw}/>
           <br/>
-          <input type="password" placeholder="비밀번호 확인" className="normal signup signupPasswordRev"/>
+          <input type="password" placeholder="비밀번호 확인" className="normal signup signupPasswordRev" onChange={sPwRev}/>
           <br/>
+          <div className="passwordError">비밀번호가 틀립니다.</div>
 
           {/* sign up 움직여서 좌측이동한 후 */}
           {/* <p className="normal forgot">Forgot your password?</p> */}

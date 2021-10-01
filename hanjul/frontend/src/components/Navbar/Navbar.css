@@ -111,6 +111,7 @@ body {
 }
 
 .up-user-button {
+  display: block;
   color: #3B2828;
   background-color: #D9B9A7;
   border-radius: 20px;
@@ -124,6 +125,26 @@ body {
   font-size: 30px;
 }
 .up-user-button:active {
+  color: #3B2828;
+  border-radius: 20px;
+  box-shadow: -2px -2px 10px 5px rgb(240, 211, 200) inset, 2px 2px 10px 5px rgba(184, 137, 117) inset;
+}
+
+.up-logout-button {
+  display: block;
+  color: #3B2828;
+  background-color: #D9B9A7;
+  border-radius: 20px;
+  box-shadow: 2px 2px 10px 5px  rgb(194, 159, 145), -2px -2px 10px 5px rgb(235, 203, 191);
+  width: 255px;
+  height: 59px;
+  margin-top:80px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Gugi';
+  font-size: 30px;
+}
+.up-logout-button:active {
   color: #3B2828;
   border-radius: 20px;
   box-shadow: -2px -2px 10px 5px rgb(240, 211, 200) inset, 2px 2px 10px 5px rgba(184, 137, 117) inset;
