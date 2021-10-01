@@ -139,15 +139,17 @@ public class BookService {
         if(reviewRepository.save(reviewEntity)!=null){
             //별점 평균내기
             List<ReviewEntity> reviewEntityList = reviewRepository.findByReviewIsbnOrderByReviewDate(reqBookDto.getReviewIsbn());
-            double avg=0;
+            int  avg=0;
             for(ReviewEntity review : reviewEntityList ){
                 avg+=review.getReviewStar();
+                System.out.println(avg);
             }
-            avg=Math.round(avg/10)*10;
+            avg=Math.round(avg/reviewEntityList.size());
             System.out.println(avg);
             Optional<TmpbooksEntity> tmpbooksEntity = tmpbooksRepository.findById(reqBookDto.getReviewIsbn());
             TmpbooksEntity updatedTmpbooksEntity = tmpbooksEntity.orElse(null);
             updatedTmpbooksEntity.setAvgStar((int)avg);
+            System.out.println(updatedTmpbooksEntity.getAvgStar());
             tmpbooksRepository.save(updatedTmpbooksEntity);
             return true;
         }
