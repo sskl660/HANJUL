@@ -1,13 +1,13 @@
 :root {
   --crsl-bg: transparent;
   --box-bg: #857D70;
-  --box-shadow: #857d70ab;
+  --box-shadow: #6b655a93;
   --box-shadow-border: #0000000f;
   --box-border: black;
 }
 
 .recommend-title {
-  font-size: 4em;
+  font-size: 3em;
   font-weight: bold;
   position: absolute;
   top: 5%;
@@ -44,7 +44,7 @@
   display: block;
   float: left;
   box-sizing: border-box;
-  margin: 0 20px;
+  margin: 0 10px;
 }
 .carousel__body .carousel__slider__item:hover {
   cursor: pointer;
@@ -67,9 +67,9 @@
   width: 100%;
   border-radius: 100%;
   height: 40px;
-  background: var(--box-shadow);
+  background: #6b655a81;
   box-shadow: 0px 0px 30px 20px var(--box-shadow);
-  transform: rotateX(70deg) translate3d(0px, -20px, 0px);
+  transform: rotateX(70deg) translate3d(0px, -20px, -30px);
 }
 .carousel__body .carousel__slider__item .item__3d-frame__box {
   display: flex;
@@ -115,12 +115,12 @@
 }
 
 .recommend-page {
-  height: 100vh;
+  height: calc(100vh - 140px);
 }
 
 .recommend-history {
   position: absolute;
-  top: 77%;
+  top: 72%;
   right: 8%;
   font-size: 32px;
   font-weight: bold;
@@ -217,6 +217,7 @@
 .book-side {
   height: 100%;
   width: 100%;
+  filter: blur(1px);
 }
 
 @media (max-width:500px) {

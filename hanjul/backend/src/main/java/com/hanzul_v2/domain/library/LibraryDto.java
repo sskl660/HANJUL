@@ -41,5 +41,6 @@ public class LibraryDto {
         private String mybookImgurl;
         private String mybookTitle;
         private String mybookAuthor;
+        private String mybookDesc;
     }
 }

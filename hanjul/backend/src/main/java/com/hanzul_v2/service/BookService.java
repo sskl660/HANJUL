@@ -42,6 +42,7 @@ public class BookService {
                     .isbn(tmpbooksEntityList.get(idx).getIsbn())
                     .imgUrl(tmpbooksEntityList.get(idx).getImgUrl())
                     .author(tmpbooksEntityList.get(idx).getAuthor())
+                    .title(tmpbooksEntityList.get(idx).getTitle())
                     .description(tmpbooksEntityList.get(idx).getDescription())
                     .avgStar(tmpbooksEntityList.get(idx).getAvgStar())
                     .publisher(tmpbooksEntityList.get(i).getPublisher())

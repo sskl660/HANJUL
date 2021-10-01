@@ -1,6 +1,7 @@
-import { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Route } from 'react-router-dom';
+import { Provider } from "react-redux";
+import store from './redux/store';
 import Hanjul from './Hanjul/Hanjul';
 import Recommend from './Recommend/Recommend';
 import History from './History/History';
@@ -9,9 +10,9 @@ import BookDetail from './BookDetail';
 import MyLibrary from './MyLibrary';
 import Navbar from './components/Navbar/Navbar';
 
-class App extends Component {
-  render () {
-    return (
+function App() {
+  return (
+    <Provider store={store}>
       <div className="app">
         <BrowserRouter>
           <Navbar />
@@ -24,8 +25,8 @@ class App extends Component {
           <Route path="/user" component={User} />
         </BrowserRouter>
       </div>
-    );
-  }
+    </Provider>
+  );
 }
 
 export default App;

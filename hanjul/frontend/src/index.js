@@ -8,14 +8,11 @@ import reportWebVitals from './reportWebVitals';
 // import logger from "redux-logger";
 // import { composeWithDevTools } from "redux-devtools-extension";
 // import rootReducer from "./reducers";
-import { BrowserRouter } from 'react-router-dom';
+// import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* 만든 store를 앱 상위에 넣어줍니다. */}
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
