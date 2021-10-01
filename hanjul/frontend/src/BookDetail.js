@@ -9,12 +9,12 @@ import Pagination from './components/BookReview/Pagination'
 
 const ARRAY = [0, 1, 2, 3, 4];
 
-const comments = [
-  { name: '김싸피', content: '이 책을 추천합니다' },
-  {name: '김싸피', content: '이 책을 추천합니다'},
-  {name: '김싸피', content: '이 책을 추천합니다'},
-  {name: '김싸피', content: '이 책을 추천합니다'},
-]
+// const comments = [
+//   { name: '김싸피', content: '이 책을 추천합니다' },
+//   {name: '김싸피', content: '이 책을 추천합니다'},
+//   {name: '김싸피', content: '이 책을 추천합니다'},
+//   {name: '김싸피', content: '이 책을 추천합니다'},
+// ]
 
 function BookDetail() {
   // 북마크 클릭
@@ -178,18 +178,6 @@ function BookDetail() {
         </div>
         <div className="bookD-pagination">
           <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>
-          {/* <ul className="pagination">
-            <li><a href="">이전</a></li>
-            <li><a href="">1</a></li>
-            <li><a href="">2</a></li>
-            <li><a href="">3</a></li>
-            <li><a href="">4</a></li>
-            <li><a href="">5</a></li>
-            <li><a href="">6</a></li>
-            <li><a href="">7</a></li>
-            <li><a href="">8</a></li>
-            <li><a href="">다음</a></li>
-          </ul> */}
         </div>
       </div>
     </div>
