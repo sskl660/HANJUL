@@ -2,8 +2,10 @@ import './Recommend.css'
 import { useEffect, useState } from 'react';
 import RecommendedBook from './RecommendedBook';
 import { connect } from 'react-redux';
-// import { getUser } from '../redux/index.js'
-import { login, logout, getUser } from '../redux'
+import { login, logout, getUser, getRecommend } from '../redux';
+import axios from 'axios';
+import { URL } from '../constants/global';
+import { useHistory } from 'react-router';
 
 let books = [
   {
@@ -69,10 +71,6 @@ let books = [
 ]; // 데이터 받아와서 넣어주기
 
 let bookList = [];
-books.forEach((book, index) => {
-  bookList.push(<RecommendedBook key={index} book={book} />)
-})
-
 
 let histories = [
   '파이썬 공부를 하고 싶다',
@@ -87,9 +85,18 @@ let histories = [
 ]
 
 let historyList = [];
-histories.forEach((history, index) => {
-  historyList.push(<li key={index}>{history}</li>)
-})
+const getSentences = () => {
+  axios({
+    method: 'get',
+    url: URL + 'history'
+  })
+  .then(res => {
+    res.data.forEach((history, index) => {
+      historyList.push(<li key={index}>{history}</li>)
+    })
+    return res
+  })
+}
 
 let h1= 0,
 h2 = 1,
@@ -99,7 +106,8 @@ h5 = 4
 
 const mapStateToProps = (props) => {
   return {
-    user: props.users.user
+    user: props.users.user,
+    recommend: props.recommend.recommend
   }
 }
 
@@ -110,13 +118,24 @@ const mapStateToProps = (props) => {
 // }
 
 const mapDispatchToProps = {
-  login, logout, getUser
+  login, logout, getUser, getRecommend
 }
 
-
 function Recommend(props) {
+  const history = useHistory();
   const [showHistories, setShowHistories] = useState([]);
+
+  // function getBooks() {
+  //   props.recommend.books.forEach((book, index) => {
+  //     if (index < 6){
+  //       bookList.push(<RecommendedBook key={index} book={book} />)
+  //     }
+  //   })
+  // }
+
   useEffect(() => {
+    getSentences();
+
     var carousel = document.getElementsByClassName('carousel')[0],
         slider = carousel.getElementsByClassName('carousel__slider')[0],
         items = carousel.getElementsByClassName('carousel__slider__item')
@@ -190,25 +209,16 @@ function Recommend(props) {
     }
 
     const sentenceInterval = setInterval(setSentences, 5000);
-    
     setSentences()
-
     return () => {
       clearInterval(sentenceInterval)
     }
   }, [])
   return (
     <div className="recommend-page">
-      <div>
-        <div>{props.user.userName}</div>
-        <div>{props.user.userId}</div>
-        <button onClick={() => props.login()}>로그인</button>
-        <button onClick={() => props.logout()}>로그아웃</button>
-        <button onClick={() => props.getUser()}>유저 찾기(다른 페이지에서 작동해보기)</button>
-      </div>
       <p className="recommend-title">
         <span>"</span>
-        <span>나는 책이 좋다!</span>
+        <span>{props.recommend.hanjul}</span>
         <span>"</span>
       </p>
 
