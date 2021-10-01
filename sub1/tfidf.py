@@ -5,26 +5,26 @@ import numpy as np
 import time
 import random
 import pandas as pd
+import os
 
-# 최대 행 수 설정
-pd.set_option('display.max_rows', 500)
-# 최대 열 수 설정
-pd.set_option('display.max_columns', 500)
-# 최대 표시 가로 길이
-pd.set_option('display.width', 1000)
+# # 최대 행 수 설정
+# pd.set_option('display.max_rows', 500)
+# # 최대 열 수 설정
+# pd.set_option('display.max_columns', 500)
+# # 최대 표시 가로 길이
+# pd.set_option('display.width', 1000)
 
 """데이터 로드"""
-data = load_dataframes()
+# data = load_dataframes()
+DUMP_FILE = os.path.join("dump.pkl")
+data = pd.read_pickle(DUMP_FILE)
 
 """원하는 문장 입력"""
 sentence = input()
 start = time.time()
-<<<<<<< HEAD
 
 """초기 데이터 가공"""
 # 첫번째 행을 지우고 해당 데이터를 데이터에 포함 시켜서 tfidf 분석 알고리즘 적용.
-=======
->>>>>>> f84c0dbbda7b00c9f344b145b69496703e51603a
 data.loc[0, 'description'] = sentence
 data.loc[0, 'title'] = sentence
 # 불용어 : 유의미하지 않은 단어 토큰을 제거
@@ -34,10 +34,7 @@ print(data.shape)
 
 """description에 대해서 TF-IDF 수행"""
 tfidf_matrix = tfidf.fit_transform(data['description'])
-<<<<<<< HEAD
 # print(tfidf_matrix)
-=======
->>>>>>> f84c0dbbda7b00c9f344b145b69496703e51603a
 # title_tfidf_matrix = tfidf.fit_transform(data['title'])
 
 """유사도 측정"""
@@ -51,7 +48,7 @@ book2id = {}
 # enumerate() 함수는 기본적으로 인덱스:원소로 이루어진 튜플을 만들어준다.
 for i, c in enumerate(data.index):
     book2id[i] = [data["isbn13"][c], data["title"][c], data["author"][c], data["publisher"][c], data["img_url"][c],
-                  data["description"][c], data["is_coll_aladin"][c], data["is_coll_naver"][c]]
+                  data["description"][c], data["is_coll_aladin"][c], data["is_coll_naver"][c], data["isbn_origin"][c]]
 # id2book = {}
 # for i, c in book2id.items():
 #     id2book[c] = i
