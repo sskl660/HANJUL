@@ -2,21 +2,64 @@ import { useState, useEffect } from "react";
 import './components/BookDetail/BookDetail.css';
 import { FaStar } from 'react-icons/fa'; // react icon에 있는 별 이미지 사용
 import BookSlider from './components/BookDetail/BookSlider';
-import Review from './components/BookReview/Review';
 import axios from 'axios';
 import Posts from './components/BookReview/Post'
 import Pagination from './components/BookReview/Pagination'
 
 const ARRAY = [0, 1, 2, 3, 4];
 
-// const comments = [
-//   { name: '김싸피', content: '이 책을 추천합니다' },
-//   {name: '김싸피', content: '이 책을 추천합니다'},
-//   {name: '김싸피', content: '이 책을 추천합니다'},
-//   {name: '김싸피', content: '이 책을 추천합니다'},
-// ]
-
 function BookDetail() {
+  // 책 상세 정보 요청
+  const [bookD, setBookD] = useState([]);
+  const bookDetail = () => {
+    axios({
+      url: `http://3.34.123.84:8080/detail/9788979971415`,
+      method: 'GET',
+    }).then(res => {
+      console.log(res)
+      setBookD(res.data)
+    })
+  };
+
+  useEffect(() => {
+    bookDetail();
+  }, [])
+
+  // console.log(bookD);
+
+  const makeStar = (num) => {
+		let stars = [];
+		for (let i = 0; i < num; i++) {
+			stars.push(
+				<FaStar size="36" className='yellowStar'/>
+			)
+		}
+		for (let i = 0; i < 5-num; i++) {
+			stars.push(
+				<FaStar size="36"/>
+			)
+		}
+		return stars;
+	}
+
+  // 덤프 책 요청
+  const [bookDump, setBookDump] = useState([]);
+  const bookDumpFile = () => {
+    axios({
+      url: `http://3.34.123.84:8080/admin/dump`,
+      method: 'GET',
+    }).then(res => {
+      console.log(res)
+      setBookDump(res.data)
+    })
+  };
+
+  useEffect(() => {
+    bookDumpFile();
+  }, [])
+
+  // console.log(bookDump);
+
   // 북마크 클릭
   const [bookmark, setBookmark] = useState(false);
   const handleBookmark = () => {
@@ -55,24 +98,38 @@ function BookDetail() {
     
   };
 
-  // 한줄평 pagination
+  // 한줄평 & pagination
   const [posts, setPosts] = useState([]);
   // const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(4);
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      // setLoading(true);
-      const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
-      setPosts(res.data);
-      // setLoading(false);
-    }
+  // useEffect(() => {
+  //   const fetchPosts = async () => {
+  //     // setLoading(true);
+  //     const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
+  //     setPosts(res.data);
+  //     // setLoading(false);
+  //   }
       
-    fetchPosts();
-  }, []);
+  //   fetchPosts();
+  // }, []);
 
-  console.log(posts);
+  const fetchPosts = () => {
+    axios({
+      url: `http://3.34.123.84:8080/detail/reivew/9788979971415`,
+      method: 'GET',
+    }).then(res => {
+      console.log('이거',res)
+      setPosts(res.data)
+    })
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  }, [])
+
+  // console.log('제발', posts);
   // 현재 페이지 가져오기
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -80,21 +137,6 @@ function BookDetail() {
 
   // 페이지 바꾸기
   const paginate = pageNumber => setCurrentPage(pageNumber);
-
-  const slides = [
-    { image: 'http://image.aladin.co.kr/product/461/58/cover/s812532176_1.jpg' },
-    { image: 'image/javabook.png'},
-    { image: 'http://image.aladin.co.kr/product/461/58/cover/s812532176_1.jpg' },
-    { image: 'image/javabook.png' },
-    { image: 'http://image.aladin.co.kr/product/461/58/cover/s812532176_1.jpg' },
-    { image: 'image/javabook.png' },
-    { image: 'http://image.aladin.co.kr/product/461/58/cover/s812532176_1.jpg' },
-    { image: 'image/javabook.png' },
-    { image: 'http://image.aladin.co.kr/product/461/58/cover/s812532176_1.jpg' },
-    { image: 'image/javabook.png' },
-    { image: 'http://image.aladin.co.kr/product/461/58/cover/s812532176_1.jpg' },
-    { image: 'image/javabook.png' },
-  ];
 
   return (
     <div className="bookDetail">
@@ -106,43 +148,36 @@ function BookDetail() {
       <div className="bookD-info d-flex justify-content-center">
         <div className="bookD-infoL">
           <div className="bookD-bookImg">
-          <img src="image/javabook.png" className="bookD-detailImg" alt="" />
+          <img src={bookD.imgUrl} className="bookD-detailImg" alt="" />
           </div>
           <div className="bookD-bookGrade">
             <div className="bookD-totalStars">
               <div className="bookD-totalStar">
-                {ARRAY.map((el, idx) => {
-                  return (
-                    <FaStar
-                      key={idx}
-                      size="36"
-                      className={clicked[el] && 'yellowStar'}
-                    />
-                  );
-                })}
+                {makeStar(bookD.avgStar)}
               </div>
             </div>
-            <div className="totalScore">5점</div>
+            <div className="totalScore">{bookD.avgStar}점</div>
           </div>
         </div>
         <div className="bookD-infoR">
           <div className="bookD-bookInfo">
-            <h3>도서명</h3>
+            <h3>{bookD.title}</h3>
           </div>
           <div className="bookD-bookInfo">
-            <h3>저자</h3>
+            <h3>{bookD.author}</h3>
           </div>
           <div className="bookD-bookInfo">
-            <h3>출판사</h3>
+            <h3>{bookD.publisher}</h3>
           </div>
           <div className="bookD-bookIntro">
-            <h3>소개</h3>
+            <h3>{bookD.description}</h3>
+            {/* <h3>이 책은 저자의 30년 교직 생활의 경험과 가정에서 아이들을 키우며 얻은 경험을 부모 교육 강의라는 형식을 빌어 나누어온 이야기들을 정리한 것이다. 책의 내용 역시 어떤 깊이 있는 이론보다는 자녀를 학교에 보내고 있는 부모라면 누구나 경험하고 느낄 수 있는 평범한 내용들을 사례 중심으로 적어 놓았다.이 책은 저자의 30년 교직 생활의 경험과 가정에서 아이들을 키우며 얻은 경험을 부모 교육 강의라는 형식을 빌어 나누어온 이야기들을 정리한 것이다. 책의 내용 역시 어떤 깊이 있는 이론보다는 자녀를 학교에 보내고 있는 부모라면 누구나 경험하고 느낄 수 있는 평범한 내용들을 사례 중심으로 적어 놓았다.이 책은 저자의 30년 교직 생활의 경험과 가정에서 아이들을 키우며 얻은 경험을 부모 교육 강의라는 형식을 빌어 나누어온 이야기들을 정리한 것이다. 책의 내용 역시 어떤 깊이 있는 이론보다는 자녀를 학교에 보내고 있는 부모라면 누구나 경험하고 느낄 수 있는 평범한 내용들을 사례 중심으로 적어 놓았다.</h3> */}
           </div>
         </div>
       </div>
       <div className="bookD-recommend">
         <div className="booD-slider">
-          <BookSlider slides={slides}/>
+          <BookSlider slides={bookDump}/>
         </div>
       </div>
       <div className="bookD-review">
@@ -169,12 +204,7 @@ function BookDetail() {
           <button className="bookD-btn">입력</button>
         </div>
         <div className="bookD-reviewShow">
-          <Posts posts={currentPosts} />
-          {/* {comments.map((comment, index) => {
-            return (
-              <Review name={comment.name} content={comment.content} />
-            )
-          })} */}
+          <Posts posts={currentPosts}/>
         </div>
         <div className="bookD-pagination">
           <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate}/>

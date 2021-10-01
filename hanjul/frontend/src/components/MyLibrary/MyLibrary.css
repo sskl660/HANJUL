@@ -170,6 +170,15 @@
   font-weight: 3rem;
 }
 
+.bookDes {
+  font-size: 1.25rem;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 8;
+}
+
 /* @media screen and (max-width: 64rem) {
   .col {
     width: calc(33.333333% - 2rem);

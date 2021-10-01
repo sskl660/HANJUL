@@ -55,6 +55,11 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 4%;
+  overflow: scroll;
+}
+
+.bookD-bookIntro::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 
 .bookD-bookGrade {
@@ -191,7 +196,9 @@
 }
 
 h3 {
-  margin-left: 15px;
+  margin: 15px 20px 15px 20px;
+  margin-bottom: 20px;
+  line-height: 28px;
 }
 
 .bookmarkIcon {
@@ -283,7 +290,7 @@ h3 {
 
 svg {
   color: #bcb8aa;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .yellowStar {

@@ -22,7 +22,7 @@ const BookSlider = (props) => {
               return (
                 <div className="slider-book" key={index}>
                   {/* <div className="slider-book-image" style={{backgroundImage:`url(${slide.image})`, backgroundSize:'cover'}} /> */}
-                  <img className="slider-book-image" src={slide.image} alt="" />
+                  <img className="slider-book-image" src={slide.imgUrl} alt="" />
                 </div>
               )
             })
