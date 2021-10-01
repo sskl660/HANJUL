@@ -95,4 +95,25 @@ public class BookController {
         Boolean aBoolean = bookService.setReview(reqBookDto);
         return ResponseEntity.ok().body(aBoolean);
     }
+
+    @ApiOperation(value = "책 별 해당 아이디 리뷰 전체 삭제 요청")
+    @DeleteMapping(value = "admin/detail/review/{isbn}/{userId}")
+    public ResponseEntity<Integer> deleteOneReview(
+            @ApiParam(value = "book isbn")
+            @PathVariable(name = "isbn") String isbn,
+            @ApiParam(value = "user id")
+            @PathVariable(name = "userId") String userId
+    )throws Exception{
+        int removedCnt= bookService.removeReview(isbn, userId);
+        return ResponseEntity.ok().body(removedCnt);
+    }
+    @ApiOperation(value = "책 별 리뷰 전체 삭제 요청")
+    @DeleteMapping(value = "admin/detail/review/{isbn}")
+    public ResponseEntity<Integer> deletAllReview(
+            @ApiParam(value = "book isbn")
+            @PathVariable(name = "isbn") String isbn
+    )throws Exception{
+        int removedCnt = bookService.removeAllReview(isbn);
+        return ResponseEntity.ok().body(removedCnt);
+    }
 }
