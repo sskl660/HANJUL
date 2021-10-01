@@ -1,11 +1,12 @@
 import { useState } from "react";
-import {useDispatch} from 'react-redux'
 import './components/User/User.css';
 import Modal from './components/Common/Modal';
 import { connect } from 'react-redux';
 import { login, logout, getUser } from './redux'
 import axios from "axios";
-import store from "./redux/store";
+import configStore from "./redux/store";
+
+const { store } = configStore();
 // import {useDispatch, useSelector} from 'react-redux';
 
 const mapDispatchToProps = {
@@ -22,16 +23,53 @@ function User (props) {
   const[flag, setFlag] = useState(0)
   const[Id, setId] = useState("")
   const[Pw, setPw] = useState("")
-  const dispatch = useDispatch()
+  const[Sname, setSname] = useState("")
+  const[Sid, setSid] = useState("")
+  const[Spw, setSpw] = useState("")
+  // const dispatch = useDispatch()
+
+  const sName = (e) => {
+    setSname(e.target.value)
+  }
+
+  const sId = (e) => {
+    setSid(e.target.value)
+  }
+
+  const sPw = (e) => {
+    setSpw(e.target.value)
+  }
+
+  const onSignup = () => {
+    const data = {
+      userId: Sid,
+      userName: Sname,
+      userPw: Spw
+    }
+    console.log(data)
+    axios({
+      url: 'http://3.34.123.84:8080/signup',
+      method: 'POST',
+      data: data,
+      headers:{
+        'Content-Type': 'application/json',
+        // 'Accept': 'application/json; charset=utf-8',
+      }
+    }).then(res => {
+      console.log("회원가입"+res.data)
+    }).catch(
+      
+    )
+  }
+
+
 
   const onId = (e) => {
     setId(e.target.value)
-    
   }
 
   const onPw = (e) => {
     setPw(e.target.value)
-    
   }
 
   // const dologin = () => {
@@ -43,8 +81,7 @@ function User (props) {
       userId : Id,
       userPw : Pw
     }
-    
-
+  
     axios({
       url: 'http://3.34.123.84:8080/login', 
       method: 'POST',
@@ -55,11 +92,10 @@ function User (props) {
       }
     }).then(res => {
         // res.data
-        console.log(res)
+        console.log(res.data)
         const modal = document.querySelector('.modal');
         modal.style.display = "block";
         store.dispatch(props.login(res.data))
-
       })
     
 
@@ -249,11 +285,11 @@ function User (props) {
           <br/>
 
           {/* 가입하기 */}
-          <input type="text" placeholder="이름" className="normal signup name"/>
+          <input type="text" placeholder="이름" className="normal signup name" onChange={sName}/>
           <br/>
-          <input type="password" placeholder="아이디" className="normal signup signupUserId"/>
+          <input type="password" placeholder="아이디" className="normal signup signupUserId" onChange={sId}/>
           <br/>
-          <input type="text" placeholder="비밀번호" className="normal signup signupPassword"/>
+          <input type="text" placeholder="비밀번호" className="normal signup signupPassword"onChange={sPw}/>
           <br/>
           <input type="password" placeholder="비밀번호 확인" className="normal signup signupPasswordRev"/>
           <br/>
@@ -262,7 +298,7 @@ function User (props) {
           {/* <p className="normal forgot">Forgot your password?</p> */}
           <button className="lbutton normal" onClick={onlogin}>로그인</button>
           {/* <button className="lbutton normal" onClick={() => this.props.login()}>로그인</button> */}
-          <button className="sbutton normal">회원가입</button>
+          <button className="sbutton normal" onClick={onSignup}>회원가입</button>
         </div>
 
         
