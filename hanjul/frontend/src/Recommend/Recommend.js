@@ -97,9 +97,9 @@ h3 = 2,
 h4 = 3,
 h5 = 4
 
-const mapStateToProps = ({users}) => {
+const mapStateToProps = (props) => {
   return {
-    user: users
+    user: props.users.user
   }
 }
 
@@ -129,7 +129,6 @@ function Recommend(props) {
         move(3); // 3번째로 focus
         bindEvents();
     }
-    
     function resize() {
         width = Math.max(window.innerWidth * .23, 275)
         // height = window.innerHeight * .5

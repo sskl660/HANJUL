@@ -1,11 +1,12 @@
 import { useState } from "react";
-import {useDispatch} from 'react-redux'
 import './components/User/User.css';
 import Modal from './components/Common/Modal';
 import { connect } from 'react-redux';
 import { login, logout, getUser } from './redux'
 import axios from "axios";
-import store from "./redux/store";
+import configStore from "./redux/store";
+
+const { store } = configStore();
 // import {useDispatch, useSelector} from 'react-redux';
 
 const mapDispatchToProps = {
@@ -22,7 +23,6 @@ function User (props) {
   const[flag, setFlag] = useState(0)
   const[Id, setId] = useState("")
   const[Pw, setPw] = useState("")
-  const dispatch = useDispatch()
 
   const onId = (e) => {
     setId(e.target.value)
@@ -55,7 +55,7 @@ function User (props) {
       }
     }).then(res => {
         // res.data
-        console.log(res)
+        console.log(res.data)
         const modal = document.querySelector('.modal');
         modal.style.display = "block";
         store.dispatch(props.login(res.data))

@@ -11,11 +11,9 @@ const userState = {
 const userReducer = (state=userState, action) => {
   switch(action.type){
     case LOGIN:
-      console.log("액션!!!"+action.user)
-      state.user = action.user
       return {
         ...state,
-        user: state.user
+        user: action.user
       }
     case LOGOUT:
       return {
@@ -26,7 +24,6 @@ const userReducer = (state=userState, action) => {
         }
       }
     case GET_USER:
-      console.log("새로고침"+action.user)
       return {
         ...state,
         user: state.user
