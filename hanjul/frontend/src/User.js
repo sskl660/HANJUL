@@ -26,7 +26,7 @@ function User (props) {
   const[Sname, setSname] = useState("")
   const[Sid, setSid] = useState("")
   const[Spw, setSpw] = useState("")
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
   const sName = (e) => {
     setSname(e.target.value)
