@@ -1,31 +1,39 @@
 import React from 'react';
 import './Review.css';
+import { FaStar } from 'react-icons/fa';
 
 const Posts = ({ posts }) => {
 	// if (loading) {
 	// 		return <h2>Loading...</h2>;
 	// }
 
-	return (
-		// <ul className="list-group mb-4">
-		// 	{posts.map(post => (
-		// 		<li key={post.id}>
-		// 			{post.title}
-		// 		</li>
-		// 	))}
-		// </ul>
+	const makeStar = (num) => {
+		let stars = [];
+		for (let i = 0; i < num; i++) {
+			stars.push(
+				<FaStar size="20" className='yellowStar'/>
+			)
+		}
+		for (let i = 0; i < 5-num; i++) {
+			stars.push(
+				<FaStar size="20"/>
+			)
+		}
+		return stars;
+	}
 
+	return (
 	<div className="reviewBox">
 		{posts.map(post => (
-			<div key={post.id}>
+			<div>
 				<div className="reviewStar">
-					평점 별
+					{makeStar(post.reviewStar)}
 				</div>
 				<div className="nameText">
-					{post.id}
+					{post.userName}
 				</div>
 				<div className="contentText">
-					{post.title}
+					{post.reviewComment}
 				</div>
 			</div>
 		))}
