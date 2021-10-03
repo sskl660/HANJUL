@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +67,7 @@ public class HistoryService {
 
     //한 줄로 추천한 사전 결과 요청
     public HistoryDto.ResponseGetHistories getHistory(String oneline){
-        Optional<HistoryEntity> history =historyRepository.findByHistoryOneline(oneline);
+        Optional<HistoryEntity> history =historyRepository.findTop1ByHistoryOnelineOrderByHistoryDate(oneline);
         HistoryEntity historyEntity=history.orElse(null);
         HistoryDto.ResponseGetHistories responseGetHistory =HistoryDto.ResponseGetHistories.builder()
                 .historyId(historyEntity.getHistoryId())
@@ -82,6 +83,10 @@ public class HistoryService {
         historyRepository.deleteById(historyId);
     }
 
+    //히스토리 전체 삭제 요청
+    public void deleteAllHistory(){
+        historyRepository.deleteAll();
+    }
     //히스토리 기록요청
     public void setHistory(HistoryDto.RequestSetHistory setHistory){
         Optional<UserEntity> user= userRepository.findById(setHistory.getUserName());
