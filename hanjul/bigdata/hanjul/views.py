@@ -70,7 +70,7 @@ def recommend(request):
     data = pd.read_pickle(DUMP_FILE)
 
     """입력 문자 할당"""
-    sentence = request.data.get('book_title')
+    sentence = request.GET.get('book_title')
 
     """초기 데이터 가공"""
     # 첫번째 행을 지우고 해당 데이터를 데이터에 포함 시켜서 tfidf 분석 알고리즘 적용.
