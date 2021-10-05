@@ -23,5 +23,5 @@ public interface HistoryRepository extends JpaRepository<HistoryEntity,Long> {
     List<HistoryEntity> findTop10ByOrderByHistoryDateDesc();
 
     @Nullable
-    Optional<HistoryEntity> findByHistoryOneline (@Param(value = "historyOneline") String historyOneline);
+    Optional<HistoryEntity> findTop1ByHistoryOnelineOrderByHistoryDate (@Param(value = "historyOneline") String historyOneline);
 }

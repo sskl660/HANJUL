@@ -55,6 +55,11 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 4%;
+  overflow: scroll;
+}
+
+.bookD-bookIntro::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 
 .bookD-bookGrade {
@@ -107,16 +112,17 @@
   width: 68%;
   background-color: #e6d3c7;
   border-radius: 10px;
-  box-shadow: -4px -4px 11px 6px rgba(255, 255, 255, 0.7) inset,
-    4px 4px 11px 5px rgba(133, 125, 112, 0.5) inset;
-  height: 535px;
-  /* display: flex; */
-  justify-content: space-between;
-  margin-bottom: 4%;
+  box-shadow: -4px -4px 11px 6px rgb(255 255 255 / 70%) inset,
+    4px 4px 11px 5px rgb(133 125 112 / 50%) inset;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 3%;
 }
 
 .bookD-reviewTitle {
-  margin-top: 2.5%;
+  margin-top: 1%;
   font-size: 48px;
   font-weight: 500;
   letter-spacing: 15px;
@@ -190,7 +196,9 @@
 }
 
 h3 {
-  margin-left: 15px;
+  margin: 15px 20px 15px 20px;
+  margin-bottom: 20px;
+  line-height: 28px;
 }
 
 .bookmarkIcon {
@@ -205,8 +213,10 @@ h3 {
 }
 
 .bookD-pagination {
-  margin-left: 25%;
-  width: 50%;
+  display: inline-block;
+  /* margin-left: calc(25%); */
+  margin-left: 20%;
+  width: 60%;
   background: #f2efe5;
   padding: 1px;
   border-radius: 3px;
@@ -225,6 +235,8 @@ h3 {
   cursor: pointer;
   flex: 1;
   margin: 0 5px;
+  width: 40px;
+  height: 40px;
   background: #f2efe5;
   border-radius: 3px;
   box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, 0.288);
@@ -278,7 +290,7 @@ h3 {
 
 svg {
   color: #bcb8aa;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .yellowStar {
