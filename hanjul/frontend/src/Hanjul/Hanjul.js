@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import './Hanjul.css'
-import { login, logout, getUser, setRecommend } from '../redux';
+import { setRecommend } from '../redux';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { URL, DJANGO_URL } from '../constants/global'
@@ -10,7 +10,7 @@ import configStore from "../redux/store";
 const { store } = configStore();
 
 const mapDispatchToProps = {
-  login, logout, getUser, setRecommend
+  setRecommend
 }
 
 const mapStateToProps = ({users}) => {
@@ -82,8 +82,6 @@ function Hanjul(props) {
         record.historyBooksImgurl.push(d.img_url)
         record.historyBooksIsbns.push(d.isbn)
       })
-      console.log(record)
-      console.log('추천책 얻어오기', res)
       return res
     })
     .then(res => {
@@ -106,7 +104,6 @@ function Hanjul(props) {
       // 'Content-Type': 'application/json',
     })
     .then(res => {
-      console.log(res)
       return res
     })
     .catch(err => {

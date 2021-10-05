@@ -1,19 +1,72 @@
 import './HistoryList.css';
-// import { useEffect } from 'react'
+import { useState } from 'react'
+import configStore from "../redux/store";
+import { connect } from 'react-redux';
+import { setRecommend } from '../redux';
+import { useHistory } from 'react-router';
+
+const { store } = configStore();
+
+const mapDispatchToProps = {
+  setRecommend
+}
+
+const mapStateToProps = ({users}) => {
+  return {
+    user: users.user
+  }
+}
 
 function HistoryList (props) {
-  let bookList = props.books.map(book => {
-    return (
-      <img className="history-book-image" src={book.img_url} alt="book" />
-    )
-  })
+  const [bookList, setBookList] = useState([]);
+  const history = useHistory();
 
+  if (bookList.length < 5) {
+    props.bookImgs.forEach(book => {
+      bookList.push(
+        <img className="history-book-image" src={book} alt="bookImage" />
+      )
+    })
+  }
+  const date = props.date.substring(10, 0)
+
+  async function goRecommend() {
+    const data = {
+      hanjul: props.sentence,
+      books: [
+        {
+          img_url: props.bookImgs[0],
+          isbn: props.bookIsbns[0]
+        },
+        {
+          img_url: props.bookImgs[1],
+          isbn: props.bookIsbns[1]
+        },
+        {
+          img_url: props.bookImgs[2],
+          isbn: props.bookIsbns[2]
+        },
+        {
+          img_url: props.bookImgs[3],
+          isbn: props.bookIsbns[3]
+        },
+        {
+          img_url: props.bookImgs[4],
+          isbn: props.bookIsbns[4]
+        },
+    ]
+    }
+    await store.dispatch(props.setRecommend(data))
+    history.push('/recommend', [])
+    // img_url: "http://image.aladin.co.kr/product/125/97/cover/087154122x_1.jpg"
+// isbn: "9780871541222"
+  }
   return (
-    <div className="history-box">
-      <div class="sect01">
-        <div class="line-box">
-          <span class="line-01"></span>
-          <span class="line-02"></span>
+    <div className="history-box" onClick={() => goRecommend()}>
+      <div className="sect01">
+        <div className="line-box">
+          <span className="line-01"></span>
+          <span className="line-02"></span>
         </div>
       </div>
       <div className="history-sentence-box">
@@ -24,9 +77,9 @@ function HistoryList (props) {
         </span>
       </div>
       <div className="history-book-list">{bookList}</div>
-      <div className="history-date">2021.09.01</div>
+      <div className="history-date">{date}</div>
     </div>
   )
 }
 
-export default HistoryList
+export default connect(mapStateToProps, mapDispatchToProps)(HistoryList);
