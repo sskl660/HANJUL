@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -81,6 +83,7 @@ public class BookService {
                     .userName(reviewEntity.getReviewFkUserId().getUserName())
                     .reviewStar(reviewEntity.getReviewStar())
                     .reviewComment(reviewEntity.getReviewComment())
+                    .reviewDate(reviewEntity.getReviewDate())
                     .build();
             respBookReviewDtoList.add(respBookReviewDto);
         }
@@ -137,6 +140,7 @@ public class BookService {
                 .reviewDate(LocalDateTime.now())
                 .reviewFkUserId(userEntity)
                 .build();
+        System.out.println(reviewEntity.getReviewDate()+"데이트 타임");
         if(reviewRepository.save(reviewEntity)!=null){
             //별점 평균내기
             List<ReviewEntity> reviewEntityList = reviewRepository.findByReviewIsbnOrderByReviewDateDesc(reqBookDto.getReviewIsbn());
