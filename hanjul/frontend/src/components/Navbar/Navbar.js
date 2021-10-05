@@ -4,13 +4,10 @@ import './Navbar.css'
 import { login, logout, getUser } from '../../redux';
 import configStore from "../../redux/store";
 import { connect } from 'react-redux';
-<<<<<<< HEAD
 import { useHistory } from 'react-router';
-=======
 import Modal from '../Common/Modal';
 
 const { store } = configStore();
->>>>>>> master
 
 const mapDispatchToProps = {
   login, logout, getUser
@@ -29,9 +26,7 @@ function Navbar (props){
   useEffect(()=> {
     checkUser()
   })
-<<<<<<< HEAD
   const history = useHistory();
-=======
 
   const realLogout = () => {
     const data = {
@@ -65,7 +60,6 @@ function Navbar (props){
     // window.location.replace("/user")
   }
   
->>>>>>> master
   const checkUser = () => {
     const loginbutton = document.querySelector(".up-user-button")
     const logoutbutton = document.querySelector(".up-logout-button")
@@ -116,13 +110,8 @@ function Navbar (props){
       <div className="side-bar" onClick={!props.open ? sideClick:''}>
         <div className="side-bar-list">
           <div>
-<<<<<<< HEAD
-            <Link to="/" exact>
-              <button className="up-mylibrary-button">ㅎㅏㄴㅈㅜㄹ</button>
-=======
             <Link to="/">
               <button className="up-hanjul-button">ㅎㅏㄴㅈㅜㄹ</button>
->>>>>>> master
             </Link>
           </div>
           <img className="nav-hanjul-img" src="../../image/nav-flower-left.png" alt="" />
