@@ -3,7 +3,6 @@ import rootReducer from './rootReducer';
 import { persistStore, persistReducer } from 'redux-persist';
 //local storage 불러오기
 import storage from 'redux-persist/lib/storage';
-// import persistReducer from 'redux-persist/es/persistReducer';
 
 //persist 설정
 const persistConfig = {

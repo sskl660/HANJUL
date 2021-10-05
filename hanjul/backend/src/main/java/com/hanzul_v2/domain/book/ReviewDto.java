@@ -27,7 +27,7 @@ public class ReviewDto {
         private int reviewStar;
         private String reviewComment;
         private String reviewIsbn;
-        private LocalDateTime reviewDate;
+//        private LocalDateTime reviewDate;
         private String userId;
 
     }

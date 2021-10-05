@@ -4,6 +4,7 @@ import './Navbar.css'
 import { login, logout, getUser } from '../../redux';
 import configStore from "../../redux/store";
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router';
 import Modal from '../Common/Modal';
 
 const { store } = configStore();
@@ -18,18 +19,14 @@ const mapStateToProps = ({users}) => {
   }
 }
 
-
 function Navbar (props){
-  const[open, setOpen] = useState("")
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     open: false,
-  //   }
-  // }
+  const[open, setOpen] = useState("") // eslint-disable-line no-unused-vars
+
+  
   useEffect(()=> {
     checkUser()
   })
+  const history = useHistory();
 
   const realLogout = () => {
     const data = {
@@ -71,7 +68,7 @@ function Navbar (props){
     const myLibrarybuttonOff = document.querySelector(".up-mylibrary-button-off")
     const tracesbuttonOff = document.querySelector(".up-traces-button-off")
     // 로그인 한상태
-    if (props.user.userName != '') {
+    if (props.user.userName !== '') {
       loginbutton.style.display = "none";
       logoutbutton.style.display = "block";
       myLibrarybutton.style.display = "block";
@@ -91,8 +88,6 @@ function Navbar (props){
 
   }
   
-
- 
   const sideClick = () => {
     const sidebar = document.querySelector(".side-bar");
     const sideback = document.querySelector(".side-back");
@@ -109,14 +104,13 @@ function Navbar (props){
     setOpen(false)
   }
   console.log(props.user.userName)
-  
+  console.log(history.location.pathname)
   return (
     <div className="side">
       <div className="side-bar" onClick={!props.open ? sideClick:''}>
-        {/* <div>{props.user.userId}</div> */}
         <div className="side-bar-list">
           <div>
-            <Link to="/" exact>
+            <Link to="/">
               <button className="up-hanjul-button">ㅎㅏㄴㅈㅜㄹ</button>
             </Link>
           </div>
@@ -128,7 +122,7 @@ function Navbar (props){
             </Link>
           </div>
           <div>
-              <button className="up-mylibrary-button-off" onClick={requestLogin}><i class="fas fa-lock fa-sm"></i>나의 서재</button>
+              <button className="up-mylibrary-button-off" onClick={requestLogin}><i className="fas fa-lock fa-sm"></i>나의 서재</button>
           </div>
           <img className="nav-mylibrary-img" src="../../image/nav-flower-right.png" alt="" />
 
@@ -138,7 +132,7 @@ function Navbar (props){
             </Link>
           </div>
           <div>
-              <button className="up-traces-button-off" onClick={requestLogin}><i class="fas fa-lock fa-sm"></i>발자취</button>
+              <button className="up-traces-button-off" onClick={requestLogin}><i className="fas fa-lock fa-sm"></i>발자취</button>
           </div>
           <img className="nav-traces-img" src="../../image/nav-flower-left.png" alt="" />
 

@@ -30,7 +30,6 @@ function User (props) {
   const[Spw, setSpw] = useState("")
   const[Spwrev, setSpwrev] = useState("")
   const history = useHistory()
-  // const dispatch = useDispatch()
 
   const sName = (e) => {
     setSname(e.target.value)
@@ -46,7 +45,7 @@ function User (props) {
 
   const sPwRev = (e) => {
     const sPwInput = document.querySelector(".passwordError")
-    if (e.target.value != Spw) {
+    if (e.target.value !== Spw) {
       sPwInput.style.display="inline-block"
       sPwInput.innerText = "비밀번호가 틀립니다."
     } else {
@@ -61,19 +60,16 @@ function User (props) {
       userName: Sname,
       userPw: Spw
     }
-    console.log(data)
 
-    if (data.userId != "" && data.userName != "" && data.userPw != "" && data.userPw === Spwrev) {
+    if (data.userId !== "" && data.userName !== "" && data.userPw !== "" && data.userPw === Spwrev) {
       axios({
         url: 'http://3.34.123.84:8080/signup',
         method: 'POST',
         data: data,
         headers:{
           'Content-Type': 'application/json',
-          // 'Accept': 'application/json; charset=utf-8',
         }
       }).then(res => {
-        console.log("회원가입"+res.data)
         const modal = document.querySelector('.modal');
         const content = document.querySelector('.modal_content');
         modal.style.display = "block";
@@ -97,7 +93,6 @@ function User (props) {
   }
 
 
-
   const onId = (e) => {
     setId(e.target.value)
   }
@@ -106,46 +101,34 @@ function User (props) {
     setPw(e.target.value)
   }
 
-  // const dologin = () => {
-  //   dispatch(login())
-  // }
-
   const onlogin = (e) =>{
     const data = {
       userId : Id,
       userPw : Pw
     }
-  
-    axios({
-      url: 'http://3.34.123.84:8080/login', 
-      method: 'POST',
-      data: data,
-      headers:{
-        'Content-Type': 'application/json',
-        // 'Accept': 'application/json; charset=utf-8',
-      }
-    }).then(res => {
-        // res.data
-        console.log(res.data)
-        // const modal = document.querySelector('.modal'); 
-        
-        // modal.style.display = "block";      
-        store.dispatch(props.login(res.data))
-        history.push('/')
-      })
-    
-
-    // dispatch(login(d))
-    //   .then(res => {
-    //     console.log(res)
-    //     const modal = document.querySelector('.modal');
-    //     modal.style.display = "block";
-    //     // modal.classList.add("fade")
-    //   })
+    console.log(Id)
+    console.log(Pw)
+    if (Id !== '' && Pw !== '') {
+      axios({
+        url: 'http://3.34.123.84:8080/login', 
+        method: 'POST',
+        data: data,
+        headers:{
+          'Content-Type': 'application/json',
+        }
+      }).then(res => {  
+          store.dispatch(props.login(res.data))
+          history.push('/')
+        })
+    } else {
+      const modal = document.querySelector('.modal');
+      const content = document.querySelector('.modal_content');
+      modal.style.display = "block";
+      content.innerText = "입력정보를 확인해주세요."
+    }
   }
   
   const signIn = () => {
-    console.log(flag)
     if(flag === 0) {
       const move = document.querySelector(".move");
       const form = document.querySelector(".user-form");
@@ -180,7 +163,6 @@ function User (props) {
       setWords();
       setFlag(1)
     } else {
-      // console.log(flag)
       const move = document.querySelector(".move");
       const form = document.querySelector(".user-form");
       const hello = document.querySelector(".hello");
@@ -221,25 +203,16 @@ function User (props) {
 
   const setWords = () => {
     const title = document.querySelector(".title");
-    // const light = document.querySelector(".light");
-    // const login = document.querySelector(".login");
     const pButton = document.querySelector(".p-button");
     const lButton = document.querySelector(".lbutton");
     const sButton = document.querySelector(".sbutton");
-    // const forgot = document.querySelector(".forgot");
     const form = document.querySelector(".user-form");
     const move = document.querySelector(".move");
-    // const signup = document.querySelector(".signup")
 
     title.innerText="가입하기";
-    // light.innerText="Or use your email account";
-    // login.style.display="none";
     lButton.style.display = "none"
     sButton.style.display = "block"
     pButton.innerText="로그인"
-    // bButton.innerText="회원가입"
-    // signup.style.display = "block"
-    // forgot.style.display="block";
     // 아래는 다시 확인...
     form.setAttribute("style","border-radius : 50px 0px 0px 50px");
     move.setAttribute("style","border-radius : 0px 50px 50px 0px");
@@ -247,40 +220,22 @@ function User (props) {
 
   const setWordsRev = () =>  {
     const title = document.querySelector(".title");
-    // const light = document.querySelector(".light");
-    // const name = document.querySelector(".name");
     const pButton = document.querySelector(".p-button");
     const lButton = document.querySelector(".lbutton");
     const sButton = document.querySelector(".sbutton");
-    // const forgot = document.querySelector(".forgot");
     const form = document.querySelector(".user-form");
     const move = document.querySelector(".move");
 
     title.innerText="들어가기";
-    // light.innerText="Or use your email for registration";
-    // name.style.display="block";
     lButton.style.display = "block"
     sButton.style.display = "none"
-
     pButton.innerText="회원가입";
-    // bButton.innerText="로그인";
-    // forgot.style.display="none";
+
     // 아래는 다시 확인...
     form.setAttribute("style","border-radius : 0px 50px 50px 0px");
     move.setAttribute("style","border-radius : 50px 0px 0px 50px");
   }
 
-  
-
-
-
- 
-    // const test = useSelector( (state) => state);
-    // console.log(this.props)
-    
-
-    
-  
   return (
     <div>
       <div>{props.user.userName}</div>
@@ -309,12 +264,6 @@ function User (props) {
         <div className="user-form">
           {/* sign up 상단 내용 */}
           <div className="user-bold title">들어가기</div>
-          {/* <div className="user-icons">
-            <div className="user-icon"><i className="fab fa-facebook-f"></i></div>
-            <div className="user-icon"><i className="fab fa-github"></i></div>
-            <div className="user-icon"><i className="fab fa-twitter"></i></div>
-          </div> */}
-          {/* <p className="normal light">Or use your email for registration</p> */}
           <input type="text" placeholder="아이디" className="normal login loginUserId" value={Id} onChange={onId}/>
           <br/>
           <input type="password" placeholder="비밀번호" className="normal login loginPassword" value={Pw} onChange={onPw}/>
@@ -323,27 +272,22 @@ function User (props) {
           {/* 가입하기 */}
           <input type="text" placeholder="이름" className="normal signup name" onChange={sName}/>
           <br/>
-          <input type="password" placeholder="아이디" className="normal signup signupUserId" onChange={sId}/>
+          <input type="text" placeholder="아이디" className="normal signup signupUserId" onChange={sId}/>
           <br/>
-          <input type="text" placeholder="비밀번호" className="normal signup signupPassword"onChange={sPw}/>
+          <input type="password" placeholder="비밀번호" className="normal signup signupPassword"onChange={sPw}/>
           <br/>
           <input type="password" placeholder="비밀번호 확인" className="normal signup signupPasswordRev" onChange={sPwRev}/>
           <br/>
           <div className="passwordError">비밀번호가 틀립니다.</div>
 
           {/* sign up 움직여서 좌측이동한 후 */}
-          {/* <p className="normal forgot">Forgot your password?</p> */}
           <button className="lbutton normal" onClick={onlogin}>로그인</button>
-          {/* <button className="lbutton normal" onClick={() => this.props.login()}>로그인</button> */}
           <button className="sbutton normal" onClick={onSignup}>회원가입</button>
-        </div>
-
-        
+        </div>  
       </div>
       <Modal msg={"로그인에 성공하셨습니다!"}/>
     </div>
   )
-  
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(User)

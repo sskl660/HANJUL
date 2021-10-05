@@ -1,42 +1,8 @@
-import { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-
-let bookList = [];
-
-const mapStateToProps = (props) => {
-  return {
-    user: props.users.user,
-    recommend: props.recommend.recommend
-  }
-}
+import { useEffect } from 'react'
 
 function RecommendedBook(props) {
-  const [books, setBooks] = useState([]);
-  const [bookList, setBookList] = useState([]);
-
-  function getBooks() {
-    props.recommend.books.forEach((book, index) => {
-      if (bookList.length < 5) {
-        bookList.push(
-          <div className="carousel__slider__item" onClick={e => console.log(e.target)}>
-            <div className="item__3d-frame">
-              <div className="item__3d-frame__box item__3d-frame__box--front">
-                <img src={book.img_url} alt="" className="item-img" />
-              </div>
-              <div className="item__3d-frame__box item__3d-frame__box--left">
-                <img src={book.img_url} alt="" className="book-side" />
-              </div>
-              <div className="item__3d-frame__box item__3d-frame__box--right"></div>
-            </div>
-          </div>
-        )
-      }
-    })
-  }
-  getBooks();
 
   useEffect(() => {
-    setBooks(props.recommend);
     var carousel = document.getElementsByClassName('carousel')[0],
     slider = carousel.getElementsByClassName('carousel__slider')[0],
     items = carousel.getElementsByClassName('carousel__slider__item')
@@ -70,7 +36,7 @@ function RecommendedBook(props) {
     function move(index) {
       currIndex = index;
 
-      for(var i = 0; i < items.length; i++) {
+      for(var i = 0; i < 5; i++) {
         let item = items[i],
           box = item.getElementsByClassName('item__3d-frame')[0];
         if(i === (index - 1)) {
@@ -93,14 +59,19 @@ function RecommendedBook(props) {
     return () => {
     }
   }, [])
+  // const book = props.book
   return (
-    <div className="carousel">
-      <div className="carousel__body">
-        <div className="carousel__slider">
-          {bookList}
+    <div className="carousel__slider__item" onClick={e => console.log(e.target)}>
+      <div className="item__3d-frame">
+        <div className="item__3d-frame__box item__3d-frame__box--front">
+          <img src={props.book.img_url} alt="" className="item-img" />
         </div>
+        <div className="item__3d-frame__box item__3d-frame__box--left">
+          <img src={props.book.img_url} alt="" className="book-side" />
+        </div>
+        <div className="item__3d-frame__box item__3d-frame__box--right"></div>
       </div>
     </div>
   )
 }
-export default connect(mapStateToProps)(RecommendedBook)
+export default RecommendedBook
