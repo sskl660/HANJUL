@@ -15,7 +15,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = ({users}) => {
   return {
-    user: users
+    user: users.user
   }
 }
 
@@ -58,7 +58,7 @@ function Hanjul(props) {
 
     ],
     historyOneline: "",
-    userName: "test",
+    userId: props.user.userId,
   }
 
   async function putHanjul(hanjul) {

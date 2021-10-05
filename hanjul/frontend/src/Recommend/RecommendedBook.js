@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-
-let bookList = [];
+import { useHistory } from 'react-router';
 
 const mapStateToProps = (props) => {
   return {
@@ -12,13 +11,14 @@ const mapStateToProps = (props) => {
 
 function RecommendedBook(props) {
   const [books, setBooks] = useState([]);
-  const [bookList, setBookList] = useState([]);
+  const [bookList] = useState([]);
+  const history = useHistory();
 
   function getBooks() {
     props.recommend.books.forEach((book, index) => {
       if (bookList.length < 5) {
         bookList.push(
-          <div className="carousel__slider__item" onClick={e => console.log(e.target)}>
+          <div className="carousel__slider__item" onClick={e => history.push('/book-detail/'+book.isbn)}>
             <div className="item__3d-frame">
               <div className="item__3d-frame__box item__3d-frame__box--front">
                 <img src={book.img_url} alt="" className="item-img" />
@@ -41,8 +41,7 @@ function RecommendedBook(props) {
     slider = carousel.getElementsByClassName('carousel__slider')[0],
     items = carousel.getElementsByClassName('carousel__slider__item')
 
-    var width, height, totalWidth, margin = 20,
-        currIndex = 0
+    var width, height, totalWidth, margin = 20
 
     function init() {
       resize();
@@ -68,8 +67,6 @@ function RecommendedBook(props) {
     }
 
     function move(index) {
-      currIndex = index;
-
       for(var i = 0; i < items.length; i++) {
         let item = items[i],
           box = item.getElementsByClassName('item__3d-frame')[0];

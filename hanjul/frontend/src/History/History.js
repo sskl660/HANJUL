@@ -1,6 +1,16 @@
 // import { useEffect } from 'react'
 import './History.css';
 import HistoryList from './HistoryList';
+import axios from 'axios'
+import { URL, DJANGO_URL } from '../constants/global'
+import { connect } from 'react-redux';
+import { useEffect, useState } from 'react'
+
+const mapStateToProps = ({users}) => {
+  return {
+    user: users.user
+  }
+}
 
 let history = [
   {
@@ -61,7 +71,22 @@ let historyList = history.map(h => {
   )
 })
 
-function History() {
+function History({user}) {
+  const [history, setHistory] = useState([]);
+  
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: URL + 'history/' + user.userId
+    })
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  })
+
   return (
     <div className="history">
       {historyList}
@@ -69,4 +94,4 @@ function History() {
   )
 }
 
-export default History
+export default connect(mapStateToProps)(History)
