@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Review.css';
 import { FaStar } from 'react-icons/fa';
 
@@ -6,7 +6,9 @@ const Posts = ({ posts }) => {
 	// if (loading) {
 	// 		return <h2>Loading...</h2>;
 	// }
-
+	// const [newPosts, setNewPosts] = useState([]);
+	// newPosts = posts
+	// setNewPosts(posts)
 	const makeStar = (num) => {
 		let stars = [];
 		for (let i = 0; i < num; i++) {

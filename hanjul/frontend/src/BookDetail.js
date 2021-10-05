@@ -5,19 +5,51 @@ import BookSlider from './components/BookDetail/BookSlider';
 import axios from 'axios';
 import Posts from './components/BookReview/Post'
 import Pagination from './components/BookReview/Pagination'
+import { getUser } from './redux'
+import { connect } from 'react-redux';
+import { useParams } from 'react-router';
+
+const mapDispatchToProps = {
+  getUser
+}
+
+const mapStateToProps = ({users}) => {
+  return {
+    user: users.user
+  }
+}
 
 const ARRAY = [0, 1, 2, 3, 4];
 
-function BookDetail() {
+function BookDetail({ user }) { //여기에 props 넣어주기
+  const { bookIsbn } = useParams();
+
   // 책 상세 정보 요청
   const [bookD, setBookD] = useState([]);
-  const bookDetail = () => {
-    axios({
-      url: `http://3.34.123.84:8080/detail/9788979971415`,
+  const [bookDump, setBookDump] = useState([]);
+  const bookDetail = async() => {
+    await axios({
+      url: `http://3.34.123.84:8080/detail/${bookIsbn}`,
       method: 'GET',
     }).then(res => {
-      console.log(res)
+      // console.log(res)
+      // console.log("되나 혹시", bookIsbn)
       setBookD(res.data)
+      bookD.title = res.data.title;
+    })
+
+    // console.log('북디', bookD)
+    await axios({
+      url: `http://3.34.123.84:8000/hanjul/recommend/?book_title=${bookD.title}`,
+      method: 'GET',
+      // params: {
+      //   "book_title" : bookD.title
+      // }
+    }).then(res => {
+      // console.log(res)
+      setBookDump(res.data)
+    }).catch(err => {
+      // console.log(err)
     })
   };
 
@@ -43,28 +75,82 @@ function BookDetail() {
 	}
 
   // 덤프 책 요청
-  const [bookDump, setBookDump] = useState([]);
-  const bookDumpFile = () => {
-    axios({
-      url: `http://3.34.123.84:8080/admin/dump`,
-      method: 'GET',
-    }).then(res => {
-      console.log(res)
-      setBookDump(res.data)
-    })
-  };
+  // const [bookDump, setBookDump] = useState([]);
+  // const bookDumpFile = () => {
+  //   console.log("북디", bookD)
+  //   axios({
+  //     url: `http://3.34.123.84:8000/hanjul/recommend/?book_title=${bookD.title}`,
+  //     method: 'GET',
+  //     // params: {
+  //     //   "book_title" : bookD.title
+  //     // }
+  //   }).then(res => {
+  //     console.log(res)
+  //     setBookDump(res.data)
+  //   }).catch(err => {
+  //     console.log(err)
+  //   })
+  // };
 
-  useEffect(() => {
-    bookDumpFile();
-  }, [])
+  // useEffect(() => {
+  //   bookDumpFile();
+  // }, [])
 
   // console.log(bookDump);
 
   // 북마크 클릭
   const [bookmark, setBookmark] = useState(false);
+  const isBookmark = () => {
+    axios({
+      url: `http://3.34.123.84:8080/detail/scrap/${bookIsbn}/${user.userId}`,
+      method: 'GET',
+    }).then(res => {
+      // console.log("북마크 했니 안했니", res)
+      setBookmark(res.data)
+    })
+  };
+
+  // console.log("북마크 확인좀", bookmark)
+
+  useEffect(() => {
+    isBookmark();
+  }, [])
+
   const handleBookmark = () => {
-    setBookmark(!bookmark);
+    const data = {
+      mybookIsbn: bookD.isbn,
+      userId: user.userId
+    }
+    if (bookmark == false) {
+      axios({
+        url: 'http://3.34.123.84:8080/detail/scrap',
+        method: 'POST',
+        data: data,
+        headers:{
+          'Content-Type': 'application/json',
+          // 'Accept': 'application/json; charset=utf-8',
+        }
+      }).then(res => {
+        setBookmark(!bookmark);
+        // console.log("북마크 한다", res.data)
+      })
+    }
+    else {
+      axios({
+        url: `http://3.34.123.84:8080/detail/scrap/${bookIsbn}/${user.userId}`,
+        method: 'DELETE',
+        data: data,
+        headers:{
+          'Content-Type': 'application/json',
+          // 'Accept': 'application/json; charset=utf-8',
+        }
+      }).then(res => {
+        setBookmark(!bookmark);
+        // console.log("북마크 취소", res.data)
+      })
+    }
   }
+    
   // 별점 클릭
   // Boolean 값을 사용해서 별(svg) 갯수를 표시하겠다
   const [clicked, setClicked] = useState([false, false, false, false, false]);
@@ -79,48 +165,22 @@ function BookDetail() {
   };
 
   useEffect(() => {
-    sendReview();
-  }, [clicked]);
-
-  const sendReview = () => {
-    let score = clicked.filter(Boolean).length;
-    // fetch('http://52.78.63.175:8000/movie', {
-    //   method: 'POST',
-    //   Headers: {
-    //     Authroization: 'e7f59ef4b4900fe5aa839fcbe7c5ceb7',
-    //   },
-    //   body: JSON.stringify({
-    //     movie_id:1
-    //     star: score,
-    //   }),
-    // });
-    // let score = clicked.filter(Boolean).length;
-    
-  };
+    sendComment();
+  }, []);
 
   // 한줄평 & pagination
   const [posts, setPosts] = useState([]);
+  let [currentPosts, setCurrentPosts] = useState("");
   // const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(4);
 
-  // useEffect(() => {
-  //   const fetchPosts = async () => {
-  //     // setLoading(true);
-  //     const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
-  //     setPosts(res.data);
-  //     // setLoading(false);
-  //   }
-      
-  //   fetchPosts();
-  // }, []);
-
   const fetchPosts = () => {
     axios({
-      url: `http://3.34.123.84:8080/detail/reivew/9788979971415`,
+      url: `http://3.34.123.84:8080/detail/reivew/${bookIsbn}`,
       method: 'GET',
     }).then(res => {
-      console.log('이거',res)
+      // console.log('이거',res)
       setPosts(res.data)
     })
   };
@@ -133,16 +193,54 @@ function BookDetail() {
   // 현재 페이지 가져오기
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   // 페이지 바꾸기
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
+  // 한줄평 입력
+  const sendComment = (comment) => {
+    if (!comment) {
+      return
+    }
+    
+    let score = clicked.filter(Boolean).length;
+    const data = {
+      reviewComment: comment,
+      reviewIsbn: bookD.isbn,
+      reviewStar: score,
+      userId: user.userId
+    }
+    // console.log(data);
+  
+    axios({
+      url: 'http://3.34.123.84:8080/detail/review',
+      method: 'POST',
+      data: data,
+      headers:{
+        'Content-Type': 'application/json',
+        // 'Accept': 'application/json; charset=utf-8',
+      }
+    }).then(res => {
+      const nextData = {
+        reviewComment: data.reviewComment,
+        reviewDate: "2021-10-08T09:00:32.504Z",
+        reviewStar: data.reviewStar,
+        userName: user.userName
+      }
+      // console.log("최종", res.data)
+      // console.log(posts)
+      // posts.unshift(nextData)
+      // console.log(posts)
+      window.location.replace("/book-detail/" + bookIsbn)
+    })
+  }
+
   return (
     <div className="bookDetail">
       <div className="bookmarkIcon" onClick={handleBookmark}>
-        {bookmark ? (<i className="far fa-bookmark fa-4x bookmark-img"></i>)
-          : (<i className="fas fa-bookmark fa-4x bookmark-img"></i>)
+        {bookmark ? (<i className="fas fa-bookmark fa-4x bookmark-img"></i>)
+          : (<i className="far fa-bookmark fa-4x bookmark-img"></i>)
         }
       </div>
       <div className="bookD-info d-flex justify-content-center">
@@ -201,7 +299,10 @@ function BookDetail() {
           <div className="bookD-reviewInput">
             <input type="text" placeholder="의견을 남겨주세요" autoFocus />
           </div>
-          <button className="bookD-btn">입력</button>
+          <button className="bookD-btn" onClick={(e) => {
+          sendComment(e.currentTarget.parentElement.childNodes[1].firstChild.value)
+          }
+        }>입력</button>
         </div>
         <div className="bookD-reviewShow">
           <Posts posts={currentPosts}/>
@@ -214,4 +315,4 @@ function BookDetail() {
   )
 }
 
-export default BookDetail
+export default connect(mapStateToProps, mapDispatchToProps)(BookDetail)
