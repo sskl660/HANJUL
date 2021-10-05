@@ -4,6 +4,8 @@ import configStore from "../redux/store";
 import { connect } from 'react-redux';
 import { setRecommend } from '../redux';
 import { useHistory } from 'react-router';
+import axios from 'axios';
+import { URL } from '../constants/global'
 
 const { store } = configStore();
 
@@ -20,7 +22,6 @@ const mapStateToProps = ({users}) => {
 function HistoryList (props) {
   const [bookList, setBookList] = useState([]);
   const history = useHistory();
-
   if (bookList.length < 5) {
     props.bookImgs.forEach(book => {
       bookList.push(
@@ -58,12 +59,25 @@ function HistoryList (props) {
     }
     await store.dispatch(props.setRecommend(data))
     history.push('/recommend', [])
-    // img_url: "http://image.aladin.co.kr/product/125/97/cover/087154122x_1.jpg"
-// isbn: "9780871541222"
   }
+  async function removeHistory(e) {
+    e.stopPropagation();
+    await axios({
+      method: 'delete',
+      url: URL + `history/${props.historyId}`
+    })
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+    window.location.reload();
+  }
+
   return (
     <div className="history-box" onClick={() => goRecommend()}>
-      <div className="sect01">
+      <div className="sect01" onClick={(e) => removeHistory(e)}>
         <div className="line-box">
           <span className="line-01"></span>
           <span className="line-02"></span>

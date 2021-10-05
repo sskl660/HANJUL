@@ -2,7 +2,7 @@
 import './History.css';
 import HistoryList from './HistoryList';
 import axios from 'axios'
-import { URL, DJANGO_URL } from '../constants/global'
+import { URL } from '../constants/global'
 import { connect } from 'react-redux';
 import { useEffect, useState } from 'react'
 
@@ -32,7 +32,15 @@ function History({user}) {
     if (historyList.length < history.length) {
       history.forEach(h => {
         historyList.push(
-          <HistoryList key={h.historyOneline} sentence={h.historyOneline} bookImgs={h.historyBooksImgurl} bookIsbns={h.histroyBooksIsbns} date={h.historyDate} />
+          <HistoryList 
+            key={h.historyOneline} 
+            sentence={h.historyOneline} 
+            bookImgs={h.historyBooksImgurl} 
+            bookIsbns={h.histroyBooksIsbns} 
+            date={h.historyDate}
+            historyId={h.historyId}
+            key={h.historyId}
+            />
         )
       });
     }
