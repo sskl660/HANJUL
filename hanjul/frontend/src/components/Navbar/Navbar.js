@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Navbar.css'
 import { login, logout, getUser } from '../../redux';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router';
 
 const mapDispatchToProps = {
   login, logout, getUser
@@ -26,7 +27,7 @@ function Navbar (props){
   useEffect(()=> {
     checkUser()
   })
-  
+  const history = useHistory();
   const checkUser = () => {
     const loginbutton = document.querySelector(".up-user-button")
     const logoutbutton = document.querySelector(".up-logout-button")
@@ -47,8 +48,6 @@ function Navbar (props){
 
   }
   
-
- 
   const sideClick = () => {
     const sidebar = document.querySelector(".side-bar");
     const sideback = document.querySelector(".side-back");
@@ -65,7 +64,7 @@ function Navbar (props){
     setOpen(false)
   }
   console.log(props.user.userName)
-  
+  console.log(history.location.pathname)
   return (
     <div className="side">
       <div className="side-bar" onClick={!props.open ? sideClick:''}>
@@ -73,7 +72,7 @@ function Navbar (props){
         <div className="side-bar-list">
           <div>
             <Link to="/" exact>
-              <button className="up-hanjul-button">ㅎㅏㄴㅈㅜㄹ</button>
+              <button className="up-mylibrary-button">ㅎㅏㄴㅈㅜㄹ</button>
             </Link>
           </div>
           <img className="nav-hanjul-img" src="../../image/nav-flower-left.png" alt="" />

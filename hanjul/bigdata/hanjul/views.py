@@ -24,10 +24,8 @@ def content_based(request):
     """데이터 로드"""
     DUMP_FILE = os.path.join(os.getcwd(), "dump.pkl")
     data = pd.read_pickle(DUMP_FILE)
-
     """입력 문자 할당"""
     sentence = request.data.get('line')
-
     """초기 데이터 가공"""
     # 첫번째 행을 지우고 해당 데이터를 데이터에 포함 시켜서 tfidf 분석 알고리즘 적용.
     data.loc[0, 'description'] = sentence
@@ -37,7 +35,6 @@ def content_based(request):
 
     """description에 대해서 TF-IDF 수행"""
     tfidf_matrix = tfidf.fit_transform(data['description'])
-
     """유사도 측정"""
     # 코사인 매트릭스, 0번과 전체의 비교
     cosine_matrix = cosine_similarity(tfidf_matrix[0], tfidf_matrix)
@@ -50,7 +47,6 @@ def content_based(request):
         book2id[i] = [data["isbn13"][c], data["title"][c], data["author"][c], data["publisher"][c], data["img_url"][c],
                       data["description"][c], data["is_coll_aladin"][c], data["is_coll_naver"][c],
                       data["isbn_origin"][c]]
-
     """유사도 추출 및 유사도 정렬"""
     # 자기 자신을 제외한 영화들의 유사도 및 인덱스를 추출
     sim_scores = [(i, c) for i, c in enumerate(cosine_matrix[0]) if i != 0]

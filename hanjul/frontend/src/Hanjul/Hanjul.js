@@ -50,14 +50,22 @@ function Hanjul(props) {
         clearInterval(tyInt)
     }
   }, [])
+  let record = {
+    historyBooksImgurl: [
 
-  let myHanjul = '';
-  const putHanjul = async (hanjul) => {
+    ],
+    historyBooksIsbns: [
+
+    ],
+    historyOneline: "",
+    userName: "test",
+  }
+
+  async function putHanjul(hanjul) {
     if (!hanjul) {
       return
     }
-    myHanjul = hanjul
-    console.log(hanjul)
+    record.historyOneline = hanjul
     await axios({
       method: 'post',
       url: DJANGO_URL + 'hanjul/line/',
@@ -65,19 +73,25 @@ function Hanjul(props) {
         "line": hanjul
       },
       headers:{
-        'Content-Type': 'application/json',
-        // 'Accept': 'application/json; charset=utf-8',
-        "Access-Control-Allow-Origin": "*"
+        // 'Content-Type': 'application/json',
+        'Accept': 'application/json; charset=utf-8',
       }
     })
     .then(res => {
-      console.log(res)
+      res.data.map((d) => {
+        record.historyBooksImgurl.push(d.img_url)
+        record.historyBooksIsbns.push(d.isbn)
+      })
+      console.log(record)
+      console.log('추천책 얻어오기', res)
+      return res
+    })
+    .then(res => {
       const data = {
         hanjul,
         books: res.data
       }
       store.dispatch(props.setRecommend(data))
-      history.push('/login', {params: data})
       return res
     })
     .catch(err => {
@@ -88,14 +102,18 @@ function Hanjul(props) {
     await axios({
       method: 'post',
       url: URL + 'history/record',
-      data: myHanjul
+      data: record,
+      // 'Content-Type': 'application/json',
     })
     .then(res => {
+      console.log(res)
       return res
     })
     .catch(err => {
+      console.log(err)
       return err
     })
+    history.push('/recommend', [])
   }
 
   return (
@@ -109,14 +127,14 @@ function Hanjul(props) {
           if (e.key === 'Enter') {
             putHanjul(e.target.value)
           }
-        }} 
+        }}
         autoFocus />
         <i 
-        className="fas fa-search" 
-        onClick={(e) => {
-          putHanjul(e.currentTarget.parentElement.firstChild.value)
-          }
-        }></i>
+          className="fas fa-search" 
+          onClick={(e) => {
+            putHanjul(e.currentTarget.parentElement.firstChild.value)
+          }}
+        ></i>
       </div>
       <h2 className="hanjul-description">당신의 인생을 한 줄로 표현한다면?"</h2>
       <h2 className="hanjul-description-typing">"</h2>

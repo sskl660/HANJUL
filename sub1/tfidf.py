@@ -47,14 +47,23 @@ np.round(cosine_matrix, 4) # 반올림해서 소수점 4번째 자리까지 사�
 book2id = {}
 # enumerate() 함수는 기본적으로 인덱스:원소로 이루어진 튜플을 만들어준다.
 for i, c in enumerate(data.index):
-    book2id[i] = [data["isbn13"][c], data["title"][c], data["author"][c], data["publisher"][c], data["img_url"][c],
-                  data["description"][c], data["is_coll_aladin"][c], data["is_coll_naver"][c], data["isbn_origin"][c]]
+    book2id[i] = {
+        "isbn": data["isbn13"][c],
+        "title": data["title"][c], 
+        "author": data["author"][c], 
+        "publisher": data["publisher"][c], 
+        "img_url": data["img_url"][c],
+        "description": data["description"][c], 
+        "aladin": data["is_coll_aladin"][c], 
+        "naver": data["is_coll_naver"][c], 
+        "isbn_origin": data["isbn_origin"][c]
+        }
 # id2book = {}
 # for i, c in book2id.items():
 #     id2book[c] = i
 # print(id2book)
 # print(cosine_matrix[0]) # 0번 영화의 유사도 및 인덱스를 추출
-print(book2id)
+# print(book2id)
 # print(cosine_matrix)
 
 
