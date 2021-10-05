@@ -34,11 +34,6 @@ def content_based(request):
     book2id = {}
     # enumerate() 함수는 기본적으로 인덱스:원소로 이루어진 튜플을 만들어준다.
     for i, c in enumerate(data.index):
-<<<<<<< HEAD
-        book2id[i] = [data["isbn13"][c], data["title"][c], data["author"][c], data["publisher"][c], data["img_url"][c],
-                      data["description"][c], data["is_coll_aladin"][c], data["is_coll_naver"][c],
-                      data["isbn_origin"][c]]
-=======
         book2id[i] = {
             "isbn": data["isbn13"][c],
             "title": data["title"][c],
@@ -51,7 +46,6 @@ def content_based(request):
             "isbn_origin": data["isbn_origin"][c]
         }
 
->>>>>>> master
     """유사도 추출 및 유사도 정렬"""
     # 자기 자신을 제외한 영화들의 유사도 및 인덱스를 추출
     sim_scores = [(i, c) for i, c in enumerate(cosine_matrix[0]) if i != 0]

@@ -2,7 +2,6 @@ import './Recommend.css'
 import { useEffect, useState } from 'react';
 import RecommendedBook from './RecommendedBook';
 import { connect } from 'react-redux';
-import { login, logout, getUser, getRecommend } from '../redux';
 import axios from 'axios';
 import { URL } from '../constants/global';
 
