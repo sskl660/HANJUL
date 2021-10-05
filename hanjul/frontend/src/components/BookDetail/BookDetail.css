@@ -43,8 +43,12 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 4%;
+  overflow: scroll;
 }
 
+.bookD-bookInfo::-webkit-scrollbar {
+  display: none;
+}
 .bookD-bookIntro {
   background-color: #e6d3c7;
   border-radius: 10px;
@@ -242,7 +246,7 @@ h3 {
   box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, 0.288);
 }
 
-.pagination li a {
+.pagination li span {
   font-size: 18px;
   text-decoration: none;
   color: #3b2828;
@@ -254,7 +258,7 @@ h3 {
   box-shadow: inset -3px -3px 7px #ffffff73, inset 3px 3px 5px rgba(94, 104, 121, 0.288);
 }
 
-.pagination li a:active {
+.pagination li span:active {
   font-size: 15px;
   color: #ce9680;
 }
