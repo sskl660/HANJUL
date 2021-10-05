@@ -27,7 +27,7 @@ public class HistoryDto {
     public static class RequestSetHistory{
         private String historyOneline;
         private List<String> historyBooksIsbns;
-        private String userName;
+        private String userId;
         private List<String> historyBooksImgurl;
     }
 
@@ -40,7 +40,7 @@ public class HistoryDto {
         private String historyOneline;
         private List<String> histroyBooksIsbns;
         private List<String> historyBooksImgurl;
-        private String userName;
+        private String userId;
     }
 
 
@@ -49,7 +49,7 @@ public class HistoryDto {
     private LocalDateTime historyDate;
     private List<String> historyBooksIsbns=new ArrayList<>();
     private List<String> historyBooksImgurl=new ArrayList<>();
-    private String userName;
+    private String userId;
 
 }
 

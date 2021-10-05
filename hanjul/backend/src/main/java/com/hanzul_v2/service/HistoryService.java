@@ -89,7 +89,7 @@ public class HistoryService {
     }
     //히스토리 기록요청
     public void setHistory(HistoryDto.RequestSetHistory setHistory){
-        Optional<UserEntity> user= userRepository.findById(setHistory.getUserName());
+        Optional<UserEntity> user= userRepository.findById(setHistory.getUserId());
         UserEntity userEntity=user.orElse(null);
         HistoryEntity historyEntity = HistoryEntity.builder()
                 .historyOneline(setHistory.getHistoryOneline())
