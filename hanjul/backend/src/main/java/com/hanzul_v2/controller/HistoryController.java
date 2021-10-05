@@ -66,6 +66,13 @@ public class HistoryController {
         return ResponseEntity.ok().body(new BasicResponse(200,"suc"));
     }
 
+    @ApiOperation(value = "발자취 전체삭제요청")
+    @DeleteMapping(value = "history")
+    public ResponseEntity<? extends BasicResponse> deleteAllHistroy()throws Exception{
+        historyService.deleteAllHistory();
+        return ResponseEntity.ok().body(new BasicResponse(200,"suc"));
+    }
+
     @ApiOperation(value = "추천 결과를 발자취에 기록 요청")
     @PostMapping(value = "history/record")
     public ResponseEntity<? extends BasicResponse> autoSetHistory(

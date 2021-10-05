@@ -2,12 +2,18 @@
   width: 90%;
   margin: 0 auto;
   max-width: 80rem;
+  display: flex;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 5%;
 }
 
 .myLibrary-cols {
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
+  /* display: flex; */
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   -webkit-box-pack: center;
@@ -29,9 +35,9 @@
   perspective: 1000px;
 }
 
-.front {
+/* .front {
   background-image: url(http://image.aladin.co.kr/product/461/58/cover/s812532176_1.jpg);
-}
+} */
 .front,
 .back {
   background-size: cover;
@@ -162,6 +168,15 @@
 .front .inner span {
   color: rgba(255, 255, 255, 0.7);
   font-weight: 3rem;
+}
+
+.bookDes {
+  font-size: 1.25rem;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 8;
 }
 
 /* @media screen and (max-width: 64rem) {
