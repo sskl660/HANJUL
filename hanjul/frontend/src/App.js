@@ -14,7 +14,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
       {/* 원하는 주소와 component를 설치해줘야합니다. exact는 공통으로 겹치는 home에만 */}
-        <Route path="/" component={Hanjul} exact />
+        <Route exact path="/" component={Hanjul} />
         <Route path="/recommend" component={Recommend} />
         <Route path="/history" component={History} />
         <Route path="/book-detail" component={BookDetail} />
