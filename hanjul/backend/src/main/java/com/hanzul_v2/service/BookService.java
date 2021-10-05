@@ -74,7 +74,7 @@ public class BookService {
         //응답
         List<ReviewDto.RespBookReviewDto> respBookReviewDtoList=new ArrayList<>();
         //조회
-        List<ReviewEntity> reviewEntityList= reviewRepository.findByReviewIsbnOrderByReviewDate(bookIsbn);
+        List<ReviewEntity> reviewEntityList= reviewRepository.findByReviewIsbnOrderByReviewDateDesc(bookIsbn);
         //빌드
         for(ReviewEntity reviewEntity : reviewEntityList){
             ReviewDto.RespBookReviewDto respBookReviewDto = ReviewDto.RespBookReviewDto.builder()
@@ -139,7 +139,7 @@ public class BookService {
                 .build();
         if(reviewRepository.save(reviewEntity)!=null){
             //별점 평균내기
-            List<ReviewEntity> reviewEntityList = reviewRepository.findByReviewIsbnOrderByReviewDate(reqBookDto.getReviewIsbn());
+            List<ReviewEntity> reviewEntityList = reviewRepository.findByReviewIsbnOrderByReviewDateDesc(reqBookDto.getReviewIsbn());
             double  avg=0;//반올림을 위해선 더블
             for(ReviewEntity review : reviewEntityList ){
                 avg+=review.getReviewStar();

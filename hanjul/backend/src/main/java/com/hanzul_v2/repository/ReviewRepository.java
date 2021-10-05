@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<ReviewEntity,Long> {
-    List<ReviewEntity> findByReviewIsbnOrderByReviewDate(String bookIsbn);
+    List<ReviewEntity> findByReviewIsbnOrderByReviewDateDesc(String bookIsbn);
     ReviewEntity findByReviewIsbnAndAndReviewFkUserId(String bookIsbn, UserEntity userEntity);
     Integer deleteByReviewIsbnAndReviewFkUserId(String bookIsbn, UserEntity userEntity);
     Integer deleteAllByReviewIsbn(String isbn);
