@@ -8,6 +8,7 @@ import Pagination from './components/BookReview/Pagination'
 import { getUser } from './redux'
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
+import Loading from './Loading';
 
 const mapDispatchToProps = {
   getUser
@@ -27,6 +28,7 @@ function BookDetail({ user }) { //여기에 props 넣어주기
   // 책 상세 정보 요청
   const [bookD, setBookD] = useState([]);
   const [bookDump, setBookDump] = useState([]);
+  const [loading, setLoading] = useState(false);
   const bookDetail = async() => {
     await axios({
       url: `http://3.34.123.84:8080/detail/${bookIsbn}`,
@@ -39,6 +41,7 @@ function BookDetail({ user }) { //여기에 props 넣어주기
     })
 
     // console.log('북디', bookD)
+    setLoading(true);
     await axios({
       url: `http://3.34.123.84:8000/hanjul/recommend/?book_title=${bookD.title}`,
       method: 'GET',
@@ -46,10 +49,12 @@ function BookDetail({ user }) { //여기에 props 넣어주기
       //   "book_title" : bookD.title
       // }
     }).then(res => {
-      // console.log(res)
       setBookDump(res.data)
+      setLoading(false);
+      // setLoading(false);
     }).catch(err => {
-      // console.log(err)
+      setLoading(false);
+      return err
     })
   };
 
@@ -232,7 +237,7 @@ function BookDetail({ user }) { //여기에 props 넣어주기
       // console.log(posts)
       // posts.unshift(nextData)
       // console.log(posts)
-      window.location.replace("/book-detail/" + bookIsbn)
+      window.location.replace("/detail/" + bookIsbn)
     })
   }
 
@@ -274,9 +279,11 @@ function BookDetail({ user }) { //여기에 props 넣어주기
         </div>
       </div>
       <div className="bookD-recommend">
-        <div className="booD-slider">
-          <BookSlider slides={bookDump}/>
-        </div>
+        {loading ? <Loading /> : 
+          <div className="booD-slider">
+            <BookSlider slides={bookDump}/>
+          </div>
+        }
       </div>
       <div className="bookD-review">
         <p className="bookD-reviewTitle">한줄평</p>

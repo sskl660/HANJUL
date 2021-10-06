@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import './Hanjul.css'
 import { setRecommend } from '../redux';
 import { connect } from 'react-redux';
@@ -6,6 +6,7 @@ import axios from 'axios';
 import { URL, DJANGO_URL } from '../constants/global'
 import { useHistory } from 'react-router';
 import configStore from "../redux/store";
+import Loading from '../Loading'
 
 const { store } = configStore();
 
@@ -19,9 +20,20 @@ const mapStateToProps = ({users}) => {
   }
 }
 
+const copywrite = [
+  '지금의 기분을 한 줄로 표현한다면?"',
+  '당신의 인생을 한 줄로 표현한다면?"',
+  '원하시는 한 줄을 검색해보세요."',
+  '당신에게 맞는 책을 추천해 드릴게요."',
+]
+
+const num = Math.floor(Math.random() * 4);
+
 
 function Hanjul(props) {
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     let typingBool = false;
     let typingIdx = 0;
@@ -47,7 +59,7 @@ function Hanjul(props) {
       var tyInt = setInterval(typingFunc, 150);
     }
     return () => {
-        clearInterval(tyInt)
+      clearInterval(tyInt)
     }
   }, [])
   let record = {
@@ -62,10 +74,12 @@ function Hanjul(props) {
   }
 
   async function putHanjul(hanjul) {
-    if (!hanjul) {
+    if (!hanjul || loading) {
       return
     }
+    setLoading(true);
     record.historyOneline = hanjul
+
     await axios({
       method: 'post',
       url: DJANGO_URL + 'hanjul/line/',
@@ -90,6 +104,7 @@ function Hanjul(props) {
         books: res.data
       }
       store.dispatch(props.setRecommend(data))
+      setLoading(true)
       return res
     })
     .catch(err => {
@@ -114,6 +129,8 @@ function Hanjul(props) {
   }
 
   return (
+    <div class="hanjul-container">
+    {loading ? <Loading /> : 
     <div className="hanjul">
       <p className="hanjul-title">ㅎㅏㄴㅈㅜㄹ</p>
       <div className="hanjul-input">
@@ -133,9 +150,12 @@ function Hanjul(props) {
           }}
         ></i>
       </div>
-      <h2 className="hanjul-description">당신의 인생을 한 줄로 표현한다면?"</h2>
       <h2 className="hanjul-description-typing">"</h2>
+      <h2 className="hanjul-description">당신의 인생을 한 줄로 표현한다면?"</h2>
+      {/* <h2 className="hanjul-description">{copywrite[num]}"</h2> */}
       <img src="image/hanjul.png" alt="image_for_css" className="hanjul-flower" />
+      </div>
+    }
     </div>
   )
 }

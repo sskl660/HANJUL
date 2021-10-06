@@ -18,7 +18,7 @@ function RecommendedBook(props) {
     props.recommend.books.forEach((book, index) => {
       if (bookList.length < 5) {
         bookList.push(
-          <div className="carousel__slider__item" onClick={e => history.push('/book-detail/'+book.isbn)}>
+          <div className="carousel__slider__item" onClick={e => history.push('/detail/'+book.isbn)}>
             <div className="item__3d-frame">
               <div className="item__3d-frame__box item__3d-frame__box--front">
                 <img src={book.img_url} alt="" className="item-img" />

@@ -19,7 +19,7 @@ function App() {
           <Route path="/" component={Hanjul} exact />
           <Route path="/recommend" component={Recommend} />
           <Route path="/history" component={History} />
-          <Route path="/book-detail/:bookIsbn" component={BookDetail} />
+          <Route path="/detail/:bookIsbn" component={BookDetail} />
           <Route path="/mylibrary" component={MyLibrary} />
           <Route path="/user" component={User} />
         </ScrollToTop>

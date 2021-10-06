@@ -40,7 +40,7 @@ function MyLibrary({user}) {
         {book.map((mybook) => {
           return (
             <div className="myLibrary-cols">
-              <Link to={`/book-detail/${mybook.mybookIsbn}`}>
+              <Link to={`/detail/${mybook.mybookIsbn}`}>
                 <div className="myLibrary-col" ontouchstart="this.classList.toggle('hover');">
                   <div className="myLibrary-container">
                     <div className="front" style={{ backgroundImage: `url(${mybook.mybookImgurl})` }}>
