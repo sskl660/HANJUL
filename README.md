@@ -80,6 +80,10 @@ python manage.py runserver 0:8000
 
 - PyCharm 2019.2(Community Edition)
 
+### Framework
+
+- Django 3.2.6 final
+
 <br>
 
 ## Database
