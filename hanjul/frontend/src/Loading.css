@@ -1,0 +1,48 @@
+.hanjul-container svg {
+  fill: #CE957E !important;
+  width: 200px;
+  height: 200px;
+}
+
+.hanjul-container .loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hanjul-container .loadingText {
+  color: #3B2828;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 50px;
+}
+
+
+.bookD-recommend .loading-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bookD-recommend svg {
+  fill: #CE957E !important;
+  position: relative;
+  left: 11% !important;
+  top: 50%;
+}
+
+.bookD-container .loading {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hanjul-container .loadingText {
+  color: #3B2828;
+}

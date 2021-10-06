@@ -2,9 +2,9 @@ import { LOGIN, LOGOUT, GET_USER } from "./types"
 
 const userState = {
   user: {
-    userId: '1',
-    userName: '1',
-    userPw: '1'
+    userId: '',
+    userName: '',
+    userPw: ''
   }
 }
 

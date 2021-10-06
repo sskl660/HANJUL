@@ -18,7 +18,7 @@ const BookSlider = (props) => {
 
   const goBook= (isbn) => {
     // console.log('되나',isbn)
-    window.location.replace("/book-detail/" + isbn)
+    window.location.replace("/detail/" + isbn)
   }
     return (
       <div className="bookD-books-slider">
