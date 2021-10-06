@@ -14,7 +14,7 @@ const getSentences = () => {
   })
   .then(res => {
     res.data.forEach((history, index) => {
-      historyList.push(<li>{history}</li>)
+      historyList.push(<li key={index}>{history}</li>)
     })
     return res
   })
