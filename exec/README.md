@@ -39,6 +39,32 @@ python manage.py runserver 0:8000
 
 <br>
 
+# 🤙Properties
+
+**Server**
+
+url : https://3.34.123.84:8888/
+
+Password : HANJULA301
+
+**Database**
+host : 3.34.123.84
+
+port : 3306
+
+ID : ssafy
+
+Password : HANJULA301
+
+**Jenkins**
+URL : 3.34.123.84:9090
+
+ID : HANJUL
+
+Password : HANJULA301
+
+<br>
+
 # 🌏Environment
 
 ## Frontend
