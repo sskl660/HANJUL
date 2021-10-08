@@ -153,44 +153,17 @@ sidebar를 통해 나의 서재에 접근할 수 있습니다.
 
 ## 기술 스택
 
-![image-20211008022022123](md-images/image-20211008022022123.png)
+![image-20211008114653511](md-images/image-20211008114653511.png)
 
 
 
-* Frontend
-  * React
-    * React 17.0.2
-    * Node.js 14.16.0
-  * Redux
-    * redux-4.1.1
-* Backend
-  * Spring boot - springboot-2.5.3
-    * Gradle 7.1.1
-  * java - OpenJDK 11.0.1
-  * MySQL
-    * MySQL 15.1 Distrib 10.6.3-MariaDB, for debian-linux-gnu
-* Bigdata
-  * Python 3.8.7
-  * Django 3.1.7
-  * pandas 1.3.2
-  * numpy 1.21.2
-* Infra
-  * Ubuntu 20.04 LTS
-  * Docker 20.10.7
-  * Jenkins 2.304
-  * AWS(EC2)
-  
-* 협업 툴
-  * 회의 : Webex, Zoom, Discord
-  * 프로젝트 형상 관리 : Git, SourceTree
-  * 이슈 트래킹 : JIRA
-  * 대화 : Slack
-  * 문서 : Notion
-  * 디자인 : Figma
+### 기술 표
+
+![image-20211008141948873](md-images/image-20211008141948873.png)
 
 
 
-### 아키텍쳐
+
 
 ### ERD
 
