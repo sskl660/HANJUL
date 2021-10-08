@@ -222,3 +222,11 @@ python manage.py runserver 0:8000
 
 * [Git Convention](./git_convention.md)
 
+* [1차 아이디어 회의록](./1차 회의록(기본 정하기, 방향 정하기).md)
+* [2차 아이디어 회의록](./2차 회의록(1주차 계획).md)
+* [3차 아이디어 회의록](./3차 회의록(아이디어 기획, 업무 분담).md)
+
+* [CF와 CBF](./CF와 CBF.md)
+* [회의 모음 링크](https://www.notion.so/15c5956eb8b84ee9bb0c1ed7e9eaa4b7?v=c551b79b301142509e6f986f678c5227)
+![image-20211008142558726](md-images/image-20211008142558726.png)
+
