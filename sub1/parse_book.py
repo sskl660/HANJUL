@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import os
 import re
 
@@ -49,6 +50,7 @@ def load_dataframes():
 
 
 def main():
+    print(np.__version__)
     data = import_data()
     pd.DataFrame(data).to_csv('output1.csv', index=False, header=False, sep='`', mode='w', encoding='utf-8-sig')
     dump_dataframes(data)

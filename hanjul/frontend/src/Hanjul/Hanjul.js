@@ -151,8 +151,8 @@ function Hanjul(props) {
         ></i>
       </div>
       <h2 className="hanjul-description-typing">"</h2>
-      <h2 className="hanjul-description">당신의 인생을 한 줄로 표현한다면?"</h2>
-      {/* <h2 className="hanjul-description">{copywrite[num]}"</h2> */}
+      {/* <h2 className="hanjul-description">당신의 인생을 한 줄로 표현한다면?"</h2> */}
+      <h2 className="hanjul-description">{copywrite[num]}</h2>
       <img src="image/hanjul.png" alt="image_for_css" className="hanjul-flower" />
       </div>
     }
